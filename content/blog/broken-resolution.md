@@ -136,7 +136,7 @@ curl \
 
  ```
 returns 200
-```bash 
+```bash {linenos=table, hl_lines=[6]}
 [redacted]
 * Server certificate:
 *  subject: O=mkcert development certificate; OU=Karan@Karans-MacBook-Air.local (Karan Chaudhary)
