@@ -1,7 +1,10 @@
 baseURL = "http://example.org/"
 languageCode = "en-us"
-title = "My New Hugo Site"
-theme = "hugo-theme-codex"
+title = "The Knife of Phaedrus"
+theme = "hugo-vitae"
+
+pygmentsCodefences = true
+pygmentsStyle = "github"
 
 [params]
 	twitter = "https://twitter.com/ckarany"

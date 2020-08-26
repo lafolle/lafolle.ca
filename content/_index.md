@@ -1,5 +1,5 @@
 ---
 heading: "Hi, I'm Karan"
-subheading: "System musings"
+subheading: "The Knife of Phaedrus"
 handle: "ckarany"
 ---
