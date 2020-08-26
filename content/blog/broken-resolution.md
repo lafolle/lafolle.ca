@@ -30,7 +30,7 @@ We can create a small HTTPS server using SSL certs signed by our own root CA usi
 certificate:
 ```Go
 func main() {
-	http.HandleFunc("/", Handler) println("listeing on localhost:443")
+	http.HandleFunc("/", Handler) 
 	err := http.ListenAndServeTLS(":443", "example.com+1.pem", "example.com+1-key.pem", nil)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
