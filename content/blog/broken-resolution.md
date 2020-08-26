@@ -23,11 +23,9 @@ and TLS handshake is done with `example.com`. There are multiple ways to do this
 
 Lets go with 3rd option. 
 
-<!-- ## Setting up of test server -->
-
 We can create a small HTTPS server using SSL certs signed by our own root CA using
-[mkcert](https://github.com/FiloSottile/mkcert).  Server code looks like this for given private key and
-certificate:
+[mkcert](https://github.com/FiloSottile/mkcert).  Server code would execute the
+following line to run TLS server given SSL certificate and private key:
 ```Go
 http.ListenAndServeTLS(":443",
 	"example.com+1.pem", // Certificate.
@@ -43,7 +41,7 @@ curl \
 ```
 Note, in the command:
 1. curl is told about the new CA root added
-2. curl is told to resolve example.com to 127.0.0.1 IP address and not use system resolver to do DNS resolution
+2. curl is told to resolve `example.com` to 127.0.0.1 IP address and not use system resolver to do DNS resolution
 
 Now lets resolve google.com to 127.0.0.1 and hit our test server:
 
@@ -83,7 +81,9 @@ connection with the sever,  which fails because of _no alternative certificate s
 name 'google.com'_.
 
 
-Whats going on? Every web server needs to prove its identity to the connecting client,  failure of which would
+Whats happened?
+
+Every web server needs to prove its identity to the connecting client,  failure of which would
 result in client terminating the connection.  The entity of proof is a digital certificate that web server offers
 to the client, which on reception of cert runs multiple validations.  Who certifices the server? Server gets its
 certifiaction from Certificate Authority (CA), a third party neutral organization whose job is to verify that the
@@ -125,7 +125,6 @@ curl \
 	--resolve google.com:443:127.0.0.1  \
 	-vvv \
 	https://google.com
-
  ```
 returns 200
 ```bash {linenos=table, hl_lines=[6]}
@@ -214,3 +213,4 @@ websites for which HSTS paramaters have been submitted before hand by the websit
 Private keys need to be kept secret.  Losing them can jeopardize whole traffic originating for the domain.
 Digital certificates are really important to asertain the identity of server apart from playing an important role
 in keeping the traffic encrypted.
+
