@@ -215,16 +215,18 @@ That gives a good idea that we'll be reasonably secure if our browsers communica
 Yes,  iff the party doing MITM is able to create and inject its own CA in user's machine.  And when does that
 happen?  Welcome to corporate networks.
 
-Let say a corporate creates its own CA and installs the root cert in your system.  Then if you go to
-`google.com` on your browser,  `ClientHello` message sent as part of TLS handshake will be intercepted by the
-corporates proxy, a new certificate signed by its own CA root cert is created where CN/SAN is `google.com`, and
-is sent back to the user in `ServerHello` message. As client has the corporate's root certificate installed,
-its verification of the certificate will pass.  Once the TLS connections is established between user and proxy,
-proxy will establish a connection to the actual `google.com` server and forwards all traffic to it after reading
-plaintext HTTP requests from user.  Safe flow happens for responses,  just in opposite direction.  Compromised.
-
-This is only possible if your computer can be controlled by entity other than you.  Otherwise,  you're safe.
+Let say corporate C creates its own CA and installs the root cert in your system,  then if you go to
+`google.com`,  `ClientHello` as part of TLS handshake will be intercepted by the corporates proxy, a new
+certificate signed by its own CA root cert is created where CN/SAN is `google.com`, and is sent back to the user
+in `ServerHello` message. As client has the corporate's root certificate installed,  its verification of the
+certificate will pass.  Once the TLS connections is established between user and proxy, proxy will establish a
+connection to the actual `google.com` server and forward all traffic to it after reading plaintext HTTP requests
+from user.
 
 ## Conclusion
 
-Always use HTTPS (with TLS1.3).
+Private keys need to be kept secret.  Losing them can jeopardize whole traffic originating for the domain.
+Mostly systems tend to rotate the certificates to break the snooping of traffic in case the key has been
+compromised.
+
+The browsing can be reasonably secure if communication is happening over HTTPS. 
