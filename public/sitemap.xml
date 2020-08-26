@@ -4,6 +4,22 @@
   
   <url>
     <loc>http://example.org/</loc>
+    <lastmod>2020-08-23T16:58:39-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/blog/</loc>
+    <lastmod>2020-08-23T16:58:39-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/blog/broken-resolution/</loc>
+    <lastmod>2020-08-23T16:58:39-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/blog/dnssec/</loc>
+    <lastmod>2020-08-19T17:04:55-04:00</lastmod>
   </url>
   
   <url>

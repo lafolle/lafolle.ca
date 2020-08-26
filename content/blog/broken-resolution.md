@@ -1,7 +1,7 @@
 ---
 title: "Broken Resolution"
 date: 2020-08-23T16:58:39-04:00
-draft: true
+draft: false
 ---
 
 # Breaking the resolution
