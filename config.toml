@@ -1,4 +1,4 @@
-baseURL = "http://example.org/"
+baseURL = "https://lafolle.ca/"
 languageCode = "en-us"
 title = "The Knife of Phaedrus"
 theme = "hugo-vitae"
