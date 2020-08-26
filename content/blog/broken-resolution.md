@@ -165,7 +165,6 @@ http.ListenAndServeTLS(":443",
 
 On running, the server fails with following error:
 ```bash
-listeing on localhost:443
 2020/08/24 17:42:44 ListenAndServe: tls: private key does not match public key
 exit status 1
 ```
