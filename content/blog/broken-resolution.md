@@ -60,10 +60,10 @@ which spits out
 * Hostname google.com was found in DNS cache
 *   Trying 127.0.0.1:443...  [redacted - ALPN stuff]
 * successfully set certificate verify locations:
-*   CAfile: /Users/Karan/Library/Application Support/mkcert/rootCA.pem CApath: /usr/local/etc/openssl@1.1/certs
+*   CAfile: ~/mkcert/rootCA.pem CApath: /usr/local/etc/openssl@1.1/certs
     [redacted - TLS 1.3 handshake stuff]
 * Server certificate:
-*  subject: O=mkcert development certificate; OU=Karan@Karans-MacBook-Air.local (Karan Chaudhary)
+*  subject: O=mkcert development certificate; OU=Lafolle Inc.
 *  start date: Jun  1 00:00:00 2019 GMT
 *  expire date: Aug 24 02:23:32 2030 GMT
 *  subjectAltName does not match google.com
@@ -130,11 +130,11 @@ returns 200
 ```bash {linenos=table, hl_lines=[6]}
 [redacted]
 * Server certificate:
-*  subject: O=mkcert development certificate; OU=Karan@Karans-MacBook-Air.local (Karan Chaudhary)
+*  subject: O=mkcert development certificate; OU=Lafolle Inc.
 *  start date: Jun  1 00:00:00 2019 GMT
 *  expire date: Aug 24 20:38:06 2030 GMT
 *  subjectAltName: host "google.com" matched cert's "google.com"
-*  issuer: O=mkcert development CA; OU=Karan@Karans-MacBook-Air.local (Karan Chaudhary); CN=mkcert Karan@Karans-MacBook-Air.local (Karan Chaudhary)
+*  issuer: O=mkcert development CA; OU=Lafolle Inc.; CN=mkcert Karan@Karans-MacBook-Air.local (Karan Chaudhary)
 *  SSL certificate verify ok.
 [redacted]
 ```
@@ -148,8 +148,6 @@ used to issue X.509 cert to server.  This ability is denied to attacker.  Mostly
 and can also be provisioned to use CA certs installed in system.
 
 Is it possible for an attacker to use `google.com`s certificate as anyways it is public?
-
-<!-- # Using google.com's cert -->
 
 How can we get the SSL cert for `google.com` in PEM format??? Easy:
 ```bash
@@ -206,7 +204,8 @@ that the HSTS Policy applies to this HSTS Host as well as any subdomains of the 
 But then what would happen if the user is accessing the website E for the first time or when the HSTS policy has
 been expired,  because in that case HSTS policy won't kick in as browser has never communicated with E earlier or
 there is no valid HSTS policy in browser? Lo and behold, all major browsers come up with a pre-loaded list of
-websites for which HSTS paramaters have been submitted before hand by the website owners.
+websites for which HSTS paramaters have been submitted before hand by the website owners. Request for removal or addition of domains
+can be made from [here](https://hstspreload.org/).
 
 # Conclusion
 
