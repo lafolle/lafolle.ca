@@ -4,6 +4,8 @@ date: 2020-08-23T16:58:39-04:00
 draft: false
 ---
 
+{{ template "_internal/google_analytics_async.html" . }}
+
 # Breaking the resolution
 
 Two machines on the internet can talk to each other iff both of them know each other's IP addresses.  When we type

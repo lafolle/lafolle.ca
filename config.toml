@@ -6,6 +6,9 @@ theme = "hugo-vitae"
 pygmentsCodefences = true
 pygmentsStyle = "github"
 
+# Google analytics
+googleAnalytics = "UA-176408027-1"
+
 [params]
 	twitter = "https://twitter.com/ckarany"
 	github = "https://github.com/lafolle"
