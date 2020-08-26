@@ -4,8 +4,6 @@ date: 2020-08-23T16:58:39-04:00
 draft: false
 ---
 
-# Breaking the resolution
-
 Two machines on the internet can talk to each other iff both of them know each other's IP addresses.  When we type
 in "google.com" in the browser,  the first task of browser is to get the IP address of "google.com" which it does
 by communicating with DNS system. Once IP address is received the broswer establishes a TCP connection to the
