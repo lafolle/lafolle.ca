@@ -9,8 +9,42 @@ pygmentsStyle = "github"
 # Google analytics
 googleAnalytics = "UA-176408027-1"
 
+copyright = "All content copyright lafolle.ca © 2020 • All rights reserved."
+
+[[menu.main]]
+name = "Home"
+url = "/"
+weight = 1
+
+[[menu.main]]
+name = "About"
+url = "/about"
+weight = 2
+
 [params]
+	description = "Musings with systems"
+	subtitle = "Musings with systems"
+
+	# Disable math typesettings
+	math = false
+
 	twitter = "https://twitter.com/ckarany"
 	github = "https://github.com/lafolle"
 	iconOrder = ["Github", "Twitter"]
 	showPageTitleInTOC = true
+
+# Social menu
+[[params.social]]
+name = "Github"
+icon = "fab fa-github"
+url = "https://github.com/lafolle"
+
+[[params.social]]
+name = "Twitter"
+icon = "fab fa-twitter"
+url = "https://twitter.com/ckarany"
+
+[[params.social]]
+name = "Linkedin"
+icon = "fab fa-linkedin"
+url = "https://www.linkedin.com/in/karan-chaudhary-603b6aa0/"
