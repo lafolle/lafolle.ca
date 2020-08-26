@@ -11,18 +11,7 @@ googleAnalytics = "UA-176408027-1"
 
 copyright = "All content copyright lafolle.ca © 2020 • All rights reserved."
 
-[[menu.main]]
-name = "Home"
-url = "/"
-weight = 1
-
-[[menu.main]]
-name = "About"
-url = "/about"
-weight = 2
-
 [params]
-	description = "Musings with systems"
 	subtitle = "Musings with systems"
 
 	# Disable math typesettings
@@ -32,6 +21,22 @@ weight = 2
 	github = "https://github.com/lafolle"
 	iconOrder = ["Github", "Twitter"]
 	showPageTitleInTOC = true
+
+# Navigation
+[[menu.main]]
+name = "Home"
+url = "/"
+weight = 1
+
+[[menu.main]]
+name = "Tags"
+url = "/tags"
+weight = 2
+
+[[menu.main]]
+name = "About"
+url = "/about"
+weight = 3
 
 # Social menu
 [[params.social]]

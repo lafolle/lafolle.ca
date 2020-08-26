@@ -2,7 +2,7 @@
 title: "Broken Resolution"
 date: 2020-08-23T16:58:39-04:00
 draft: false
-tags: [ TLS, X.509, HTTPS ]
+tags: [ tls, x.509, https ]
 ---
 
 Two machines on the internet can talk to each other iff both of them know each other's IP addresses.  When we type
@@ -23,7 +23,7 @@ and TLS handshake is done with `example.com`. There are multiple ways to do this
 Lets go with 3rd option. 
 
 We can create a small HTTPS server using SSL certs signed by our own root CA using
-[mkcert](https://github.com/FiloSottile/mkcert).  Server code would execute the
+[mkcert](https://github.com/FiloSottile/mkcert) `example.com`.  Server code would execute the
 following line to run TLS server given SSL certificate and private key:
 ```Go
 http.ListenAndServeTLS(":443",
@@ -33,17 +33,12 @@ http.ListenAndServeTLS(":443",
 Check if the server is running correctly:
 ```bash
 curl \
-	--cacert rootCA.pem \
-	--resolve example.com:443:127.0.0.1  \
+	--cacert rootCA.pem \ # Load the root cert from this path
+	--resolve example.com:443:127.0.0.1  \ # Use this mapping instead of asking DNS resolver
 	-vvv \
 	https://example.com
 ```
-Note, in the command:
-1. curl is told about the new CA root added
-2. curl is told to resolve `example.com` to 127.0.0.1 IP address and not use system resolver to do DNS resolution
-
-Now lets resolve google.com to 127.0.0.1 and hit our test server:
-
+Now lets resolve `google.com` to 127.0.0.1 and hit our test server:
 ```bash
 curl \
 	--cacert rootCA.pem \
@@ -128,7 +123,7 @@ curl \
 	-vvv \
 	https://google.com
  ```
-returns 200
+ outputs
 ```bash {linenos=table, hl_lines=[6]}
 [redacted]
 * Server certificate:
@@ -153,8 +148,7 @@ Is it possible for an attacker to use `google.com`s certificate as anyways it is
 
 How can we get the SSL cert for `google.com` in PEM format??? Easy:
 ```bash
-echo | \
-	openssl s_connect -showcerts -connect google.com.443 \
+echo | openssl s_connect -showcerts -connect google.com.443 \
 	openssl x509 -out google.com-original.pem
 ```
 This will create a file `google.com-original.pem` that would contain the digital certificate for `google.com`.  We
