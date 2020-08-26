@@ -29,18 +29,14 @@ We can create a small HTTPS server using SSL certs signed by our own root CA usi
 [mkcert](https://github.com/FiloSottile/mkcert).  Server code looks like this for given private key and
 certificate:
 ```Go
-func main() {
-	http.HandleFunc("/", Handler) 
-	err := http.ListenAndServeTLS(":443", "example.com+1.pem", "example.com+1-key.pem", nil)
-	if err != nil {
-		log.Fatal("ListenAndServe: ", err)
-	}
-}
+http.ListenAndServeTLS(":443",
+	"example.com+1.pem", // Certificate.
+	"example.com+1-key.pem", nil) // Private key.
 ```
 Check if the server is running correctly:
 ```bash
 curl \
-	--cacert /Users/Karan/Library/Application\ Support/mkcert/rootCA.pem \
+	--cacert rootCA.pem \
 	--resolve example.com:443:127.0.0.1  \
 	-vvv \
 	https://example.com
@@ -53,7 +49,7 @@ Now lets resolve google.com to 127.0.0.1 and hit our test server:
 
 ```bash
 curl \
-	--cacert /Users/Karan/Library/Application\ Support/mkcert/rootCA.pem \
+	--cacert rootCA.pem \
 	--resolve \
 	google.com:443:127.0.0.1  \
 	-vvv \
@@ -117,19 +113,15 @@ Cool, so we now know why the failure occured.  But what if we generate the certi
 Lets generate cert for google.com: `mkcert google.com`,  and load them into the server such that server looks like
 this:
 ```Go
-func main() {
-	http.HandleFunc("/", Handler)
-	err := http.ListenAndServeTLS(":443", "google.com.pem", "google.com-key.pem", nil)
-	if err != nil {
-		log.Fatal("ListenAndServe: ", err)
-	}
-}
+http.ListenAndServeTLS(":443",
+	"google.com.pem", // Certificate.
+	"google.com-key.pem", nil) // Private key.
 ```
 
  and hitting the server with following curl request:
  ```bash
 curl \
-	--cacert /Users/Karan/Library/Application\ Support/mkcert/rootCA.pem \
+	--cacert rootCA.pem \
 	--resolve google.com:443:127.0.0.1  \
 	-vvv \
 	https://google.com
@@ -172,12 +164,9 @@ corresponding private key,  Google's existance is literally doomed.
 
 This is a blocker but lets go forward and try to feed-in wrong private key to the Go server:
 ```Go
-func main() {
-	http.HandleFunc("/", Handler) 
-	err := http.ListenAndServeTLS(":443", "google.com-original.pem", "google-key.pem", nil)
-	if err != nil {
-		log.Fatal("ListenAndServe: ", err)
-	}
+http.ListenAndServeTLS(":443",
+	"google.com-original.pem", // Certificate.
+	"google-key.pem", nil) // Private key.
 }
 ```
 
