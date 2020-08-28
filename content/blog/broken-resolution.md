@@ -94,18 +94,18 @@ the X.509 certificate containing public key of the requesting org, for how long 
 identitiy of self as to who generated the certificate, list of domains this certificate is valid for in CN
 (Common Name) and SAN (Subject Alternate Name) fields and other various fields.
 
-Note from the section above that the certificate is valid for selected list of domains.  When client made a
+Note from the section above, the certificate is only valid for selected list of domains.  When client made a
 connection with server,  the server sent back its certificate to affirm its identity.  Apart from many other
 validations (like is the certificate signed by a verified CA, is the cert expired or not,  etc) the client also
 checks if the domain name to which it was trying to connect to matches the CN (Common Name) or SAN (Subject
-Alternate Name) present in the certificate.  This is the stuff that failed in our case as neither CN nor SAN
-in certificate matches `google.com`.  What are they in the certificate?  CN is set to "mkcert
+Alternate Name) present in the certificate.  This is the stuff that failed in our case as neither CN nor SAN in
+certificate matches `google.com`.  What are they in the certificate?  CN is set to "mkcert
 <username>@<machine-name>.local (<my full name>)" and SAN consists of DNS name=example.com and IP Address =
 127.0.0.1. Both of these were set by the `mkcert` command for us.
 
 
 Cool, so we now know why the failure occured.  But what if we generate the certificate where SAN matches
-"google.com"?
+`google.com`?
 
 Lets generate cert for google.com: `mkcert google.com`,  and load them into the server such that server looks like
 this:
@@ -123,7 +123,7 @@ curl \
 	-vvv \
 	https://google.com
  ```
- outputs
+outputs
 ```bash {linenos=table, hl_lines=[6]}
 [redacted]
 * Server certificate:
@@ -136,7 +136,7 @@ curl \
 [redacted]
 ```
 
-This is expected.  The certificate does have `google.com` in it under SAN section which
+This is expected.  The certificate does have `google.com` in it under SAN (`subjectAltName`) section which
 matches domain present in the request.
 
 One big advantage we have over an attacker is that we are able to inject CA's root certificates into the client.
@@ -151,16 +151,16 @@ How can we get the SSL cert for `google.com` in PEM format??? Easy:
 echo | openssl s_connect -showcerts -connect google.com.443 \
 	openssl x509 -out google.com-original.pem
 ```
-This will create a file `google.com-original.pem` that would contain the digital certificate for `google.com`.  We
-can add it to our server  but there is a problem.  We don't have the private key.  In fact, if we can have the
-corresponding private key,  Google's existance is literally doomed.
+This will create a file `google.com-original.pem` that would contain the digital certificate for `google.com`.
+We can load this into our server,  but there is a problem.  We don't have the private key. Note,  at the time of
+making CSR request we need to generate public/private key pair and private key is used to sign the request.  In
+fact, if we can have the corresponding private key,  Google's existance is literally doomed.
 
 This is a blocker but lets go forward and try to feed-in wrong private key to the Go server:
 ```Go
 http.ListenAndServeTLS(":443",
 	"google.com-original.pem", // Certificate.
-	"google-key.pem", nil) // Private key.
-}
+	"bad-key.pem", nil) // Private key.
 ```
 
 On running, the server fails with following error:
@@ -169,11 +169,13 @@ On running, the server fails with following error:
 exit status 1
 ```
 
-Of course!  That is expected.  Now we are certain that attacker cannot do any damage unless they have the private
-key corresponding to the public key.
+Of course!  When the server loads the cert and private key,  it generates corresponding public key from private
+key and matches it against the provided public key in first argument.  This matching failed here,  hence the
+error.  Now we are certain that attacker cannot do any damage unless they have the private key corresponding to
+the public key.
 
 If the imposter is somehow able to direct the browser to her IP which is backed by a webserver also controlled by
-her,  unless the website is being accessed by HTTPS,  she won't be able to do any harm because the whole
+her,  until the website is being accessed by HTTPS,  she won't be able to do any harm because the whole
 certificate dance prevents her from faking the identity. But it is important to note that this only works if the
 website is being accessed over HTTPS.  In case the website is accessed over HTTP,  there is no way for the client
 to verify the identity of server it is communicating with and is easy for the attacker to fake its identity.  For
@@ -181,25 +183,26 @@ example,  she might direct `scotiabank.com` (a major bank in Canada) to her own 
 website and ignorant user won't be able to differentiate and might end up giving private info to the attacker, if
 the servers running the site were operating over HTTP.
 
-Though browsers are not unaware of this case and can take steps to inform the user about such insecurity. For
-example,  in Firefox,  accessing a website over HTTP, `http://www.bccancer.bc.ca/`,  (some site do a redirection
-from 80 -> 443) will result in indication on the url bar highlighting that communication with website is insecure
-via a red mark on a lock.  Though that is true enough to alert the user about the pitfalls of using the website,
-the truth is,  i can't even verify if this website truly belongs to `bccancer.bc.ca`.
+Though browsers are not unaware of such attack vectors and can take steps to inform the user about such
+insecurity. For example,  in Firefox,  accessing a website over HTTP, `http://www.bccancer.bc.ca/` (some sites
+do a redirection from 80 -> 443) will result in indication on the url bar highlighting that communication with
+website is insecure via a red mark on a lock.  Though that is true enough to alert the user about the pitfalls
+of using the website, the truth is,  i can't even verify if this website truly belongs to `bccancer.bc.ca`.
 
 ![Firefox warning](/broken-resolution/firefox-warning.png)
 
 Another role browsers play is to enforce HTTPS on certain domains using something called HSTS policy mechanism.
-It states that if when communicating with website W there comes a response with header containing HSTS
-(Strict-Transport-Security) record then all future calls to W will be made over HTTPS only until the duration
-specified in HSTS header (`max-age` directive).  What about sub-domains like x.W or y.x.W? This is handled by
-another valueless directive in the header named "includeSubDomains" that "signals the UA [User Agent eg browser]
-that the HSTS Policy applies to this HSTS Host as well as any subdomains of the host's domain name."
+It states that if when communicating with website W there comes a response with header containing HSTS (HTTP
+Strict-Transport-Security) record then all future calls to W will be made over HTTPS until the duration
+(`max-age` directive) specified in HSTS header.  What about sub-domains like x.W or y.x.W? This is handled by
+another valueless directive in the header named `includeSubDomains` that,  quoting
+[RFC6797#6.1.2](https://tools.ietf.org/html/rfc6797#section-6.1.2),  "signals the UA [User Agent eg browser] that the
+HSTS Policy applies to this HSTS Host as well as any subdomains of the host's domain name."
 
-But then what would happen if the user is accessing the website E for the first time or when the HSTS policy has
-been expired,  because in that case HSTS policy won't kick in as browser has never communicated with E earlier
+But then what would happen if the user is accessing the website W for the first time or when the HSTS policy has
+been expired,  because in that case HSTS policy won't kick in as browser has never communicated with W earlier
 or there is no valid HSTS policy in browser? Lo and behold, all major browsers come up with a pre-loaded list of
-websites for which HSTS paramaters have been submitted before hand by the website owners. Request for removal or
+websites for which HSTS paramaters have been submitted beforehand by the website owners. Request for removal or
 addition of domains can be made from [here](https://hstspreload.org/).
 
 That gives a good idea that we'll be reasonably secure if our browsers communicate with websites using HTTPS
@@ -208,13 +211,14 @@ That gives a good idea that we'll be reasonably secure if our browsers communica
 Yes,  iff the party doing MITM is able to create and inject its own CA in user's machine.  And when does that
 happen?  Welcome to corporate networks.
 
-Let say a corporate creates its own CA and installs the root cert in your system.  Then if you go to
+Lets say a corporation creates its own CA and installs the root cert in your system.  Then if you go to
 `google.com` on your browser,  `ClientHello` message sent as part of TLS handshake will be intercepted by the
 corporates proxy, a new certificate signed by its own CA root cert is created where CN/SAN is `google.com`, and
-is sent back to the user in `ServerHello` message. As client has the corporate's root certificate installed,
-its verification of the certificate will pass.  Once the TLS connections is established between user and proxy,
-proxy will establish a connection to the actual `google.com` server and forwards all traffic to it after reading
-plaintext HTTP requests from user.  Safe flow happens for responses,  just in opposite direction.  Compromised.
+is sent back to the user in `ServerHello` message. As client has the corporate's root certificate installed, its
+verification of the presented certificate will pass.  Once the TLS connection is established between user and
+the proxy, proxy will establish a connection to the actual `google.com` server and forwards all traffic to it
+after reading plaintext HTTP requests from user.  Not just the requests,  but now the proxy can also read the
+responses  Compromised.
 
 This is only possible if your computer can be controlled by entity other than you.  Otherwise,  you're safe.
 
