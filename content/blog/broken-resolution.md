@@ -24,7 +24,19 @@ TCP and TLS handshake is done with `example.com`. There are multiple ways to do 
 Let's go with the 3rd option. 
 
 We can create a small HTTPS server using SSL certs signed by our own root CA using
-[mkcert](https://github.com/FiloSottile/mkcert) `example.com`.  Server code would execute the following line to
+[mkcert](https://github.com/FiloSottile/mkcert):
+
+```
+$ mkcert example.com
+Using the local CA at "/Users/Karan/Library/Application Support/mkcert" ✨
+
+Created a new certificate valid for the following names 📜
+ - "example.com"
+
+The certificate is at "./example.com.pem" and the key at "./example.com-key.pem" ✅
+```
+
+Server code would execute the following line to
 run TLS server given SSL certificate and private key:
 ```Go
 http.ListenAndServeTLS(":443",
