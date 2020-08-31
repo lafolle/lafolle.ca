@@ -2,7 +2,7 @@
 title: "Broken Resolution"
 date: 2020-08-23T16:58:39-04:00
 draft: false
-tags: [ tls, x.509, https ]
+tags: [ tls, x.509, https, sni, esni, san, diffie-hellman, dh ]
 ---
 
 Two machines on the internet can talk to each other iff both of them know each other's IP addresses.  When we
