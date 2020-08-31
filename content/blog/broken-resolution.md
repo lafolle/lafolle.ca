@@ -40,8 +40,8 @@ Server code would execute the following line to
 run TLS server given SSL certificate and private key:
 ```Go
 http.ListenAndServeTLS(":443",
-	"example.com+1.pem", // Certificate.
-	"example.com+1-key.pem", nil) // Private key.
+	"example.com.pem", // Certificate.
+	"example.com-key.pem", nil) // Private key.
 ```
 Check if the server is running correctly:
 ```bash
