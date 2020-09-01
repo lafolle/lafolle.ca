@@ -1,5 +1,5 @@
 ---
-title: "Broken Resolution"
+title: "Breaking the Resolution"
 date: 2020-08-23T16:58:39-04:00
 draft: false
 tags: [ tls, x.509, https, sni, esni, san, diffie-hellman, dh ]
