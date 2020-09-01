@@ -297,13 +297,10 @@ At the other side,  the server extracts the public key from ClientHello, creates
 the symmetric key. That's Diffie Hellman in action.  Using this key the server decrypts the ESNI present in the
 message and serves the host to which it points to.
 
-Then does successful processing of ESNI by server gives the client 100% confidence about the identity of the
-server?  That is,  now is it needed for the server to send back its SSL certificates for the client verify the
-host? 
-
 Lastly,  imposters can read the src/dst IP address of TCP packets to know which sites are being accessed.  I
 don't think there is yet a way to fix this.
 
 ## Conclusion
 
-Always use HTTPS (with TLS1.3).
+Always use HTTPS (with TLS1.3) and at the server side,  keep good care of your private keys to protect yourself
+as well your customers malicious entities.
