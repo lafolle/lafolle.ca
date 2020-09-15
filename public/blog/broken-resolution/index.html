@@ -1,32 +1,58 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 	
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-176408027-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+	
 	<meta name="generator" content="Hugo 0.74.3" />
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta property="og:title" content="Broken Resolution" />
-<meta property="og:description" content="Breaking the resolution Two machines on the internet can talk to each other iff both of them know each other&rsquo;s IP addresses. When we type in &ldquo;google.com&rdquo; in the browser, the first task of browser is to get the IP address of &ldquo;google.com&rdquo; which it does by communicating with DNS system. Once IP address is received the broswer establishes a TCP connection to the server, does a TLS handshake, exchanges of data with the server before terminating the connection." />
+	<meta name="keywords" content="tls,x.509,https,sni,esni,san,diffie-hellman,dh"><meta property="og:title" content="Breaking the Resolution" />
+<meta property="og:description" content="Two machines on the internet can talk to each other iff both of them know each other&rsquo;s IP addresses. When we type in &ldquo;google.com&rdquo; in the browser, the first task of the browser is to get the IP address of &ldquo;google.com&rdquo; which it does by communicating with the DNS system. Once an IP address is received, the browser establishes a TCP connection to the server, does a TLS handshake, exchanges data with the server before terminating the connection." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://example.org/blog/broken-resolution/" />
+<meta property="og:url" content="https://lafolle.ca/blog/broken-resolution/" />
 <meta property="article:published_time" content="2020-08-23T16:58:39-04:00" />
 <meta property="article:modified_time" content="2020-08-23T16:58:39-04:00" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Broken Resolution"/>
-<meta name="twitter:description" content="Breaking the resolution Two machines on the internet can talk to each other iff both of them know each other&rsquo;s IP addresses. When we type in &ldquo;google.com&rdquo; in the browser, the first task of browser is to get the IP address of &ldquo;google.com&rdquo; which it does by communicating with DNS system. Once IP address is received the broswer establishes a TCP connection to the server, does a TLS handshake, exchanges of data with the server before terminating the connection."/>
+<meta name="twitter:title" content="Breaking the Resolution"/>
+<meta name="twitter:description" content="Two machines on the internet can talk to each other iff both of them know each other&rsquo;s IP addresses. When we type in &ldquo;google.com&rdquo; in the browser, the first task of the browser is to get the IP address of &ldquo;google.com&rdquo; which it does by communicating with the DNS system. Once an IP address is received, the browser establishes a TCP connection to the server, does a TLS handshake, exchanges data with the server before terminating the connection."/>
 
-	<link rel="stylesheet" type="text/css" media="screen" href="http://example.org/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="http://example.org/css/main.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="http://example.org/css/all.css" />
-	<title>Broken Resolution | The Knife of Phaedrus</title></head>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://lafolle.ca/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://lafolle.ca/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://lafolle.ca/css/all.css" />
+	<title>Breaking the Resolution | The Knife of Phaedrus</title></head>
 <body><header>
 	
-	<div id="titletext"><h2 id="title"><a href="http://example.org/">The Knife of Phaedrus</a></h2></div>
-	<div id="title-description"><div id=social>
+	<div id="titletext"><h2 id="title"><a href="https://lafolle.ca/">The Knife of Phaedrus</a></h2></div>
+	<div id="title-description"><p id="subtitle">Musings with systems</p><div id=social>
 			<nav>
-				<ul></ul>
+				<ul><li><a href="https://github.com/lafolle"><i title="Github" class="icons fab fa-github"></i></a></li><li><a href="https://twitter.com/ckarany"><i title="Twitter" class="icons fab fa-twitter"></i></a></li><li><a href="https://www.linkedin.com/in/karan-chaudhary-603b6aa0/"><i title="Linkedin" class="icons fab fa-linkedin"></i></a></li></ul>
 			</nav>
 		</div>
+	</div>
+	
+	<div id="mainmenu">
+		<nav>
+			<ul>
+				
+				<li><a href="/">Home</a></li>
+				
+				<li><a href="/tags">Tags</a></li>
+				
+				<li><a href="/about">About</a></li>
+				
+			</ul>
+		</nav>
 	</div>
 	
 </header>
@@ -47,49 +73,47 @@
 		</div>
 		
 		<div class="matter">
-			<h1 class="title">Broken Resolution</h1>
+			<h1 class="title">Breaking the Resolution</h1>
 		</div>
 	</div>
 	<div class="markdown">
-		<h1 id="breaking-the-resolution">Breaking the resolution</h1>
-<p>Two machines on the internet can talk to each other iff both of them know each other&rsquo;s IP addresses.  When we type
-in &ldquo;google.com&rdquo; in the browser,  the first task of browser is to get the IP address of &ldquo;google.com&rdquo; which it does
-by communicating with DNS system. Once IP address is received the broswer establishes a TCP connection to the
-server, does a TLS handshake, exchanges of data with the server before terminating the connection.</p>
-<p>What would happen if DNS system gives a bad IP for a domain?  That is,  rather than giving <code>172.217.164.206</code> for
-<code>google.com</code>,  DNS answers with some other IP. How can that happen? Apart from bug in DNS resolvers, there can be
-cases where a malicious user might evesdrop for DNS queries from your system and replies back with IP address over
-which she commands control and thereafter can snoop on the traffic from your machine.</p>
-<p>To check out this scenerio,  lets try to connect to <code>google.com</code> with an IP address of <code>example.com</code> such that TCP
-and TLS handshake is done with <code>example.com</code>. There are multiple ways to do this: update your local
+		<p>Two machines on the internet can talk to each other iff both of them know each other&rsquo;s IP addresses.  When we
+type in &ldquo;google.com&rdquo; in the browser,  the first task of the browser is to get the IP address of &ldquo;google.com&rdquo;
+which it does by communicating with the DNS system. Once an IP address is received, the browser establishes a
+TCP connection to the server, does a TLS handshake, exchanges data with the server before terminating the
+connection.</p>
+<p>What would happen if the DNS system gives a bad IP for a domain?  That is,  rather than giving <code>172.217.164.206</code>
+for <code>google.com</code>,  DNS answers with some other IP. How can that happen? Apart from a bug in the DNS resolvers,
+there can be cases where a malicious user might eavesdrop for DNS queries from your system and replies back with
+IP address over which she commands control and thereafter can snoop on the traffic from your machine.</p>
+<p>To check out this scenario,  let&rsquo;s try to connect to <code>google.com</code> with an IP address of <code>example.com</code> such that
+TCP and TLS handshake is done with <code>example.com</code>. There are multiple ways to do this: update your local
 <code>/private/etc/hosts</code> to direct <code>google.com</code> to <code>example.com</code>,  inject the bad RR in locally running DNS resolver
 <a href="https://github.com/lafolle/rrdns">rrdns</a> or much simpler,  use curl&rsquo;s <code>--resolve</code> option.</p>
-<p>Lets go with 3rd option.</p>
-<!-- raw HTML omitted -->
+<p>Let&rsquo;s go with the 3rd option.</p>
 <p>We can create a small HTTPS server using SSL certs signed by our own root CA using
-<a href="https://github.com/FiloSottile/mkcert">mkcert</a>.  Server code looks like this for given private key and
-certificate:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Go" data-lang="Go"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">main</span>() {
-	http.<span style="color:#900;font-weight:bold">HandleFunc</span>(<span style="color:#d14">&#34;/&#34;</span>, Handler) <span style="color:#0086b3">println</span>(<span style="color:#d14">&#34;listeing on localhost:443&#34;</span>)
-	err <span style="color:#000;font-weight:bold">:=</span> http.<span style="color:#900;font-weight:bold">ListenAndServeTLS</span>(<span style="color:#d14">&#34;:443&#34;</span>, <span style="color:#d14">&#34;example.com+1.pem&#34;</span>, <span style="color:#d14">&#34;example.com+1-key.pem&#34;</span>, <span style="color:#000;font-weight:bold">nil</span>)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Fatal</span>(<span style="color:#d14">&#34;ListenAndServe: &#34;</span>, err)
-	}
-}
-</code></pre></div><p>Check if the server is running correctly:</p>
+<a href="https://github.com/FiloSottile/mkcert">mkcert</a>:</p>
+<pre><code>$ mkcert example.com
+Using the local CA at &quot;/Users/Karan/Library/Application Support/mkcert&quot; ✨
+
+Created a new certificate valid for the following names 📜
+ - &quot;example.com&quot;
+
+The certificate is at &quot;./example.com.pem&quot; and the key at &quot;./example.com-key.pem&quot; ✅
+</code></pre><p>Server code would execute the following line to
+run TLS server given SSL certificate and private key:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Go" data-lang="Go">http.<span style="color:#900;font-weight:bold">ListenAndServeTLS</span>(<span style="color:#d14">&#34;:443&#34;</span>,
+	<span style="color:#d14">&#34;example.com.pem&#34;</span>, <span style="color:#998;font-style:italic">// Certificate.
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#d14">&#34;example.com-key.pem&#34;</span>, <span style="color:#000;font-weight:bold">nil</span>) <span style="color:#998;font-style:italic">// Private key.
+</span></code></pre></div><p>Check if the server is running correctly:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl <span style="color:#d14">\
-</span><span style="color:#d14"></span>	--cacert /Users/Karan/Library/Application<span style="color:#d14">\ </span>Support/mkcert/rootCA.pem <span style="color:#d14">\
-</span><span style="color:#d14"></span>	--resolve example.com:443:127.0.0.1  <span style="color:#d14">\
-</span><span style="color:#d14"></span>	-vvv <span style="color:#d14">\
+</span><span style="color:#d14"></span>	--cacert rootCA.pem <span style="color:#d14">\ </span><span style="color:#998;font-style:italic"># Load the root cert from this path</span>
+	--resolve example.com:443:127.0.0.1  <span style="color:#d14">\ </span><span style="color:#998;font-style:italic"># Use this mapping instead of asking DNS resolver</span>
+	-vvv <span style="color:#d14">\
 </span><span style="color:#d14"></span>	https://example.com
-</code></pre></div><p>Note, in the command:</p>
-<ol>
-<li>curl is told about the new CA root added</li>
-<li>curl is told to resolve example.com to 127.0.0.1 IP address and not use system resolver to do DNS resolution</li>
-</ol>
-<p>Now lets resolve google.com to 127.0.0.1 and hit our test server:</p>
+</code></pre></div><p>Now lets resolve <code>google.com</code> to 127.0.0.1 and hit our test server:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl <span style="color:#d14">\
-</span><span style="color:#d14"></span>	--cacert /Users/Karan/Library/Application<span style="color:#d14">\ </span>Support/mkcert/rootCA.pem <span style="color:#d14">\
+</span><span style="color:#d14"></span>	--cacert rootCA.pem <span style="color:#d14">\
 </span><span style="color:#d14"></span>	--resolve <span style="color:#d14">\
 </span><span style="color:#d14"></span>	google.com:443:127.0.0.1  <span style="color:#d14">\
 </span><span style="color:#d14"></span>	-vvv <span style="color:#d14">\
@@ -120,10 +144,10 @@ certificate:</p>
 * Hostname google.com was found in DNS cache
 *   Trying 127.0.0.1:443...  <span style="color:#000;font-weight:bold">[</span>redacted - ALPN stuff<span style="color:#000;font-weight:bold">]</span>
 * successfully <span style="color:#0086b3">set</span> certificate verify locations:
-*   CAfile: /Users/Karan/Library/Application Support/mkcert/rootCA.pem CApath: /usr/local/etc/openssl@1.1/certs
+*   CAfile: ~/mkcert/rootCA.pem CApath: /usr/local/etc/openssl@1.1/certs
     <span style="color:#000;font-weight:bold">[</span>redacted - TLS 1.3 handshake stuff<span style="color:#000;font-weight:bold">]</span>
 * Server certificate:
-*  subject: <span style="color:#008080">O</span><span style="color:#000;font-weight:bold">=</span>mkcert development certificate; <span style="color:#008080">OU</span><span style="color:#000;font-weight:bold">=</span>Karan@Karans-MacBook-Air.local <span style="color:#000;font-weight:bold">(</span>Karan Chaudhary<span style="color:#000;font-weight:bold">)</span>
+*  subject: <span style="color:#008080">O</span><span style="color:#000;font-weight:bold">=</span>mkcert development certificate; <span style="color:#008080">OU</span><span style="color:#000;font-weight:bold">=</span>Lafolle Inc.
 *  start date: Jun  <span style="color:#099">1</span> 00:00:00 <span style="color:#099">2019</span> GMT
 *  expire date: Aug <span style="color:#099">24</span> 02:23:32 <span style="color:#099">2030</span> GMT
 *  subjectAltName does not match google.com
@@ -137,113 +161,189 @@ learn more about this situation and how to fix it, please visit the web page men
 </div>
 </div><p>We can see here that curl loaded its DNS cache with our entry,  tries and succeeds to establish a TCP connection
 with localhost:443, loads the root certs from the custom path provided and then goes ahead to establish TLS 1.3
-connection with the sever,  which fails because of <em>no alternative certificate subject name matches target host
+connection with the server,  which fails because of <em>no alternative certificate subject name matches target host
 name &lsquo;google.com&rsquo;</em>.</p>
-<p>Whats going on? Every web server needs to prove its identity to the connecting client,  failure of which would
-result in client terminating the connection.  The entity of proof is a digital certificate that web server offers
-to the client, which on reception of cert runs multiple validations.  Who certifices the server? Server gets its
-certifiaction from Certificate Authority (CA), a third party neutral organization whose job is to verify that the
-server/org does own the domain for which it is asking the certificate for.</p>
-<p>Server generates a public/private key pair and composes Certificate Signing Request (CSR) containing the public
-key and name of domains for which it intends to get certificate for, signs it with its private key and sends it to
-CA.  CA verifies the CSR using public key in it and also verifies if the domains for which the certifcate is
-requested for does actually belong the requesting org/server/entity.  Once verification succeeds,  CA generates
-the X.509 certificate containing public key of the requesting org, for how long the certificate is valid,
-identitiy of itself as to who generated the certificate and for which domains this certificate is valid for
-and other various fields.</p>
-<p>Note from the section above that the certificate is valid for selected list of domains.  When client made a
-connection with server,  the server sent back its certificate to affirm its identity.  Apart from many other
+<p>What&rsquo;s happening?</p>
+<p>Every web server needs to prove its identity to the connecting client,  failure of which would result in the
+client terminating the connection.  The entity of proof is a digital certificate that a web server offers to the
+client, which on reception of cert runs multiple validations.  Who certifies the server? Server gets its
+certification from Certificate Authority (CA), a third party neutral organization whose job is to verify that
+the server/org does own the domain for which it is asking the certificate for.</p>
+<p>Server or domain administrator, generates a public/private RSA key pair and composes Certificate Signing Request
+(CSR) containing the public key and name of domains for which it intends to get a certificate for, signs it with
+the private key and sends it (CSR) to CA.  CA verifies the CSR using the public key in it and also verifies if
+the domains for which the certificate is requested for,  does actually belong to the requesting
+org/server/entity: earlier there used to be manual steps involved, like asking the domain controller to update
+DNS records temporarily which can assert the claim of ownership but lately the verification can be automated
+using <a href="https://tools.ietf.org/html/rfc8555">ACME</a> protocol by LetsEncrypt.  Once verification succeeds, CA
+generates the X.509 certificate containing the public key of the requesting org, for how long the certificate is
+valid, identity of self as to who generated the certificate, list of domains this certificate is valid for in CN
+(Common Name) and SAN (Subject Alternate Name) fields and other various fields.</p>
+<p>Note from the section above, the certificate is only valid for a selected list of domains.  When client a made a
+connection with the server,  the server sent back its certificate to affirm its identity.  Apart from many other
 validations (like is the certificate signed by a verified CA, is the cert expired or not,  etc) the client also
 checks if the domain name to which it was trying to connect to matches the CN (Common Name) or SAN (Subject
-Alternate Name) present in the certificate.  This is the stuff that failed in our case as neither CN nor SAN
-in certificate matches <code>google.com</code>.  What are they in the certificate?  CN is set to &ldquo;mkcert
+Alternate Name) present in the certificate.  This is the stuff that failed in our case as neither CN nor SAN in
+certificate matches <code>google.com</code>.  What are they in the certificate?  CN is set to &ldquo;mkcert
 <!-- raw HTML omitted -->@<!-- raw HTML omitted -->.local (<!-- raw HTML omitted -->)&rdquo; and SAN consists of DNS name=example.com and IP Address =
 127.0.0.1. Both of these were set by the <code>mkcert</code> command for us.</p>
 <p>Cool, so we now know why the failure occured.  But what if we generate the certificate where SAN matches
-&ldquo;google.com&rdquo;?</p>
-<p>Lets generate cert for google.com: <code>mkcert google.com</code>,  and load them into the server such that server looks like
-this:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Go" data-lang="Go"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">main</span>() {
-	http.<span style="color:#900;font-weight:bold">HandleFunc</span>(<span style="color:#d14">&#34;/&#34;</span>, Handler)
-	err <span style="color:#000;font-weight:bold">:=</span> http.<span style="color:#900;font-weight:bold">ListenAndServeTLS</span>(<span style="color:#d14">&#34;:443&#34;</span>, <span style="color:#d14">&#34;google.com.pem&#34;</span>, <span style="color:#d14">&#34;google.com-key.pem&#34;</span>, <span style="color:#000;font-weight:bold">nil</span>)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Fatal</span>(<span style="color:#d14">&#34;ListenAndServe: &#34;</span>, err)
-	}
-}
-</code></pre></div><p>and hitting the server with following curl request:</p>
+<code>google.com</code>?</p>
+<p>Lets generate cert for google.com: <code>mkcert google.com</code>,  and load them into the server such that server looks
+like this:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Go" data-lang="Go">http.<span style="color:#900;font-weight:bold">ListenAndServeTLS</span>(<span style="color:#d14">&#34;:443&#34;</span>,
+	<span style="color:#d14">&#34;google.com.pem&#34;</span>, <span style="color:#998;font-style:italic">// Certificate.
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#d14">&#34;google.com-key.pem&#34;</span>, <span style="color:#000;font-weight:bold">nil</span>) <span style="color:#998;font-style:italic">// Private key.
+</span></code></pre></div><p>and hitting the server with following curl request:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl <span style="color:#d14">\
-</span><span style="color:#d14"></span>   --cacert /Users/Karan/Library/Application<span style="color:#d14">\ </span>Support/mkcert/rootCA.pem <span style="color:#d14">\
+</span><span style="color:#d14"></span>   --cacert rootCA.pem <span style="color:#d14">\
 </span><span style="color:#d14"></span>   --resolve google.com:443:127.0.0.1  <span style="color:#d14">\
 </span><span style="color:#d14"></span>   -vvv <span style="color:#d14">\
 </span><span style="color:#d14"></span>   https://google.com
-
-</code></pre></div><p>returns 200</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#000;font-weight:bold">[</span>redacted<span style="color:#000;font-weight:bold">]</span>
+</code></pre></div><p>outputs</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="display:block;width:100%;background-color:#e5e5e5"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#000;font-weight:bold">[</span>redacted<span style="color:#000;font-weight:bold">]</span>
 * Server certificate:
-*  subject: <span style="color:#008080">O</span><span style="color:#000;font-weight:bold">=</span>mkcert development certificate; <span style="color:#008080">OU</span><span style="color:#000;font-weight:bold">=</span>Karan@Karans-MacBook-Air.local <span style="color:#000;font-weight:bold">(</span>Karan Chaudhary<span style="color:#000;font-weight:bold">)</span>
+*  subject: <span style="color:#008080">O</span><span style="color:#000;font-weight:bold">=</span>mkcert development certificate; <span style="color:#008080">OU</span><span style="color:#000;font-weight:bold">=</span>Lafolle Inc.
 *  start date: Jun  <span style="color:#099">1</span> 00:00:00 <span style="color:#099">2019</span> GMT
 *  expire date: Aug <span style="color:#099">24</span> 20:38:06 <span style="color:#099">2030</span> GMT
-*  subjectAltName: host <span style="color:#d14">&#34;google.com&#34;</span> matched cert<span style="color:#a61717;background-color:#e3d2d2">&#39;</span>s <span style="color:#d14">&#34;google.com&#34;</span>
-*  issuer: <span style="color:#008080">O</span><span style="color:#000;font-weight:bold">=</span>mkcert development CA; <span style="color:#008080">OU</span><span style="color:#000;font-weight:bold">=</span>Karan@Karans-MacBook-Air.local <span style="color:#000;font-weight:bold">(</span>Karan Chaudhary<span style="color:#000;font-weight:bold">)</span>; <span style="color:#008080">CN</span><span style="color:#000;font-weight:bold">=</span>mkcert Karan@Karans-MacBook-Air.local <span style="color:#000;font-weight:bold">(</span>Karan Chaudhary<span style="color:#000;font-weight:bold">)</span>
+<span style="display:block;width:100%;background-color:#e5e5e5">*  subjectAltName: host <span style="color:#d14">&#34;google.com&#34;</span> matched cert<span style="color:#a61717;background-color:#e3d2d2">&#39;</span>s <span style="color:#d14">&#34;google.com&#34;</span>
+</span>*  issuer: <span style="color:#008080">O</span><span style="color:#000;font-weight:bold">=</span>mkcert development CA; <span style="color:#008080">OU</span><span style="color:#000;font-weight:bold">=</span>Lafolle Inc.; <span style="color:#008080">CN</span><span style="color:#000;font-weight:bold">=</span>mkcert Karan@Karans-MacBook-Air.local <span style="color:#000;font-weight:bold">(</span>Karan Chaudhary<span style="color:#000;font-weight:bold">)</span>
 *  SSL certificate verify ok.
 <span style="color:#000;font-weight:bold">[</span>redacted<span style="color:#000;font-weight:bold">]</span>
-</code></pre></div><p>This is expected.  The certificate does have <code>google.com</code> in it under SAN section which
+</code></pre></td></tr></table>
+</div>
+</div><p>This is expected.  The certificate does have <code>google.com</code> in it under SAN (<code>subjectAltName</code>) section which
 matches domain present in the request.</p>
 <p>One big advantage we have over an attacker is that we are able to inject CA&rsquo;s root certificates into the client.
 Note the &ldquo;&ndash;cacert&rdquo; option passed to <code>curl</code> which tells <code>curl</code> where to find the root CA certificate which was
-used to issue X.509 cert to server.  This ability is denied to attacker.  Mostly clients come bundled with CA certs
-and can also be provisioned to use CA certs installed in system.</p>
+used to issue X.509 cert to server.  This ability is denied to attackers.  Mostly clients come bundled with CA
+certs and can also be provisioned to use CA certs installed in the system.</p>
 <p>Is it possible for an attacker to use <code>google.com</code>s certificate as anyways it is public?</p>
-<!-- raw HTML omitted -->
 <p>How can we get the SSL cert for <code>google.com</code> in PEM format??? Easy:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#0086b3">echo</span> | <span style="color:#d14">\
-</span><span style="color:#d14"></span>	openssl s_connect -showcerts -connect google.com.443 <span style="color:#d14">\
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#0086b3">echo</span> | openssl s_connect -showcerts -connect google.com.443 <span style="color:#d14">\
 </span><span style="color:#d14"></span>	openssl x509 -out google.com-original.pem
-</code></pre></div><p>This will create a file <code>google.com-original.pem</code> that would contain the digital certificate for <code>google.com</code>.  We
-can add it to our server  but there is a problem.  We don&rsquo;t have the private key.  In fact, if we can have the
-corresponding private key,  Google&rsquo;s existance is literally doomed.</p>
+</code></pre></div><p>This will create a file <code>google.com-original.pem</code> that will contain the digital certificate for <code>google.com</code>.
+We can load this into our server,  but there is a problem.  We don&rsquo;t have the private key. Note,  at the time of
+building CSR request we need to generate public/private key pair and the private key is used to sign the
+request.  In fact, if we can have the corresponding private key,  Google&rsquo;s existence is literally doomed.</p>
 <p>This is a blocker but lets go forward and try to feed-in wrong private key to the Go server:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Go" data-lang="Go"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">main</span>() {
-	http.<span style="color:#900;font-weight:bold">HandleFunc</span>(<span style="color:#d14">&#34;/&#34;</span>, Handler) 
-	err <span style="color:#000;font-weight:bold">:=</span> http.<span style="color:#900;font-weight:bold">ListenAndServeTLS</span>(<span style="color:#d14">&#34;:443&#34;</span>, <span style="color:#d14">&#34;google.com-original.pem&#34;</span>, <span style="color:#d14">&#34;google-key.pem&#34;</span>, <span style="color:#000;font-weight:bold">nil</span>)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Fatal</span>(<span style="color:#d14">&#34;ListenAndServe: &#34;</span>, err)
-	}
-}
-</code></pre></div><p>On running, the server fails with following error:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">listeing on localhost:443
-2020/08/24 17:42:44 ListenAndServe: tls: private key does not match public key
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Go" data-lang="Go">http.<span style="color:#900;font-weight:bold">ListenAndServeTLS</span>(<span style="color:#d14">&#34;:443&#34;</span>,
+	<span style="color:#d14">&#34;google.com-original.pem&#34;</span>, <span style="color:#998;font-style:italic">// Certificate.
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#d14">&#34;bad-key.pem&#34;</span>, <span style="color:#000;font-weight:bold">nil</span>) <span style="color:#998;font-style:italic">// Private key.
+</span></code></pre></div><p>On running, the server fails with following error:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">2020/08/24 17:42:44 ListenAndServe: tls: private key does not match public key
 <span style="color:#0086b3">exit</span> status <span style="color:#099">1</span>
-</code></pre></div><p>Of course!  That is expected.  Now we are certain that attacker cannot do any damage unless they have the private
-key corresponding to the public key.</p>
-<p>If the imposter is somehow able to direct the browser to her IP which is backed by a webserver also controlled by
-her,  unless the website is being accessed by HTTPS,  she won&rsquo;t be able to do any harm because the whole
+</code></pre></div><p>Of course!  When the server loads the cert and private key,  it generates corresponding public key from private
+key and matches it against the provided public key in first argument.  This matching failed here,  hence the
+error.  Now we are certain that attacker cannot do any damage unless they have the private key corresponding to
+the public key.</p>
+<p>If the imposter is somehow able to direct the browser to her IP which is backed by a webserver also controlled
+by her,  until the website is being accessed by HTTPS,  she won&rsquo;t be able to do any harm because the whole
 certificate dance prevents her from faking the identity. But it is important to note that this only works if the
-website is being accessed over HTTPS.  In case the website is accessed over HTTP,  there is no way for the client
-to verify the identity of server it is communicating with and is easy for the attacker to fake its identity.  For
-example,  she might direct <code>scotiabank.com</code> (a major bank in Canada) to her own malicious version of the bank&rsquo;s
-website and ignorant user won&rsquo;t be able to differentiate and might end up giving private info to the attacker, if
-the servers running the site were operating over HTTP.</p>
-<p>Though browsers are not unaware of this case and can take steps to inform the user about such insecurity. For
-example,  in Firefox,  accessing a website over HTTP, <code>http://www.bccancer.bc.ca/</code>,  (some site do a redirection
-from 80 -&gt; 443) will result in indication on the url bar highlighting that communication with website is insecure
-via a red mark on a lock.  Though that is true enough to alert the user about the pitfalls of using the website,
-the truth is,  i can&rsquo;t even verify if this website truly belongs to <code>bccancer.bc.ca</code>.</p>
+website is being accessed over HTTPS.  In case the website is accessed over HTTP,  there is no way for the
+client to verify the identity of server it is communicating with and is easy for the attacker to fake its
+identity.  For example,  she might direct <code>scotiabank.com</code> (a major bank in Canada) to her own malicious version
+of the bank&rsquo;s website and ignorant user won&rsquo;t be able to differentiate and might end up giving private info to
+the attacker, if the servers running the site were operating over HTTP.</p>
+<p>Though browsers are not unaware of such attack vectors and can take steps to inform the user about such
+insecurity. For example,  in Firefox,  accessing a website over HTTP, <code>http://www.bccancer.bc.ca/</code> (some sites
+do a redirection from 80 -&gt; 443) will result in indication on the url bar highlighting that communication with
+website is insecure via a red mark on a lock.  Though that is true enough to alert the user about the pitfalls
+of using the website, the truth is,  i can&rsquo;t even verify if this website truly belongs to <code>bccancer.bc.ca</code>.</p>
 <p><img src="/broken-resolution/firefox-warning.png" alt="Firefox warning"></p>
 <p>Another role browsers play is to enforce HTTPS on certain domains using something called HSTS policy mechanism.
-It states that if when communicating with website W there comes a response with header containing HSTS
-(Strict-Transport-Security) record then all future calls to W will be made over HTTPS only until the duration
-specified in HSTS header (<code>max-age</code> directive).  What about sub-domains like x.W or y.x.W? This is handled by
-another valueless directive in the header named &ldquo;includeSubDomains&rdquo; that &ldquo;signals the UA [User Agent eg browser]
+It states that if when communicating with website W there comes a response with header containing HSTS (HTTP
+Strict-Transport-Security) record then all future calls to W will be made over HTTPS until the duration
+(<code>max-age</code> directive) specified in HSTS header.  What about sub-domains like x.W or y.x.W? This is handled by
+another valueless directive in the header named <code>includeSubDomains</code> that,  quoting
+<a href="https://tools.ietf.org/html/rfc6797#section-6.1.2">RFC6797#6.1.2</a>,  &ldquo;signals the UA [User Agent eg browser]
 that the HSTS Policy applies to this HSTS Host as well as any subdomains of the host&rsquo;s domain name.&rdquo;</p>
-<p>But then what would happen if the user is accessing the website E for the first time or when the HSTS policy has
-been expired,  because in that case HSTS policy won&rsquo;t kick in as browser has never communicated with E earlier or
-there is no valid HSTS policy in browser? Lo and behold, all major browsers come up with a pre-loaded list of
-websites for which HSTS paramaters have been submitted before hand by the website owners.</p>
-<h1 id="conclusion">Conclusion</h1>
-<p>Private keys need to be kept secret.  Losing them can jeopardize whole traffic originating for the domain.
-Digital certificates are really important to asertain the identity of server apart from playing an important role
-in keeping the traffic encrypted.</p>
+<p>But then what would happen if the user is accessing the website W for the first time or when the HSTS policy has
+expired,  because in that case HSTS policy won&rsquo;t kick in as the browser has never communicated with W earlier or
+there is no valid HSTS policy in the browser? Lo and behold, all major browsers come up with a preloaded list of
+websites for which HSTS parameters have been submitted beforehand by the website owners. Request for removal or
+addition of domains can be made from <a href="https://hstspreload.org/">here</a>.</p>
+<p>That gives a good idea that we&rsquo;ll be reasonably secure if our browsers communicate with websites using HTTPS
+(specifically TLS1.3).  But is it possible for someone to snoop encrypted traffic?  Still do MITM?</p>
+<p>Yes,  iff the party doing MITM is able to create and inject its own CA in the user&rsquo;s machine.  And when does
+that happen?  Welcome to corporate networks.</p>
+<p>Lets say a corporation creates its own CA and installs the root cert in your system.  Then if you go to
+<code>google.com</code> on your browser,  <code>ClientHello</code> message sent as part of TLS handshake will be intercepted by the
+corporates proxy, a new certificate signed by its own CA root cert is created where CN/SAN is <code>google.com</code>, and
+is sent back to the user in <code>ServerHello</code> message. As client has the corporate&rsquo;s root certificate installed, its
+verification of the presented certificate will pass.  Once the TLS connection is established between user and
+the proxy, proxy will establish a connection to the actual <code>google.com</code> server and forwards all traffic to it
+after reading plaintext HTTP requests from the user.  Not just the requests,  but now the proxy can also read
+the responses  Compromised.</p>
+<p>This is only possible if your computer can be controlled by an entity other than you.  Otherwise,  you&rsquo;re safe.</p>
+<p>Or,  are we?  Consider the case where there is no custom CA root certs present in your system and you always use
+HTTPS to communicate with websites.  All traffic to the websites is encrypted,  thanks to TLS,  thereby no one
+in the middle can know the content of communication.</p>
+<p>But there are few ways where an attacker can know which websites the user is accessing.  Firstly,  DNS queries
+are not encrypted.  Attacker can figure out which websites you&rsquo;re accessing by sniffing on DNS traffic
+originating from your machine or DNS traffic destined to your machine.  This has been a problem for the industry
+for quite some time and current solution involves making DNS queries for HTTPS (DOH) or DNS over TLS (DOT).
+Using them, DNS queries will be resolved the same way content is fetched from any normal website over secure
+channel.  Though for this to work the DNS resolver your machine is configured to contact must support DOH or
+DOT.  Major public resolvers like Cloudflare,  Google public DNS and Quad9 do provide DOT/H.</p>
+<p>Secondly,  as part of TLS handshake, server provides its certificate to the connecting client to assert its
+identity.  The client can verify validity of the certificate to check if it is connecting to the correct server
+and not an imposter.  In TLS1.2,  the certificate sent by the server to the client is in plaintext.  Note,  as
+mentioned above,  the certificate includes name of the website to which the client is trying to connect hence
+creating a hole which can be exploited by the attacker.  This is how it looks like in wireshark (note, i&rsquo;m not
+using SSLKEYLOGFILE to help wireshark decrypt TLS traffic):</p>
+<p><img src="/broken-resolution/free-hostname.png" alt="Firefox warning"></p>
+<p>Good news is that this got fixed in TLS1.3 The certificate sent by the server is encrypted using symmetric key
+generated by the client and server using Diffie–Hellman key exchange.</p>
+<p>Thirdly,  the <code>ClientHello</code> message sent by the client to the server to establish TLS connection contains in
+plain sight the name of the server it intends to connect talk.  This field is call SNI - Server Name Indication.
+In old days a single IP used to host a single HTTPS site thereby serving a single SSL certificate.  As the world
+evolved,  this was not the case any more - a single IP could be used to host multiple domain names.  For
+example, consider the case of this website- lafolle.ca.  On digging it we get:</p>
+<pre><code>$ dig +short lafolle.ca
+104.248.60.43
+162.243.166.170
+</code></pre><p>which correspond to IP addresses at which Netlify is listening for TLS connections.  In fact,  Netlify is not
+just listening for connections for <code>lafolle.ca</code>.  Had that been the case it would have been extremely
+inefficient as that would require dedicated IP for each website it hosts.  Rather, it listens for all HTTPS
+traffic at these addresses.  But then how would it know which site (SSL certificate) to serve?  You guessed it
+right.  Using SNI field in <code>ClientHello</code> message. As soon as it gets a <code>ClientHello</code>, it checks the SNI field of
+the <code>ClientHello</code> to determine which site it should offer.  In this case it would be <code>lafolle.ca</code> as seen in
+wireshark:</p>
+<p><img src="/broken-resolution/sni-lafolle.ca.png" alt="lafolle.ca SNI"> SNI field is sent unencrypted to the server because at
+this point in TLS handshake no symmetric key has been established yet.  Though, it is established by the time
+server sends SSL certificate to the client.</p>
+<p>This is where <a href="https://tools.ietf.org/html/draft-ietf-tls-esni-06">ESNI</a>, Encrypted Server Name Indication, is
+born.  The problem here is that at the time of establishing a connection the client does not know anything about
+the server.  There is no symmetric key present which can be used to encrypt the SNI.  Only after the initial
+stage of TLS handshake, is the shared secret key negotiated (using DH in TLS1.3).  If that is the case then what
+can be used to encrypt the SNI?  In ESNI, the SNI is encrypted using public key of the provider that hosts the
+domain to which TLS connection is being established. And how does the client get to know about the public key
+associated with the domain? DNS.</p>
+<p>The owner of the domain publishes its public key in DNS record which the client extracts before rolling out the
+connection.  Once fetched,  the client uses that (server&rsquo;s) public key and some random data generated by self to
+create a secret key,  encrypts the SNI and sends it along with its own (client&rsquo;s) public key to the server.</p>
+<p>At the other side,  the server extracts the public key from ClientHello, creates some random stuff and generates
+the symmetric key. That&rsquo;s Diffie Hellman in action.  Using this key the server decrypts the ESNI present in the
+message and serves the host to which it points to.</p>
+<p>Lastly,  imposters can read the src/dst IP address of TCP packets to know which sites are being accessed.  I
+don&rsquo;t think there is yet a way to fix this.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Always use HTTPS (with TLS1.3) and at the server side,  keep good care of your private keys to protect yourself
+as well your customers malicious entities.</p>
 
 	</div>
 	
@@ -253,14 +353,91 @@ in keeping the traffic encrypted.</p>
 	
 		
 	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Tags</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			<a href="https://lafolle.ca/tags/dh/"> dh </a>
+			
+			
+			
+			
+			
+			<a href="https://lafolle.ca/tags/diffie-hellman/"> diffie-hellman </a>
+			
+			
+			
+			
+			
+			<a href="https://lafolle.ca/tags/esni/"> esni </a>
+			
+			
+			
+			
+			
+			<a href="https://lafolle.ca/tags/https/"> https </a>
+			
+			
+			
+			
+			
+			<a href="https://lafolle.ca/tags/san/"> san </a>
+			
+			
+			
+			
+			
+			<a href="https://lafolle.ca/tags/sni/"> sni </a>
+			
+			
+			
+			
+			
+			<a href="https://lafolle.ca/tags/tls/"> tls </a>
+			
+			
+			
+			
+			
+			<a href="https://lafolle.ca/tags/x.509/"> x.509 </a>
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
 		
 		
 	</div></div>
 
   </main>
+<footer>
+	 All content copyright lafolle.ca © 2020 • All rights reserved. 
+	
+	
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-176408027-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
 
-
-
+	
+</footer>
 
 
 </body>
