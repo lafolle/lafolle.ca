@@ -303,4 +303,4 @@ don't think there is yet a way to fix this.
 ## Conclusion
 
 Always use HTTPS (with TLS1.3) and at the server side,  keep good care of your private keys to protect yourself
-as well your customers malicious entities.
+as well your customers from malicious entities.
