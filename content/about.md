@@ -1,11 +1,13 @@
 
 Hi,
 
-I'm Karan Chaudhary and my interests include distributed systems, load balancing, HA, microservices and all backend stuff.
+I'm Karan Chaudhary. My interests span from designing and debugging distributed systems to improving developer productivity. 
 
-I have worked for Amazon, Fresworks and a couple of startups.
+Currently I'm a Senior Software Engineer in Demonware.
+
+My previous gigs were at Amazon, Fresworks and a triple of startups.
 
 You can reach out to me here: fghjklp at the rate gmail dot com.
 
-Thanks,  
-lafolle
+Thanks,
+Karan
