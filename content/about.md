@@ -9,5 +9,5 @@ My previous gigs were at Amazon, Fresworks and a triple of startups.
 
 You can reach out to me here: fghjklp at the rate gmail dot com.
 
-Thanks,
+Thanks,  
 Karan
