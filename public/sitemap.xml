@@ -1,89 +1,67 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>https://lafolle.ca/</loc>
-    <lastmod>2020-09-05T15:26:36-04:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2022-03-10T22:08:29-08:00</lastmod>
+  </url><url>
+    <loc>https://lafolle.ca/tags/asyncio/</loc>
+    <lastmod>2022-03-10T22:08:29-08:00</lastmod>
+  </url><url>
     <loc>https://lafolle.ca/blog/</loc>
-    <lastmod>2020-09-05T15:26:36-04:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2022-03-10T22:08:29-08:00</lastmod>
+  </url><url>
+    <loc>https://lafolle.ca/blog/asyncio_loop/</loc>
+    <lastmod>2022-03-10T22:08:29-08:00</lastmod>
+  </url><url>
+    <loc>https://lafolle.ca/tags/python/</loc>
+    <lastmod>2022-03-10T22:08:29-08:00</lastmod>
+  </url><url>
+    <loc>https://lafolle.ca/tags/</loc>
+    <lastmod>2022-03-10T22:08:29-08:00</lastmod>
+  </url><url>
+    <loc>https://lafolle.ca/tags/thread/</loc>
+    <lastmod>2022-03-10T22:08:29-08:00</lastmod>
+  </url><url>
     <loc>https://lafolle.ca/blog/wifi/</loc>
     <lastmod>2020-09-05T15:26:36-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://lafolle.ca/blog/impl-sha256/</loc>
     <lastmod>2020-08-28T08:09:13-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://lafolle.ca/blog/broken-resolution/</loc>
     <lastmod>2020-08-23T16:58:39-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://lafolle.ca/tags/dh/</loc>
     <lastmod>2020-08-23T16:58:39-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://lafolle.ca/tags/diffie-hellman/</loc>
     <lastmod>2020-08-23T16:58:39-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://lafolle.ca/tags/esni/</loc>
     <lastmod>2020-08-23T16:58:39-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://lafolle.ca/tags/https/</loc>
     <lastmod>2020-08-23T16:58:39-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://lafolle.ca/tags/san/</loc>
     <lastmod>2020-08-23T16:58:39-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://lafolle.ca/tags/sni/</loc>
     <lastmod>2020-08-23T16:58:39-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://lafolle.ca/tags/</loc>
-    <lastmod>2020-08-23T16:58:39-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://lafolle.ca/tags/tls/</loc>
     <lastmod>2020-08-23T16:58:39-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://lafolle.ca/tags/x.509/</loc>
     <lastmod>2020-08-23T16:58:39-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://lafolle.ca/blog/dnssec/</loc>
     <lastmod>2020-08-19T17:04:55-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://lafolle.ca/about/</loc>
     <priority>0</priority>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://lafolle.ca/categories/</loc>
   </url>
-  
 </urlset>

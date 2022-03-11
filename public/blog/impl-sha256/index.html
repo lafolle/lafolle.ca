@@ -1,22 +1,13 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-	
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-176408027-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-	
-	<meta name="generator" content="Hugo 0.74.3" />
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<html><head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Impl Sha256 - The Knife of Phaedrus</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="How does SHA256 work?
+What is a hash? Given a messages M of m bits generate a data N of n bits where n &lt; m. Must be collision resistant
+What is cryptographic hash? h = H(x)
+ Large input domain -&gt; small fixed output =&gt; compression Well distributed P(H(x)-i) = 1/N  Three additional properties:
+ Pre-image resistant - given H(x), hard to find x. Weak collision resistance - hard to find any x such that H(x) = h Strong collision resistance - hard to find any pair such that H(x) = H(y)  How is hashing different from encryption?" />
+	<meta property="og:image" content=""/>
 	<meta property="og:title" content="Impl Sha256" />
 <meta property="og:description" content="How does SHA256 work?
 What is a hash? Given a messages M of m bits generate a data N of n bits where n &lt; m. Must be collision resistant
@@ -24,9 +15,10 @@ What is cryptographic hash? h = H(x)
  Large input domain -&gt; small fixed output =&gt; compression Well distributed P(H(x)-i) = 1/N  Three additional properties:
  Pre-image resistant - given H(x), hard to find x. Weak collision resistance - hard to find any x such that H(x) = h Strong collision resistance - hard to find any pair such that H(x) = H(y)  How is hashing different from encryption?" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lafolle.ca/blog/impl-sha256/" />
+<meta property="og:url" content="https://lafolle.ca/blog/impl-sha256/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2020-08-28T08:09:13-04:00" />
 <meta property="article:modified_time" content="2020-08-28T08:09:13-04:00" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Impl Sha256"/>
 <meta name="twitter:description" content="How does SHA256 work?
@@ -34,58 +26,44 @@ What is a hash? Given a messages M of m bits generate a data N of n bits where n
 What is cryptographic hash? h = H(x)
  Large input domain -&gt; small fixed output =&gt; compression Well distributed P(H(x)-i) = 1/N  Three additional properties:
  Pre-image resistant - given H(x), hard to find x. Weak collision resistance - hard to find any x such that H(x) = h Strong collision resistance - hard to find any pair such that H(x) = H(y)  How is hashing different from encryption?"/>
+<script src="https://lafolle.ca/js/feather.min.js"></script>
+	
+	
+        <link href="https://lafolle.ca/css/fonts.b685ac6f654695232de7b82a9143a46f9e049c8e3af3a21d9737b01f4be211d1.css" rel="stylesheet">
+	
 
-	<link rel="stylesheet" type="text/css" media="screen" href="https://lafolle.ca/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://lafolle.ca/css/main.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://lafolle.ca/css/all.css" />
-	<title>Impl Sha256 | The Knife of Phaedrus</title></head>
-<body><header>
 	
-	<div id="titletext"><h2 id="title"><a href="https://lafolle.ca/">The Knife of Phaedrus</a></h2></div>
-	<div id="title-description"><p id="subtitle">Musings with systems</p><div id=social>
-			<nav>
-				<ul><li><a href="https://github.com/lafolle"><i title="Github" class="icons fab fa-github"></i></a></li><li><a href="https://twitter.com/ckarany"><i title="Twitter" class="icons fab fa-twitter"></i></a></li><li><a href="https://www.linkedin.com/in/karan-chaudhary-603b6aa0/"><i title="Linkedin" class="icons fab fa-linkedin"></i></a></li></ul>
-			</nav>
-		</div>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://lafolle.ca/css/main.40ca3a860425083862b7ebd55447caec5c4384573f0cb098b8d06a91e8dace2e.css" />
+	
+	
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="https://lafolle.ca/">The Knife of Phaedrus</a>
 	</div>
-	
-	<div id="mainmenu">
-		<nav>
-			<ul>
-				
-				<li><a href="/">Home</a></li>
-				
-				<li><a href="/tags">Tags</a></li>
-				
-				<li><a href="/about">About</a></li>
-				
-			</ul>
-		</nav>
-	</div>
-	
+	<nav>
+		
+		<a href="/">Home</a>
+		
+		<a href="/tags">Tags</a>
+		
+		<a href="/about">About</a>
+		
+		
+	</nav>
 </header>
-<main><div class="post">
-	
-	<div class="author">
-	
-	</div>
-	<div class="post-header">
-	
-		<div class="meta">
-			
-			<div class="date">
-				<span class="day">28</span>
-				<span class="rest">Aug 2020</span>
-			</div>
-			
+
+<main>
+	<article>
+		<div class="title">
+			<h1 class="title">Impl Sha256</h1>
+			<div class="meta">Posted on Aug 28, 2020 <span class="draft-label">DRAFT</span> </div>
 		</div>
 		
-		<div class="matter">
-			<h1 class="title">Impl Sha256</h1>
-		</div>
-	</div>
-	<div class="markdown">
-		<p>How does SHA256 work?</p>
+
+		<section class="body">
+			<p>How does SHA256 work?</p>
 <p>What is a hash?
 Given a messages M of m bits generate a data N of n bits where n &lt; m.
 Must be collision resistant</p>
@@ -104,23 +82,24 @@ h = H(x)</p>
 <p>How is hashing different from encryption?</p>
 <p>What is a message schedule?</p>
 
-	</div>
-	
-	
-	
-	
-	
-		
-	
-		
-		
-	</div></div>
+		</section>
 
-  </main>
+		<div class="post-tags">
+			
+			
+			
+		</div>
+	</article>
+</main>
 <footer>
-	 All content copyright lafolle.ca © 2020 • All rights reserved. 
-	
-	
+  <div style="display:flex"><a class="soc" href="https://github.com/lafolle" title="Github"><i data-feather="fab fa-github"></i></a><a class="soc" href="https://twitter.com/ckarany" title="Twitter"><i data-feather="fab fa-twitter"></i></a><a class="soc" href="https://www.linkedin.com/in/karan-chaudhary-603b6aa0/" title="Linkedin"><i data-feather="fab fa-linkedin"></i></a></div>
+  <div class="footer-info">
+    2022  All content copyright lafolle.ca © 2020 • All rights reserved. |  <a
+      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+  </div>
+</footer>
+
+
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -132,9 +111,8 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-	
-</footer>
-
-
-</body>
+<script>
+  feather.replace()
+</script></div>
+    </body>
 </html>

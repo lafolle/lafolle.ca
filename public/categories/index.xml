@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-	<channel>
-		<title>Categories on The Knife of Phaedrus</title>
-		<link>https://lafolle.ca/categories/</link>
-		<description>Recent content in Categories on lafolle.ca</description>
-		<generator>Hugo -- gohugo.io</generator>
-		<language>en-us</language>
-		<copyright>All content copyright lafolle.ca © 2020 • All rights reserved.</copyright>
-		
-		<atom:link href="https://lafolle.ca/categories/index.xml" rel="self" type="application/rss+xml" />
-		
-		
-	</channel>
+  <channel>
+    <title>Categories on The Knife of Phaedrus</title>
+    <link>https://lafolle.ca/categories/</link>
+    <description>Recent content in Categories on The Knife of Phaedrus</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>All content copyright lafolle.ca © 2020 • All rights reserved.</copyright><atom:link href="https://lafolle.ca/categories/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
 </rss>

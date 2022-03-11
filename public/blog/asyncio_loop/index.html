@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>On asyncio run - The Knife of Phaedrus</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Python formally introduced concurrency using asncio in 3.7&#43;. A simple program that can demonstrate the hello world of async stuff goes like this-
+import asyncio async def main(): print(&#39;hello&#39;) await asyncio.sleep(1) print(&#39;world&#39;) asyncio.run(main()) In this case asyncio.run is the blocking call. It takes coroutine as a param, that is created by main() due to the async qualifer.
+Does it also create an event loop inside? From the doc, yes it does-" />
+	<meta property="og:image" content=""/>
+	<meta property="og:title" content="On asyncio run" />
+<meta property="og:description" content="Python formally introduced concurrency using asncio in 3.7&#43;. A simple program that can demonstrate the hello world of async stuff goes like this-
+import asyncio async def main(): print(&#39;hello&#39;) await asyncio.sleep(1) print(&#39;world&#39;) asyncio.run(main()) In this case asyncio.run is the blocking call. It takes coroutine as a param, that is created by main() due to the async qualifer.
+Does it also create an event loop inside? From the doc, yes it does-" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lafolle.ca/blog/asyncio_loop/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2022-03-10T22:08:29-08:00" />
+<meta property="article:modified_time" content="2022-03-10T22:08:29-08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="On asyncio run"/>
+<meta name="twitter:description" content="Python formally introduced concurrency using asncio in 3.7&#43;. A simple program that can demonstrate the hello world of async stuff goes like this-
+import asyncio async def main(): print(&#39;hello&#39;) await asyncio.sleep(1) print(&#39;world&#39;) asyncio.run(main()) In this case asyncio.run is the blocking call. It takes coroutine as a param, that is created by main() due to the async qualifer.
+Does it also create an event loop inside? From the doc, yes it does-"/>
+<script src="https://lafolle.ca/js/feather.min.js"></script>
+	
+	
+        <link href="https://lafolle.ca/css/fonts.b685ac6f654695232de7b82a9143a46f9e049c8e3af3a21d9737b01f4be211d1.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="https://lafolle.ca/css/main.40ca3a860425083862b7ebd55447caec5c4384573f0cb098b8d06a91e8dace2e.css" />
+	
+	
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="https://lafolle.ca/">The Knife of Phaedrus</a>
+	</div>
+	<nav>
+		
+		<a href="/">Home</a>
+		
+		<a href="/tags">Tags</a>
+		
+		<a href="/about">About</a>
+		
+		
+	</nav>
+</header>
+
+<main>
+	<article>
+		<div class="title">
+			<h1 class="title">On asyncio run</h1>
+			<div class="meta">Posted on Mar 10, 2022 <span class="draft-label">DRAFT</span> </div>
+		</div>
+		
+
+		<section class="body">
+			<p>Python formally introduced concurrency using asncio in 3.7+. A simple program that can
+demonstrate the hello world of async stuff goes like this-</p>
+<pre tabindex="0"><code>import asyncio
+
+async def main():
+	print(&#39;hello&#39;)
+	await asyncio.sleep(1)
+	print(&#39;world&#39;)
+
+asyncio.run(main())
+</code></pre><p>In this case <code>asyncio.run</code> is the blocking call. It takes coroutine as a param, that is
+created by <code>main()</code> due to the <code>async</code> qualifer.</p>
+<p>Does it also create an event loop inside? From the doc, yes it does-</p>
+<blockquote>
+<p>This function always creates a new event loop and closes it at the end.</p>
+</blockquote>
+<p>What if an event loop is already present in the same thread? Will it scheudle the coroutine
+in that existing event loop?  From the docs-</p>
+<blockquote>
+<p>This function cannot be called when another asyncio event loop is running in the same thread.</p>
+</blockquote>
+<p>If that is the case then calling <code>run</code> from <code>run</code> should throw an error-</p>
+<pre tabindex="0"><code>async def boom():
+    await asyncio.sleep(3)
+
+async def main():
+    asyncio.run(boom())
+    await asyncio.sleep(3)
+    print(&#39;hello&#39;)
+
+asyncio.run(main(), debug=True)
+</code></pre><p>Indeed it does-</p>
+<pre tabindex="0"><code>Traceback (most recent call last):
+    &lt;NOT RELEVANT&gt;
+   asyncio.run(boom())
+  File &#34;runners.py&#34;, line 33, in run
+    raise RuntimeError(
+RuntimeError: asyncio.run() cannot be called from a running event loop
+sys:1: RuntimeWarning: coroutine &#39;boom&#39; was never awaited
+</code></pre><p>As expected. This is infact the first check in the <code>run</code> function.</p>
+<pre tabindex="0"><code>if events._get_running_loop() is not None:
+	raise RuntimeError(
+		&#34;asyncio.run() cannot be called from a running event loop&#34;)
+</code></pre><p>Note, the runtime also tells that the <code>boom</code> coroutine never got executed. I believe that is just
+a side effect of the process exiting before finishing all the coroutines in the event loop.</p>
+<p>Next, the run function checks if the passed param is a coroutine or not. It is indeed in our case, so we&rsquo;re good.<br>
+Next, the event loop is created.</p>
+<pre tabindex="0"><code>loop = events.new_event_loop()
+try:
+	events.set_event_loop(loop)
+</code></pre><p>Next the event loop is &ldquo;set&rdquo;.</p>
+<pre tabindex="0"><code>try:
+	events.set_event_loop(loop)
+</code></pre><p>What does this mean? Going inside <code>set_event_loop</code> I see-</p>
+<pre tabindex="0"><code>def set_event_loop(loop):
+    &#34;&#34;&#34;Equivalent to calling get_event_loop_policy().set_event_loop(loop).&#34;&#34;&#34;
+    get_event_loop_policy().set_event_loop(loop)
+</code></pre><p>Ok, so get an instance of an event loop policy and set the loop on it (not sure what the last part means).
+The event loop policy is maintained in <code>_event_loop_policy</code> global var. If it is set, then that policy is used.
+Otherwise a new event loop policy is created using <code>DefaultEventLoopPolicy</code>.</p>
+<p>What is <code>DefaultEventLoopPolicy</code>?<br>
+By default this is set to <code>WindowsProactorEventLoopPolicy</code>. That does not sound right
+because I&rsquo;m on mac but looks like a type related to windows is being used. At least that is what vim tells me.
+Confusing. Lets put breakpoint to decipher that-</p>
+<pre tabindex="0"><code>breakpoint()
+asyncio.run(main)
+</code></pre><p>After a few <code>s</code> and <code>n</code>s the true identity of default event loop policy is revealed-</p>
+<pre tabindex="0"><code>(Pdb) ll
+722     def get_event_loop_policy():
+723         &#34;&#34;&#34;Get the current event loop policy.&#34;&#34;&#34;
+724         if _event_loop_policy is None:
+725             _init_event_loop_policy()
+726  -&gt;     return _event_loop_policy
+(Pdb) _event_loop_policy
+&lt;asyncio.unix_events._UnixDefaultEventLoopPolicy object at 0x104c6bc40&gt;
+</code></pre><p>It is correctly set to <code>_UnixDefaultEventLoopPolicy</code> rather than the windows one.</p>
+<p>Ah, python&rsquo;s vim jedi plugin dropped me to the windows selector for whatever reason and hence the confusion.
+On unix based system <code>Lib/asyncio/unix_events.py</code> is executed and the last line there sets the default policy to
+<code>_UnixDefaultEventLoopPolicy</code>.</p>
+<p>But during stepping through the debugger i also realize that the event loop policy is already created beforehand.
+That is, L725 in the above code snippet was not hit. Which means somebody set it. When was this done?</p>
+<h2 id="on-event-loop-policy">On Event loop policy</h2>
+<p>I am staring at two concepts-</p>
+<ol>
+<li>event loop</li>
+<li>event loop policy<br>
+and both are binded together using <code>set_event_loop</code> method on the policy.</li>
+</ol>
+<p>What is this policy thing?<br>
+Hmmm, the unix policy inherits from a base class-</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">_UnixDefaultEventLoopPolicy</span>(events<span style="color:#000;font-weight:bold">.</span>BaseDefaultEventLoopPolicy):
+</span></span></code></pre></div><p>Lets take a look at the base class first.<br>
+Ok, that inherits from an abstract class-</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">BaseDefaultEventLoopPolicy</span>(AbstractEventLoopPolicy):
+</span></span></code></pre></div><p>Lets take a look at the abc class. It states just this in the doc-</p>
+<blockquote>
+<p>Abstract policy for accessing the event loop.</p>
+</blockquote>
+<p>Apart from that it expects following 3 methods to be implemented in child classes-</p>
+<ol>
+<li>get_event_loop</li>
+<li>set_event_loop</li>
+<li>new_event_loop</li>
+</ol>
+<p>And two additional methods which are only supported in unix platform-</p>
+<ol>
+<li>get_child_watcher</li>
+<li>set_child_watcher</li>
+</ol>
+<p>From the look of it the policy appears to manage the event loop instance and watchers of forked processes,
+in some &ldquo;context&rdquo;. This &ldquo;context&rdquo; thing is not clear yet.</p>
+<p>Ok. Lets go back to the concrete child class <code>BaseDefaultEventLoopPolicy</code>. The documentation here is
+neat and is understandable now that I have traversed its base. The doc goes like-</p>
+<blockquote>
+<p>In this policy, each thread has its own event loop.  However, we only automatically create an event loop by default for the main thread; other threads by default have no event loop.</p>
+<p>Other policies may have different rules (e.g. a single global event loop, or automatically creating an event loop per thread, or using some other notion of context to which an event loop is associated).</p>
+</blockquote>
+<p>Right. The policy does determine the relationship between &ldquo;context&rdquo;, that in our case is thread for this base default policy, and the event loop.
+One loop in main thread and none for the others. Or each thread with its own event loop. Apart from these two points there is also a concept of main thread.
+To digress a bit, what is this main thread? The first thread that is created in the process by the kernel? Lets take a quick look at <code>threading.main_thread</code>-</p>
+<blockquote>
+<p>In normal conditions, the main thread is the thread from which the Python interpreter was started.</p>
+</blockquote>
+<p>Neat. That is the documentation of the <code>main_thread</code> in the threading module. For now, I would not go into abnormal conditions.</p>
+<p>Back to policy stuff. The <code>_UnixDefaultEventLoopPolicy</code> stores the event loop instance in the thread local storage. For this it defines
+an internal class that inherits from <code>threading.local</code> which represents TLS (transport layer secu&hellip;kidding)-</p>
+<pre tabindex="0"><code>class _Local(threading.local):
+	_loop = None
+	_set_called = False
+</code></pre><p>When an instance of this policy is created <code>self._local</code> is set to TLS+two extra data-</p>
+<pre tabindex="0"><code>def __init__(self):
+	self._local = self._Local()
+</code></pre><p>The most interesting is the <code>get_event_loop</code> method-</p>
+<pre tabindex="0"><code>def get_event_loop(self):
+        if (self._local._loop is None and
+                not self._local._set_called and
+                threading.current_thread() is threading.main_thread()):
+            self.set_event_loop(self.new_event_loop())
+
+        if self._local._loop is None:
+            raise RuntimeError(&#39;There is no current event loop in thread %r.&#39;
+                               % threading.current_thread().name)
+
+        return self._local._loop
+</code></pre><p>Here, the first condition states that if-</p>
+<ul>
+<li>local loop is not already set and</li>
+<li>setting local loop has not already been called and</li>
+<li>this method is being executed on the main thread (on which the py interpreter first started)</li>
+</ul>
+<p>is true, then create a new event loop and set it in the TLS (thread local storage).</p>
+<p>Next, if no loop is present in the current thread, then raise exception. Lastly return the loop.</p>
+<p>Only thing left here now is the <code>_loop_factory</code>. This is the thing that actually creates the event loop.
+And it is not defined in the default policy class. Where is it?<br>
+Aha, the unix&rsquo;s event loop policy that derives from the default policy has it-</p>
+<pre tabindex="0"><code>class _UnixDefaultEventLoopPolicy(events.BaseDefaultEventLoopPolicy):
+    &#34;&#34;&#34;UNIX event loop policy with a watcher for child processes.&#34;&#34;&#34;
+    _loop_factory = _UnixSelectorEventLoop
+</code></pre><p>So, what is <code>_UnixSelectorEventLoop</code>? And how is that involved in giving birth to event loop? This i&rsquo;ll cover in next step.</p>
+
+		</section>
+
+		<div class="post-tags">
+			
+			
+			<nav class="nav tags">
+				<ul class="tags">
+					
+					<li><a href="/tags/python">python</a></li>
+					
+					<li><a href="/tags/thread">thread</a></li>
+					
+					<li><a href="/tags/asyncio">asyncio</a></li>
+					
+				</ul>
+			</nav>
+			
+			
+		</div>
+	</article>
+</main>
+<footer>
+  <div style="display:flex"><a class="soc" href="https://github.com/lafolle" title="Github"><i data-feather="fab fa-github"></i></a><a class="soc" href="https://twitter.com/ckarany" title="Twitter"><i data-feather="fab fa-twitter"></i></a><a class="soc" href="https://www.linkedin.com/in/karan-chaudhary-603b6aa0/" title="Linkedin"><i data-feather="fab fa-linkedin"></i></a></div>
+  <div class="footer-info">
+    2022  All content copyright lafolle.ca © 2020 • All rights reserved. |  <a
+      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+  </div>
+</footer>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-176408027-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<script>
+  feather.replace()
+</script></div>
+    </body>
+</html>
