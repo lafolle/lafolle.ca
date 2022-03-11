@@ -4,3 +4,9 @@
 [submodule "themes/hugo-theme-codex"]
 	path = themes/hugo-theme-codex
 	url = https://github.com/jakewies/hugo-theme-codex.git
+[submodule "themes/archi"]
+	path = themes/archi
+	url = git@github.com:lafolle/archie.git
+[submodule "themes/archie"]
+	path = themes/archie
+	url = git@github.com:lafolle/archie.git

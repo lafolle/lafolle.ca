@@ -52,6 +52,19 @@
 				
 				
 				<section class="list-item">
+					<h1 class="title"><a href="/blog/on-asyncio-run/">On asyncio run</a></h1>
+					<time>Mar 10, 2022</time>
+					<br><div class="description">
+						
+						Python formally introduced concurrency using asncio in 3.7+. A simple program that can demonstrate the hello world of async stuff goes like this-
+import asyncio async def main(): print(&#39;hello&#39;) await asyncio.sleep(1) print(&#39;world&#39;) asyncio.run(main()) In this case asyncio.run is the blocking call. It takes coroutine as a param, that is created by main() due to the async qualifer.
+Does it also create an event loop inside? From the doc, yes it does-&hellip;
+						
+					</div>
+					<a class="readmore" href="/blog/on-asyncio-run/">Read more ⟶</a>
+				</section>
+				
+				<section class="list-item">
 					<h1 class="title"><a href="/blog/wifi/">Wifi</a></h1>
 					<time>Sep 5, 2020 <span class="draft-label">DRAFT</span> </time>
 					<br><div class="description">
