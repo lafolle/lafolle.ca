@@ -1,6 +1,6 @@
-#Code for lafolle.ca
+# Powers lafolle.ca
 
-To run local server
+To run local server-
 ```
 hugo server -D
 ```
