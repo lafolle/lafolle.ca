@@ -107,11 +107,22 @@ After a few `s` and `n`s the true identity of default event loop policy is revea
 It is correctly set to `_UnixDefaultEventLoopPolicy` rather than the windows one.
 
 Ah, python's vim jedi plugin dropped me to the windows selector for whatever reason and hence the confusion.
-On unix based system `Lib/asyncio/unix_events.py` is executed and the last line there sets the default policy to
-`_UnixDefaultEventLoopPolicy`.
 
 But during stepping through the debugger i also realize that the event loop policy is already created beforehand.
 That is, L725 in the above code snippet was not hit. Which means somebody set it. When was this done?
+
+Its done in `Lib/asyncio/__init__.py` [link](https://github.com/python/cpython/blob/3.9/Lib/asyncio/__init__.py#L42-L47)-
+```
+if sys.platform == 'win32':  # pragma: no cover
+    from .windows_events import *
+    __all__ += windows_events.__all__
+else:
+    from .unix_events import *  # pragma: no cover
+    __all__ += unix_events.__all__
+```
+
+On unix based systems `Lib/asyncio/unix_events.py` is executed and the last line there sets the default policy to
+`_UnixDefaultEventLoopPolicy`.
 
 ## On Event loop policy
 I am staring at two concepts-
@@ -121,12 +132,12 @@ and both are binded together using `set_event_loop` method on the policy.
 
 What is this policy thing?  
 Hmmm, the unix policy inherits from a base class-
-```python
+```
 class _UnixDefaultEventLoopPolicy(events.BaseDefaultEventLoopPolicy):
 ```
 Lets take a look at the base class first.  
 Ok, that inherits from an abstract class-
-```python
+```
 class BaseDefaultEventLoopPolicy(AbstractEventLoopPolicy):
 ```
 

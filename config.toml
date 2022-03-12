@@ -9,7 +9,7 @@ pygmentsStyle = "github"
 # Google analytics
 googleAnalytics = "UA-176408027-1"
 
-copyright = "All content copyright lafolle.ca © 2020 • All rights reserved."
+copyright = "© Karan Chaudhary"
 
 [params]
 	subtitle = "Musings with systems"
