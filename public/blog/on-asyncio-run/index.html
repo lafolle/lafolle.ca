@@ -133,11 +133,18 @@ asyncio.run(main)
 (Pdb) _event_loop_policy
 &lt;asyncio.unix_events._UnixDefaultEventLoopPolicy object at 0x104c6bc40&gt;
 </code></pre><p>It is correctly set to <code>_UnixDefaultEventLoopPolicy</code> rather than the windows one.</p>
-<p>Ah, python&rsquo;s vim jedi plugin dropped me to the windows selector for whatever reason and hence the confusion.
-On unix based system <code>Lib/asyncio/unix_events.py</code> is executed and the last line there sets the default policy to
-<code>_UnixDefaultEventLoopPolicy</code>.</p>
+<p>Ah, python&rsquo;s vim jedi plugin dropped me to the windows selector for whatever reason and hence the confusion.</p>
 <p>But during stepping through the debugger i also realize that the event loop policy is already created beforehand.
 That is, L725 in the above code snippet was not hit. Which means somebody set it. When was this done?</p>
+<p>Its done in <code>Lib/asyncio/__init__.py</code> <a href="https://github.com/python/cpython/blob/3.9/Lib/asyncio/__init__.py#L42-L47">link</a>-</p>
+<pre tabindex="0"><code>if sys.platform == &#39;win32&#39;:  # pragma: no cover
+    from .windows_events import *
+    __all__ += windows_events.__all__
+else:
+    from .unix_events import *  # pragma: no cover
+    __all__ += unix_events.__all__
+</code></pre><p>On unix based systems <code>Lib/asyncio/unix_events.py</code> is executed and the last line there sets the default policy to
+<code>_UnixDefaultEventLoopPolicy</code>.</p>
 <h2 id="on-event-loop-policy">On Event loop policy</h2>
 <p>I am staring at two concepts-</p>
 <ol>
@@ -147,11 +154,11 @@ and both are binded together using <code>set_event_loop</code> method on the pol
 </ol>
 <p>What is this policy thing?<br>
 Hmmm, the unix policy inherits from a base class-</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">_UnixDefaultEventLoopPolicy</span>(events<span style="color:#000;font-weight:bold">.</span>BaseDefaultEventLoopPolicy):
-</span></span></code></pre></div><p>Lets take a look at the base class first.<br>
+<pre tabindex="0"><code>class _UnixDefaultEventLoopPolicy(events.BaseDefaultEventLoopPolicy):
+</code></pre><p>Lets take a look at the base class first.<br>
 Ok, that inherits from an abstract class-</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">BaseDefaultEventLoopPolicy</span>(AbstractEventLoopPolicy):
-</span></span></code></pre></div><p>Lets take a look at the abc class. It states just this in the doc-</p>
+<pre tabindex="0"><code>class BaseDefaultEventLoopPolicy(AbstractEventLoopPolicy):
+</code></pre><p>Lets take a look at the abc class. It states just this in the doc-</p>
 <blockquote>
 <p>Abstract policy for accessing the event loop.</p>
 </blockquote>
@@ -241,7 +248,7 @@ Aha, the unix&rsquo;s event loop policy that derives from the default policy has
 <footer>
   <div style="display:flex"><a class="soc" href="https://github.com/lafolle" title="Github"><i data-feather="fab fa-github"></i></a><a class="soc" href="https://twitter.com/ckarany" title="Twitter"><i data-feather="fab fa-twitter"></i></a><a class="soc" href="https://www.linkedin.com/in/karan-chaudhary-603b6aa0/" title="Linkedin"><i data-feather="fab fa-linkedin"></i></a></div>
   <div class="footer-info">
-    2022  All content copyright lafolle.ca © 2020 • All rights reserved. |  <a
+    2022  © Karan Chaudhary |  <a
       href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
   </div>
 </footer>

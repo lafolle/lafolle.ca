@@ -6,8 +6,21 @@
     <description>Recent content on The Knife of Phaedrus</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>All content copyright lafolle.ca © 2020 • All rights reserved.</copyright>
-    <lastBuildDate>Thu, 10 Mar 2022 22:08:29 -0800</lastBuildDate><atom:link href="https://lafolle.ca/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>© Karan Chaudhary</copyright>
+    <lastBuildDate>Wed, 16 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lafolle.ca/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>On asyncio class hierarchy</title>
+      <link>https://lafolle.ca/blog/on-asyncio-class-hierarchy/</link>
+      <pubDate>Wed, 16 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lafolle.ca/blog/on-asyncio-class-hierarchy/</guid>
+      <description>_UnixSelectorEventLoop is used as a _loop_factory. That is, it is used to create new event loops in unix based system.
+What does it look like?
+class _UnixSelectorEventLoop(selector_events.BaseSelectorEventLoop) It is a subclass of BaseSelectorEventLoop. Rather than going into the details of the unix selector, i&amp;rsquo;ll first dive into the base class.
+class BaseSelectorEventLoop(base_events.BaseEventLoop) And it inherits from BaseEventLoop.
+class BaseEventLoop(events.AbstractEventLoop) And it inherits from AbstractEventLoop. I&amp;rsquo;m glad that this is the end to the inheritance hierarchy.</description>
+    </item>
+    
     <item>
       <title>On asyncio run</title>
       <link>https://lafolle.ca/blog/on-asyncio-run/</link>

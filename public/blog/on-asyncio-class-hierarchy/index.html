@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>On asyncio class hierarchy - The Knife of Phaedrus</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="_UnixSelectorEventLoop is used as a _loop_factory. That is, it is used to create new event loops in unix based system.
+What does it look like?
+class _UnixSelectorEventLoop(selector_events.BaseSelectorEventLoop) It is a subclass of BaseSelectorEventLoop. Rather than going into the details of the unix selector, i&rsquo;ll first dive into the base class.
+class BaseSelectorEventLoop(base_events.BaseEventLoop) And it inherits from BaseEventLoop.
+class BaseEventLoop(events.AbstractEventLoop) And it inherits from AbstractEventLoop. I&rsquo;m glad that this is the end to the inheritance hierarchy." />
+	<meta property="og:image" content=""/>
+	<meta property="og:title" content="On asyncio class hierarchy" />
+<meta property="og:description" content="_UnixSelectorEventLoop is used as a _loop_factory. That is, it is used to create new event loops in unix based system.
+What does it look like?
+class _UnixSelectorEventLoop(selector_events.BaseSelectorEventLoop) It is a subclass of BaseSelectorEventLoop. Rather than going into the details of the unix selector, i&rsquo;ll first dive into the base class.
+class BaseSelectorEventLoop(base_events.BaseEventLoop) And it inherits from BaseEventLoop.
+class BaseEventLoop(events.AbstractEventLoop) And it inherits from AbstractEventLoop. I&rsquo;m glad that this is the end to the inheritance hierarchy." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lafolle.ca/blog/on-asyncio-class-hierarchy/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2022-03-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-03-16T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="On asyncio class hierarchy"/>
+<meta name="twitter:description" content="_UnixSelectorEventLoop is used as a _loop_factory. That is, it is used to create new event loops in unix based system.
+What does it look like?
+class _UnixSelectorEventLoop(selector_events.BaseSelectorEventLoop) It is a subclass of BaseSelectorEventLoop. Rather than going into the details of the unix selector, i&rsquo;ll first dive into the base class.
+class BaseSelectorEventLoop(base_events.BaseEventLoop) And it inherits from BaseEventLoop.
+class BaseEventLoop(events.AbstractEventLoop) And it inherits from AbstractEventLoop. I&rsquo;m glad that this is the end to the inheritance hierarchy."/>
+<script src="https://lafolle.ca/js/feather.min.js"></script>
+	
+	
+        <link href="https://lafolle.ca/css/fonts.b685ac6f654695232de7b82a9143a46f9e049c8e3af3a21d9737b01f4be211d1.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="https://lafolle.ca/css/main.40ca3a860425083862b7ebd55447caec5c4384573f0cb098b8d06a91e8dace2e.css" />
+	
+	
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="https://lafolle.ca/">The Knife of Phaedrus</a>
+	</div>
+	<nav>
+		
+		<a href="/">Home</a>
+		
+		<a href="/tags">Tags</a>
+		
+		<a href="/about">About</a>
+		
+		
+	</nav>
+</header>
+
+<main>
+	<article>
+		<div class="title">
+			<h1 class="title">On asyncio class hierarchy</h1>
+			<div class="meta">Posted on Mar 16, 2022</div>
+		</div>
+		
+
+		<section class="body">
+			<p><code>_UnixSelectorEventLoop</code> is used as a <code>_loop_factory</code>. That is, it is used to create new event loops in unix based system.</p>
+<p>What does it look like?</p>
+<pre tabindex="0"><code>class _UnixSelectorEventLoop(selector_events.BaseSelectorEventLoop)
+</code></pre><p>It is a subclass of <code>BaseSelectorEventLoop</code>.  Rather than going into the details of the unix selector, i&rsquo;ll first dive
+into the base class.</p>
+<pre tabindex="0"><code>class BaseSelectorEventLoop(base_events.BaseEventLoop)
+</code></pre><p>And it inherits from <code>BaseEventLoop</code>.</p>
+<pre tabindex="0"><code>class BaseEventLoop(events.AbstractEventLoop)
+</code></pre><p>And it inherits from <code>AbstractEventLoop</code>.  I&rsquo;m glad that this is the end to the inheritance hierarchy.</p>
+<h2 id="abstracteventloop"><code>AbstractEventLoop</code></h2>
+<p>This abc event loop class defines a lot of methods. All the methods can be grouped in the following categories
+based on the comments in the code-</p>
+<ul>
+<li>Running and stopping the event loop, like run_forever, run_until_complete(future), stop, close</li>
+<li>Methods scheduling callbacks.  All these return Handles. like cal_soon, call_later, call_at, time</li>
+<li>Method scheduling a coroutine object: create a task. Only one is here- create_task</li>
+<li>Methods for interacting with threads, like call_soon_threadsafe, run_in_executor</li>
+<li>Network I/O methods returning Futures, like getaddrinfo, create_connection, create_server</li>
+<li>Ready-based callback registration method, like add_reader, remove_reader</li>
+<li>Completion based I/O methods returning Futures, like sock_recv, sock_accept</li>
+<li>Signal handling, like add_signal_handler, remove_signal_handler</li>
+<li>Task factory, like set_task_factory, get_task_factory</li>
+<li>Error handlers, like get_exception_handler, set_exception_handler</li>
+<li>Debug flag management, like get_debug, set_debug</li>
+</ul>
+<p>Note, this is an abstract class. It does not implement any of the above listed methods.
+Next, lets unwind and drop to the first child- <code>BaseEventLoop</code>.</p>
+<h2 id="baseeventloop"><code>BaseEventLoop</code></h2>
+<p>This class implements methods of the abc class.</p>
+<p>If there is an event loop then there must be two concepts I should look for. First, a queue where events can park themselves until someone picks them for processing.
+This is the place all the new events would go into. And second, something that should process the events in this queue. In some order or priority.</p>
+<p>These three instance variables look interesting-</p>
+<pre tabindex="0"><code>self._ready = collections.deque()
+self._scheduled = []
+self._selector = None
+</code></pre><h3 id="on-self_ready">On <code>self._ready</code></h3>
+<ul>
+<li>This is just a normal list with objects of type <code>Handle</code></li>
+<li>Populated only by <code>self._call_soon</code> method</li>
+<li>Also used for signaling</li>
+</ul>
+<h3 id="on-self_scheduled">On <code>self._scheduled</code></h3>
+<ul>
+<li>This is a priority queue with objects of type <code>TimeHandle</code>
+<ul>
+<li>dunder methods <code>lt</code>, <code>le</code>, <code>gt</code>, <code>ge</code>, <code>eq</code> are implemented for TimeHandle</li>
+<li>handle with the lowest <code>_when</code> is at the top of the queue</li>
+</ul>
+</li>
+<li>Populated by <code>call_at</code> and <code>call_later</code></li>
+</ul>
+<h3 id="on-self_selector">On <code>self._selector</code></h3>
+<ul>
+<li>this selector monitors multiple file descriptors to see if i/o is possible on them (from man of select)</li>
+<li>it is set in <code>BaseSelectorEventLoop</code> to <code>selectors.DefaultSelector</code></li>
+<li><code>selectors.DefaultSelector</code> is <a href="https://github.com/python/cpython/blob/3.9/Lib/selectors.py#L610-L619">platform dependent</a>. For example, for macs it is KqueueSelector, for linux its EpollSelector etc.</li>
+</ul>
+<p>These both queues are processed in the <code>_run_once</code> method. From the look of it, it is the core of the event loop and deserves its own writing.
+To summarize it processes the events (handles) in <code>_ready</code> and <code>_scheduled</code> queues. For i/o bound tasks the selector is used. Knowledge of handler, task, future, coroutine is
+needed to completely understand this code. Will do that later.</p>
+<p>Unwinding the inheritance hierarchy, lets move to <code>BaseSelectorEventLoop</code>.</p>
+<h2 id="baseselectoreventloop"><code>BaseSelectorEventLoop</code></h2>
+<p>This class provides i/o methods on socket. The socket must be in non-blocking mode otherwise</p>
+<pre tabindex="0"><code>ValueError(&#34;the socket must be non-blocking&#34;)
+</code></pre><p>error is thrown.</p>
+<p>The general flow of operations on the socket is-</p>
+<pre tabindex="0"><code>fut = self.create_future()
+self._sock_operation(fut, sock)
+await fut
+</code></pre><ol>
+<li>create a future</li>
+<li>do the specified operation on the socket</li>
+<li>if 2 is successful then write the results of 2 to future</li>
+<li>if 2 is unsuccessful due to socket not being ready, then register the socket for read/write event with the selector so that a callback is triggered when the socket becomes readable/writable.  This is done using either <code>self._add_reader</code> or <code>self._add_writer</code></li>
+</ol>
+<p>For example, consider the case of reading data from a socket.</p>
+<pre tabindex="0"><code>async def sock_recv(self, sock, n):
+	&#34;&#34;&#34;Receive data from the socket.
+
+	The return value is a bytes object representing the data received.
+	The maximum amount of data to be received at once is specified by
+	nbytes.
+	&#34;&#34;&#34;
+	base_events._check_ssl_socket(sock)
+	if self._debug and sock.gettimeout() != 0:
+		raise ValueError(&#34;the socket must be non-blocking&#34;)
+	try:
+		return sock.recv(n)
+	except (BlockingIOError, InterruptedError):
+		pass
+	fut = self.create_future()
+	fd = sock.fileno()
+	self._ensure_fd_no_transport(fd)
+	handle = self._add_reader(fd, self._sock_recv, fut, sock, n)
+	fut.add_done_callback(
+		functools.partial(self._sock_read_done, fd, handle=handle))
+	return await fut
+</code></pre><p>This method is used to receive n bytes from the socket.</p>
+<p>First a read on socket is tried-</p>
+<pre tabindex="0"><code>return sock.recv(n)
+</code></pre><p>If its successful then return the bytes read.</p>
+<p>If the read call fails then-</p>
+<ul>
+<li><code>fut = self.create_future()</code> - create a future</li>
+<li><code>handle = self._add_reader(fd, self._sock_recv, fut, sock, n)</code> - ask the selector to call <code>self._sock_recv</code> with <code>fut</code> and <code>n</code> when the socket represented by file descriptor <code>fd</code> is ready to be read</li>
+<li><code>fut.add_done_callback(...</code> - when the future is done call <code>self._sock_read_done</code> with <code>fd</code> and <code>handle</code> args to unregister the fd for read events (that is to undo what is done in step above)</li>
+</ul>
+<p>Lastly, lets take a look at <code>self._sock_recv</code>-</p>
+<pre tabindex="0"><code>def _sock_recv(self, fut, sock, n):
+	...
+	try:
+		data = sock.recv(n)
+	except (BlockingIOError, InterruptedError):
+		return  # try again next time
+	...
+	else:
+		fut.set_result(data)
+</code></pre><p>This method is called by the event loop when the kernel gets to know that the socket is ready to be read.
+The data is read from the socket. If successful the data is written to the future. This writing of data to future marks it as done and corresponding &ldquo;done&rdquo; callbacks
+are triggered.</p>
+<p>Apart from this, this class also introduces self socket.</p>
+<pre tabindex="0"><code>self._ssock, self._csock = socket.socketpair()
+</code></pre><p>where <code>csock</code> is the writable socket, while <code>ssock</code> is the readable socket. Writing only involves a single byte. Not sure what they are used for as of now.
+Though i do see references to it in next class.</p>
+<p>Unwinding the inheritance hierarchy, lets move to <code>_UnixSelectorEventLoop</code>.</p>
+<h2 id="_unixselectoreventloop"><code>_UnixSelectorEventLoop</code></h2>
+<p>This class provides management for signal handlers and unix server/connection. It integrates signal handling with the event loop.</p>
+<h3 id="how-signal-handling-works">How signal handling works</h3>
+<p>User registers a callback that should be called when the thread receives a signal from os using <code>add_signal_handler</code> method like this-</p>
+<pre tabindex="0"><code>event_loop.add_signal_handler(signum, callback, *args)
+</code></pre><p>When the signal is received callback is triggered by the event loop along with other callbacks.</p>
+<p>The flow starts with asking the signal module to write the signal number to csock when a signal arrives.</p>
+<pre tabindex="0"><code>signal.set_wakeup_fd(self._csock.fileno())
+</code></pre><p>Its important to note that csock is a pair socket with ssock as the readable part of the pair. When anything is written to csock, it comes out of ssock. ssock has already been registered with the event loop for read events when <code>BaseSelectorEventLoop</code> is initialized-</p>
+<pre tabindex="0"><code>def _make_self_pipe(self):
+	# A self-socket, really. :-)
+	self._ssock, self._csock = socket.socketpair()
+	self._ssock.setblocking(False)
+	self._csock.setblocking(False)
+	self._internal_fds += 1
+	self._add_reader(self._ssock.fileno(), self._read_from_self)
+</code></pre><p>When a signal arrives, its signum is written to csock, that wakes up the event loop on ssock and trigger <code>_read_from_self</code> method.
+This method just reads upto 4096B of data from the socket and then triggers <code>self._process_self_data(data)</code>-</p>
+<pre tabindex="0"><code>def _read_from_self(self):
+	while True:
+		data = self._ssock.recv(4096)
+		...
+		self._process_self_data(data)
+		...
+</code></pre><p>The method <code>_process_self_data</code> is not defined in <code>BaseSelectorEventLoop</code>. It is defined in the child class <code>_UnixSelectorEventLoop</code>-</p>
+<pre tabindex="0"><code>def _process_self_data(self, data):
+	for signum in data:
+		if not signum:
+			# ignore null bytes written by _write_to_self()
+			continue
+		self._handle_signal(signum)
+</code></pre><p>This method is simple. It just triggers the <code>_handle_signal</code> method.</p>
+<pre tabindex="0"><code>def _handle_signal(self, sig):
+	&#34;&#34;&#34;Internal helper that is the actual signal handler.&#34;&#34;&#34;
+	handle = self._signal_handlers.get(sig)
+	if handle is None:
+		return  # Assume it&#39;s some race condition.
+	if handle._cancelled:
+		self.remove_signal_handler(sig)  # Remove it properly.
+	else:
+		self._add_callback_signalsafe(handle)
+</code></pre><p>Here the Handle for the signal is fetched if present and then <code>_add_callback_signalsafe</code> is called. This is a fun method defined in <code>BaseEventLoop</code>-</p>
+<pre tabindex="0"><code>def _add_callback_signalsafe(self, handle):
+	self._add_callback(handle)
+	self._write_to_self()
+</code></pre><p>Here <code>_add_callback</code> simply appends the handle to <code>self._ready</code> queue. And, a brilliant move, <code>_write_to_self</code> is called. This method is defined in child class <code>BaseSelectorEventLoop</code>-</p>
+<pre tabindex="0"><code>def _write_to_self(self):
+	...
+	csock.send(b&#39;\0&#39;)
+	...
+</code></pre><p>It writes a byte to the csock.  Anything written to csock gets passed on to ssock. When anything comes to ssock selector wakes up the event loop and says- &ldquo;hi, there is some data in the ssock socket. Please read from it&rdquo;. But in this particular case, the intention of the 0 byte written is to just wake up the event loop so that it can process
+<code>self._ready</code> queue. This <code>self._ready</code> queue has the handle[r] for the signum in current context. And this handle&rsquo;s callback is <a href="https://github.com/python/cpython/blob/ccb0e6a3452335a4c3e2433934c3c0c5622a34cd/Lib/asyncio/base_events.py#L1890">called</a> at this point.</p>
+
+		</section>
+
+		<div class="post-tags">
+			
+			
+			
+		</div>
+	</article>
+</main>
+<footer>
+  <div style="display:flex"><a class="soc" href="https://github.com/lafolle" title="Github"><i data-feather="fab fa-github"></i></a><a class="soc" href="https://twitter.com/ckarany" title="Twitter"><i data-feather="fab fa-twitter"></i></a><a class="soc" href="https://www.linkedin.com/in/karan-chaudhary-603b6aa0/" title="Linkedin"><i data-feather="fab fa-linkedin"></i></a></div>
+  <div class="footer-info">
+    2022  © Karan Chaudhary |  <a
+      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+  </div>
+</footer>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-176408027-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<script>
+  feather.replace()
+</script></div>
+    </body>
+</html>

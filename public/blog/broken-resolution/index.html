@@ -76,23 +76,55 @@ Created a new certificate valid for the following names 📜
 The certificate is at &#34;./example.com.pem&#34; and the key at &#34;./example.com-key.pem&#34; ✅
 </code></pre><p>Server code would execute the following line to
 run TLS server given SSL certificate and private key:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Go" data-lang="Go"><span style="display:flex;"><span>http.<span style="color:#900;font-weight:bold">ListenAndServeTLS</span>(<span style="color:#d14">&#34;:443&#34;</span>,
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Go" data-lang="Go"><span style="display:flex;"><span>http.<span style="color:#900;font-weight:bold">ListenAndServeTLS</span>(<span style="color:#d14">&#34;:443&#34;</span>,
 </span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;example.com.pem&#34;</span>, <span style="color:#998;font-style:italic">// Certificate.
 </span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>	<span style="color:#d14">&#34;example.com-key.pem&#34;</span>, <span style="color:#000;font-weight:bold">nil</span>) <span style="color:#998;font-style:italic">// Private key.
-</span></span></span></code></pre></div><p>Check if the server is running correctly:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl <span style="color:#d14">\
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Check if the server is running correctly:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl <span style="color:#d14">\
 </span></span></span><span style="display:flex;"><span><span style="color:#d14"></span>	--cacert rootCA.pem <span style="color:#d14">\ </span><span style="color:#998;font-style:italic"># Load the root cert from this path</span>
 </span></span><span style="display:flex;"><span>	--resolve example.com:443:127.0.0.1  <span style="color:#d14">\ </span><span style="color:#998;font-style:italic"># Use this mapping instead of asking DNS resolver</span>
 </span></span><span style="display:flex;"><span>	-vvv <span style="color:#d14">\
 </span></span></span><span style="display:flex;"><span><span style="color:#d14"></span>	https://example.com
-</span></span></code></pre></div><p>Now lets resolve <code>google.com</code> to 127.0.0.1 and hit our test server:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl <span style="color:#d14">\
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Now lets resolve <code>google.com</code> to 127.0.0.1 and hit our test server:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl <span style="color:#d14">\
 </span></span></span><span style="display:flex;"><span><span style="color:#d14"></span>	--cacert rootCA.pem <span style="color:#d14">\
 </span></span></span><span style="display:flex;"><span><span style="color:#d14"></span>	--resolve <span style="color:#d14">\
 </span></span></span><span style="display:flex;"><span><span style="color:#d14"></span>	google.com:443:127.0.0.1  <span style="color:#d14">\
 </span></span></span><span style="display:flex;"><span><span style="color:#d14"></span>	-vvv <span style="color:#d14">\
 </span></span></span><span style="display:flex;"><span><span style="color:#d14"></span>	https://google.com
-</span></span></code></pre></div><p>which spits out</p>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>which spits out</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
@@ -165,16 +197,36 @@ certificate matches <code>google.com</code>.  What are they in the certificate? 
 <code>google.com</code>?</p>
 <p>Lets generate cert for google.com: <code>mkcert google.com</code>,  and load them into the server such that server looks
 like this:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Go" data-lang="Go"><span style="display:flex;"><span>http.<span style="color:#900;font-weight:bold">ListenAndServeTLS</span>(<span style="color:#d14">&#34;:443&#34;</span>,
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Go" data-lang="Go"><span style="display:flex;"><span>http.<span style="color:#900;font-weight:bold">ListenAndServeTLS</span>(<span style="color:#d14">&#34;:443&#34;</span>,
 </span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;google.com.pem&#34;</span>, <span style="color:#998;font-style:italic">// Certificate.
 </span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>	<span style="color:#d14">&#34;google.com-key.pem&#34;</span>, <span style="color:#000;font-weight:bold">nil</span>) <span style="color:#998;font-style:italic">// Private key.
-</span></span></span></code></pre></div><p>and hitting the server with following curl request:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl <span style="color:#d14">\
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>and hitting the server with following curl request:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl <span style="color:#d14">\
 </span></span></span><span style="display:flex;"><span><span style="color:#d14"></span>   --cacert rootCA.pem <span style="color:#d14">\
 </span></span></span><span style="display:flex;"><span><span style="color:#d14"></span>   --resolve google.com:443:127.0.0.1  <span style="color:#d14">\
 </span></span></span><span style="display:flex;"><span><span style="color:#d14"></span>   -vvv <span style="color:#d14">\
 </span></span></span><span style="display:flex;"><span><span style="color:#d14"></span>   https://google.com
-</span></span></code></pre></div><p>outputs</p>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>outputs</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
@@ -207,20 +259,45 @@ used to issue X.509 cert to server.  This ability is denied to attackers.  Mostl
 certs and can also be provisioned to use CA certs installed in the system.</p>
 <p>Is it possible for an attacker to use <code>google.com</code>s certificate as anyways it is public?</p>
 <p>How can we get the SSL cert for <code>google.com</code> in PEM format??? Easy:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#0086b3">echo</span> | openssl s_connect -showcerts -connect google.com.443 <span style="color:#d14">\
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#0086b3">echo</span> | openssl s_connect -showcerts -connect google.com.443 <span style="color:#d14">\
 </span></span></span><span style="display:flex;"><span><span style="color:#d14"></span>	openssl x509 -out google.com-original.pem
-</span></span></code></pre></div><p>This will create a file <code>google.com-original.pem</code> that will contain the digital certificate for <code>google.com</code>.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This will create a file <code>google.com-original.pem</code> that will contain the digital certificate for <code>google.com</code>.
 We can load this into our server,  but there is a problem.  We don&rsquo;t have the private key. Note,  at the time of
 building CSR request we need to generate public/private key pair and the private key is used to sign the
 request.  In fact, if we can have the corresponding private key,  Google&rsquo;s existence is literally doomed.</p>
 <p>This is a blocker but lets go forward and try to feed-in wrong private key to the Go server:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Go" data-lang="Go"><span style="display:flex;"><span>http.<span style="color:#900;font-weight:bold">ListenAndServeTLS</span>(<span style="color:#d14">&#34;:443&#34;</span>,
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Go" data-lang="Go"><span style="display:flex;"><span>http.<span style="color:#900;font-weight:bold">ListenAndServeTLS</span>(<span style="color:#d14">&#34;:443&#34;</span>,
 </span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;google.com-original.pem&#34;</span>, <span style="color:#998;font-style:italic">// Certificate.
 </span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>	<span style="color:#d14">&#34;bad-key.pem&#34;</span>, <span style="color:#000;font-weight:bold">nil</span>) <span style="color:#998;font-style:italic">// Private key.
-</span></span></span></code></pre></div><p>On running, the server fails with following error:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>2020/08/24 17:42:44 ListenAndServe: tls: private key does not match public key
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>On running, the server fails with following error:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>2020/08/24 17:42:44 ListenAndServe: tls: private key does not match public key
 </span></span><span style="display:flex;"><span><span style="color:#0086b3">exit</span> status <span style="color:#099">1</span>
-</span></span></code></pre></div><p>Of course!  When the server loads the cert and private key,  it generates corresponding public key from private
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Of course!  When the server loads the cert and private key,  it generates corresponding public key from private
 key and matches it against the provided public key in first argument.  This matching failed here,  hence the
 error.  Now we are certain that attacker cannot do any damage unless they have the private key corresponding to
 the public key.</p>
@@ -353,7 +430,7 @@ as well your customers from malicious entities.</p>
 <footer>
   <div style="display:flex"><a class="soc" href="https://github.com/lafolle" title="Github"><i data-feather="fab fa-github"></i></a><a class="soc" href="https://twitter.com/ckarany" title="Twitter"><i data-feather="fab fa-twitter"></i></a><a class="soc" href="https://www.linkedin.com/in/karan-chaudhary-603b6aa0/" title="Linkedin"><i data-feather="fab fa-linkedin"></i></a></div>
   <div class="footer-info">
-    2022  All content copyright lafolle.ca © 2020 • All rights reserved. |  <a
+    2022  © Karan Chaudhary |  <a
       href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
   </div>
 </footer>
