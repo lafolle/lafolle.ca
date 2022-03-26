@@ -1,79 +1,53 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Blogs on The Knife of Phaedrus</title>
-    <link>https://lafolle.ca/blog/</link>
-    <description>Recent content in Blogs on The Knife of Phaedrus</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>© Karan Chaudhary</copyright>
-    <lastBuildDate>Wed, 16 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lafolle.ca/blog/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>On asyncio class hierarchy</title>
-      <link>https://lafolle.ca/blog/on-asyncio-class-hierarchy/</link>
-      <pubDate>Wed, 16 Mar 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://lafolle.ca/blog/on-asyncio-class-hierarchy/</guid>
-      <description>_UnixSelectorEventLoop is used as a _loop_factory. That is, it is used to create new event loops in unix based system.
-What does it look like?
-class _UnixSelectorEventLoop(selector_events.BaseSelectorEventLoop) It is a subclass of BaseSelectorEventLoop. Rather than going into the details of the unix selector, i&amp;rsquo;ll first dive into the base class.
-class BaseSelectorEventLoop(base_events.BaseEventLoop) And it inherits from BaseEventLoop.
-class BaseEventLoop(events.AbstractEventLoop) And it inherits from AbstractEventLoop. I&amp;rsquo;m glad that this is the end to the inheritance hierarchy.</description>
-    </item>
-    
-    <item>
-      <title>On asyncio run</title>
-      <link>https://lafolle.ca/blog/on-asyncio-run/</link>
-      <pubDate>Thu, 10 Mar 2022 22:08:29 -0800</pubDate>
-      
-      <guid>https://lafolle.ca/blog/on-asyncio-run/</guid>
-      <description>Python formally introduced concurrency using asncio in 3.7+. A simple program that can demonstrate the hello world of async stuff goes like this-
-import asyncio async def main(): print(&amp;#39;hello&amp;#39;) await asyncio.sleep(1) print(&amp;#39;world&amp;#39;) asyncio.run(main()) In this case asyncio.run is the blocking call. It takes coroutine as a param, that is created by main() due to the async qualifer.
-Does it also create an event loop inside? From the doc, yes it does-</description>
-    </item>
-    
-    <item>
-      <title>Wifi</title>
-      <link>https://lafolle.ca/blog/wifi/</link>
-      <pubDate>Sat, 05 Sep 2020 15:26:36 -0400</pubDate>
-      
-      <guid>https://lafolle.ca/blog/wifi/</guid>
-      <description>Was unable to capture traffic for my wifi using airport sniff . It turns out my wifi is on channel 44 and not 1.
-airport sniff 44 # works
-Beacon frame -
-wlan.fc.type_subtype != 0x08 &amp;amp;&amp;amp; wlan.ssid == &amp;quot;Waves in Space-5G&amp;quot; &amp;amp;&amp;amp; wlan.ta == e4:76:84:ce:61:0d</description>
-    </item>
-    
-    <item>
-      <title>Impl Sha256</title>
-      <link>https://lafolle.ca/blog/impl-sha256/</link>
-      <pubDate>Fri, 28 Aug 2020 08:09:13 -0400</pubDate>
-      
-      <guid>https://lafolle.ca/blog/impl-sha256/</guid>
-      <description>How does SHA256 work?
-What is a hash? Given a messages M of m bits generate a data N of n bits where n &amp;lt; m. Must be collision resistant
-What is cryptographic hash? h = H(x)
- Large input domain -&amp;gt; small fixed output =&amp;gt; compression Well distributed P(H(x)-i) = 1/N  Three additional properties:
- Pre-image resistant - given H(x), hard to find x. Weak collision resistance - hard to find any x such that H(x) = h Strong collision resistance - hard to find any pair such that H(x) = H(y)  How is hashing different from encryption?</description>
-    </item>
-    
-    <item>
-      <title>Breaking the Resolution</title>
-      <link>https://lafolle.ca/blog/broken-resolution/</link>
-      <pubDate>Sun, 23 Aug 2020 16:58:39 -0400</pubDate>
-      
-      <guid>https://lafolle.ca/blog/broken-resolution/</guid>
-      <description>Two machines on the internet can talk to each other iff both of them know each other&amp;rsquo;s IP addresses. When we type in &amp;ldquo;google.com&amp;rdquo; in the browser, the first task of the browser is to get the IP address of &amp;ldquo;google.com&amp;rdquo; which it does by communicating with the DNS system. Once an IP address is received, the browser establishes a TCP connection to the server, does a TLS handshake, exchanges data with the server before terminating the connection.</description>
-    </item>
-    
-    <item>
-      <title>Dnssec</title>
-      <link>https://lafolle.ca/blog/dnssec/</link>
-      <pubDate>Wed, 19 Aug 2020 17:04:55 -0400</pubDate>
-      
-      <guid>https://lafolle.ca/blog/dnssec/</guid>
-      <description>Prelude Is DNS secure without DNSSEC??? No. All queries made by clients to recursive resolver, authoritative name servers, TLD name servers or root name servers are un-encrypted. Apart from that DNS is based on UDP protocol which is connectionless in nature such that if i have a DNS server running on my (public) machine anyone who knows the IP and port on which the server is listening for traffic, can easily send request to it.</description>
-    </item>
-    
-  </channel>
+	<channel>
+		<title>Blogs on The Knife of Phaedrus</title>
+		<link>https://lafolle.ca/blog/</link>
+		<description>Recent content in Blogs on lafolle.ca</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>en-us</language>
+		<copyright>© Karan Chaudhary</copyright>
+		<lastBuildDate>Wed, 16 Mar 2022 00:00:00 +0000</lastBuildDate>
+		
+		<atom:link href="https://lafolle.ca/blog/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>On asyncio class hierarchy</title>
+			<link>https://lafolle.ca/blog/on-asyncio-class-hierarchy/</link>
+			<pubDate>Wed, 16 Mar 2022 00:00:00 +0000</pubDate>
+			
+			<guid>https://lafolle.ca/blog/on-asyncio-class-hierarchy/</guid>
+			<description>
+				
+				_UnixSelectorEventLoop is used as a _loop_factory. That is, it is used to create new event loops in unix based system.
+W...
+				
+			</description>
+		</item>
+		<item>
+			<title>On asyncio run</title>
+			<link>https://lafolle.ca/blog/on-asyncio-run/</link>
+			<pubDate>Thu, 10 Mar 2022 22:08:29 -0800</pubDate>
+			
+			<guid>https://lafolle.ca/blog/on-asyncio-run/</guid>
+			<description>
+				
+				Python formally introduced concurrency using asncio in 3.7&#43;. A simple program that can demonstrate the hello world of as...
+				
+			</description>
+		</item>
+		<item>
+			<title>Breaking the Resolution</title>
+			<link>https://lafolle.ca/blog/broken-resolution/</link>
+			<pubDate>Sun, 23 Aug 2020 16:58:39 -0400</pubDate>
+			
+			<guid>https://lafolle.ca/blog/broken-resolution/</guid>
+			<description>
+				
+				Two machines on the internet can talk to each other iff both of them know each other’s IP addresses. When we type ...
+				
+			</description>
+		</item>
+		
+	</channel>
 </rss>

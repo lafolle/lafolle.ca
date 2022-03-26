@@ -1,14 +1,23 @@
 <!DOCTYPE html>
-<html><head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>On asyncio class hierarchy - The Knife of Phaedrus</title><meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="_UnixSelectorEventLoop is used as a _loop_factory. That is, it is used to create new event loops in unix based system.
-What does it look like?
-class _UnixSelectorEventLoop(selector_events.BaseSelectorEventLoop) It is a subclass of BaseSelectorEventLoop. Rather than going into the details of the unix selector, i&rsquo;ll first dive into the base class.
-class BaseSelectorEventLoop(base_events.BaseEventLoop) And it inherits from BaseEventLoop.
-class BaseEventLoop(events.AbstractEventLoop) And it inherits from AbstractEventLoop. I&rsquo;m glad that this is the end to the inheritance hierarchy." />
-	<meta property="og:image" content=""/>
-	<meta property="og:title" content="On asyncio class hierarchy" />
+<html lang="en"><head>
+	
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-176408027-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+	
+	<meta name="generator" content="Hugo 0.94.0" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="keywords" content="python,asyncio,signals"><meta property="og:title" content="On asyncio class hierarchy" />
 <meta property="og:description" content="_UnixSelectorEventLoop is used as a _loop_factory. That is, it is used to create new event loops in unix based system.
 What does it look like?
 class _UnixSelectorEventLoop(selector_events.BaseSelectorEventLoop) It is a subclass of BaseSelectorEventLoop. Rather than going into the details of the unix selector, i&rsquo;ll first dive into the base class.
@@ -26,44 +35,58 @@ What does it look like?
 class _UnixSelectorEventLoop(selector_events.BaseSelectorEventLoop) It is a subclass of BaseSelectorEventLoop. Rather than going into the details of the unix selector, i&rsquo;ll first dive into the base class.
 class BaseSelectorEventLoop(base_events.BaseEventLoop) And it inherits from BaseEventLoop.
 class BaseEventLoop(events.AbstractEventLoop) And it inherits from AbstractEventLoop. I&rsquo;m glad that this is the end to the inheritance hierarchy."/>
-<script src="https://lafolle.ca/js/feather.min.js"></script>
-	
-	
-        <link href="https://lafolle.ca/css/fonts.b685ac6f654695232de7b82a9143a46f9e049c8e3af3a21d9737b01f4be211d1.css" rel="stylesheet">
-	
 
+	<link rel="stylesheet" type="text/css" media="screen" href="https://lafolle.ca/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://lafolle.ca/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://lafolle.ca/css/all.css" />
+	<title>On asyncio class hierarchy | The Knife of Phaedrus</title></head>
+<body><header>
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://lafolle.ca/css/main.40ca3a860425083862b7ebd55447caec5c4384573f0cb098b8d06a91e8dace2e.css" />
-	
-	
-</head>
-<body>
-        <div class="content"><header>
-	<div class="main">
-		<a href="https://lafolle.ca/">The Knife of Phaedrus</a>
+	<div id="titletext"><h2 id="title"><a href="https://lafolle.ca/">The Knife of Phaedrus</a></h2></div>
+	<div id="title-description"><p id="subtitle">Musings with systems</p><div id=social>
+			<nav>
+				<ul><li><a href="https://github.com/lafolle"><i title="Github" class="icons fab fa-github"></i></a></li><li><a href="https://twitter.com/ckarany"><i title="Twitter" class="icons fab fa-twitter"></i></a></li><li><a href="https://www.linkedin.com/in/karan-chaudhary-603b6aa0/"><i title="Linkedin" class="icons fab fa-linkedin"></i></a></li></ul>
+			</nav>
+		</div>
 	</div>
-	<nav>
-		
-		<a href="/">Home</a>
-		
-		<a href="/tags">Tags</a>
-		
-		<a href="/about">About</a>
-		
-		
-	</nav>
+	
+	<div id="mainmenu">
+		<nav>
+			<ul>
+				
+				<li><a href="/">Home</a></li>
+				
+				<li><a href="/tags">Tags</a></li>
+				
+				<li><a href="/about">About</a></li>
+				
+			</ul>
+		</nav>
+	</div>
+	
 </header>
-
-<main>
-	<article>
-		<div class="title">
-			<h1 class="title">On asyncio class hierarchy</h1>
-			<div class="meta">Posted on Mar 16, 2022</div>
+<main><div class="post">
+	
+	<div class="author">
+	
+	</div>
+	<div class="post-header">
+	
+		<div class="meta">
+			
+			<div class="date">
+				<span class="day">16</span>
+				<span class="rest">Mar 2022</span>
+			</div>
+			
 		</div>
 		
-
-		<section class="body">
-			<p><code>_UnixSelectorEventLoop</code> is used as a <code>_loop_factory</code>. That is, it is used to create new event loops in unix based system.</p>
+		<div class="matter">
+			<h1 class="title">On asyncio class hierarchy</h1>
+		</div>
+	</div>
+	<div class="markdown">
+		<p><code>_UnixSelectorEventLoop</code> is used as a <code>_loop_factory</code>. That is, it is used to create new event loops in unix based system.</p>
 <p>What does it look like?</p>
 <pre tabindex="0"><code>class _UnixSelectorEventLoop(selector_events.BaseSelectorEventLoop)
 </code></pre><p>It is a subclass of <code>BaseSelectorEventLoop</code>.  Rather than going into the details of the unix selector, i&rsquo;ll first dive
@@ -241,36 +264,96 @@ This method just reads upto 4096B of data from the socket and then triggers <cod
 </code></pre><p>It writes a byte to the csock.  Anything written to csock gets passed on to ssock. When anything comes to ssock selector wakes up the event loop and says- &ldquo;hi, there is some data in the ssock socket. Please read from it&rdquo;. But in this particular case, the intention of the 0 byte written is to just wake up the event loop so that it can process
 <code>self._ready</code> queue. This <code>self._ready</code> queue has the handle[r] for the signum in current context. And this handle&rsquo;s callback is <a href="https://github.com/python/cpython/blob/ccb0e6a3452335a4c3e2433934c3c0c5622a34cd/Lib/asyncio/base_events.py#L1890">called</a> at this point.</p>
 
-		</section>
-
-		<div class="post-tags">
-			
-			
-			<nav class="nav tags">
-				<ul class="tags">
-					
-					<li><a href="/tags/python">python</a></li>
-					
-					<li><a href="/tags/asyncio">asyncio</a></li>
-					
-					<li><a href="/tags/signals">signals</a></li>
-					
-				</ul>
-			</nav>
-			
-			
+	</div>
+	
+	
+	
+	
+	
+		
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Tags</p>
 		</div>
-	</article>
-</main>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			<a href="https://lafolle.ca/tags/asyncio/"> asyncio </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="https://lafolle.ca/tags/python/"> python </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="https://lafolle.ca/tags/signals/"> signals </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+		
+	</div></div>
+
+  </main>
 <footer>
-  <div style="display:flex"><a class="soc" href="https://github.com/lafolle" title="Github"><i data-feather="fab fa-github"></i></a><a class="soc" href="https://twitter.com/ckarany" title="Twitter"><i data-feather="fab fa-twitter"></i></a><a class="soc" href="https://www.linkedin.com/in/karan-chaudhary-603b6aa0/" title="Linkedin"><i data-feather="fab fa-linkedin"></i></a></div>
-  <div class="footer-info">
-    2022  © Karan Chaudhary |  <a
-      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
-  </div>
-</footer>
-
-
+	 © Karan Chaudhary 
+	
+	
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -282,8 +365,9 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-<script>
-  feather.replace()
-</script></div>
-    </body>
+	
+</footer>
+
+
+</body>
 </html>

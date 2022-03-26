@@ -1,12 +1,23 @@
 <!DOCTYPE html>
-<html><head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>On asyncio run - The Knife of Phaedrus</title><meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Python formally introduced concurrency using asncio in 3.7&#43;. A simple program that can demonstrate the hello world of async stuff goes like this-
-import asyncio async def main(): print(&#39;hello&#39;) await asyncio.sleep(1) print(&#39;world&#39;) asyncio.run(main()) In this case asyncio.run is the blocking call. It takes coroutine as a param, that is created by main() due to the async qualifer.
-Does it also create an event loop inside? From the doc, yes it does-" />
-	<meta property="og:image" content=""/>
-	<meta property="og:title" content="On asyncio run" />
+<html lang="en"><head>
+	
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-176408027-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+	
+	<meta name="generator" content="Hugo 0.94.0" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="keywords" content="python,thread,asyncio"><meta property="og:title" content="On asyncio run" />
 <meta property="og:description" content="Python formally introduced concurrency using asncio in 3.7&#43;. A simple program that can demonstrate the hello world of async stuff goes like this-
 import asyncio async def main(): print(&#39;hello&#39;) await asyncio.sleep(1) print(&#39;world&#39;) asyncio.run(main()) In this case asyncio.run is the blocking call. It takes coroutine as a param, that is created by main() due to the async qualifer.
 Does it also create an event loop inside? From the doc, yes it does-" />
@@ -20,44 +31,58 @@ Does it also create an event loop inside? From the doc, yes it does-" />
 <meta name="twitter:description" content="Python formally introduced concurrency using asncio in 3.7&#43;. A simple program that can demonstrate the hello world of async stuff goes like this-
 import asyncio async def main(): print(&#39;hello&#39;) await asyncio.sleep(1) print(&#39;world&#39;) asyncio.run(main()) In this case asyncio.run is the blocking call. It takes coroutine as a param, that is created by main() due to the async qualifer.
 Does it also create an event loop inside? From the doc, yes it does-"/>
-<script src="https://lafolle.ca/js/feather.min.js"></script>
-	
-	
-        <link href="https://lafolle.ca/css/fonts.b685ac6f654695232de7b82a9143a46f9e049c8e3af3a21d9737b01f4be211d1.css" rel="stylesheet">
-	
 
+	<link rel="stylesheet" type="text/css" media="screen" href="https://lafolle.ca/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://lafolle.ca/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://lafolle.ca/css/all.css" />
+	<title>On asyncio run | The Knife of Phaedrus</title></head>
+<body><header>
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://lafolle.ca/css/main.40ca3a860425083862b7ebd55447caec5c4384573f0cb098b8d06a91e8dace2e.css" />
-	
-	
-</head>
-<body>
-        <div class="content"><header>
-	<div class="main">
-		<a href="https://lafolle.ca/">The Knife of Phaedrus</a>
+	<div id="titletext"><h2 id="title"><a href="https://lafolle.ca/">The Knife of Phaedrus</a></h2></div>
+	<div id="title-description"><p id="subtitle">Musings with systems</p><div id=social>
+			<nav>
+				<ul><li><a href="https://github.com/lafolle"><i title="Github" class="icons fab fa-github"></i></a></li><li><a href="https://twitter.com/ckarany"><i title="Twitter" class="icons fab fa-twitter"></i></a></li><li><a href="https://www.linkedin.com/in/karan-chaudhary-603b6aa0/"><i title="Linkedin" class="icons fab fa-linkedin"></i></a></li></ul>
+			</nav>
+		</div>
 	</div>
-	<nav>
-		
-		<a href="/">Home</a>
-		
-		<a href="/tags">Tags</a>
-		
-		<a href="/about">About</a>
-		
-		
-	</nav>
+	
+	<div id="mainmenu">
+		<nav>
+			<ul>
+				
+				<li><a href="/">Home</a></li>
+				
+				<li><a href="/tags">Tags</a></li>
+				
+				<li><a href="/about">About</a></li>
+				
+			</ul>
+		</nav>
+	</div>
+	
 </header>
-
-<main>
-	<article>
-		<div class="title">
-			<h1 class="title">On asyncio run</h1>
-			<div class="meta">Posted on Mar 10, 2022</div>
+<main><div class="post">
+	
+	<div class="author">
+	
+	</div>
+	<div class="post-header">
+	
+		<div class="meta">
+			
+			<div class="date">
+				<span class="day">10</span>
+				<span class="rest">Mar 2022</span>
+			</div>
+			
 		</div>
 		
-
-		<section class="body">
-			<p>Python formally introduced concurrency using asncio in 3.7+. A simple program that can
+		<div class="matter">
+			<h1 class="title">On asyncio run</h1>
+		</div>
+	</div>
+	<div class="markdown">
+		<p>Python formally introduced concurrency using asncio in 3.7+. A simple program that can
 demonstrate the hello world of async stuff goes like this-</p>
 <pre tabindex="0"><code>import asyncio
 
@@ -224,36 +249,96 @@ Aha, the unix&rsquo;s event loop policy that derives from the default policy has
     _loop_factory = _UnixSelectorEventLoop
 </code></pre><p>So, what is <code>_UnixSelectorEventLoop</code>? And how is that involved in giving birth to event loop? This i&rsquo;ll cover in next step.</p>
 
-		</section>
-
-		<div class="post-tags">
-			
-			
-			<nav class="nav tags">
-				<ul class="tags">
-					
-					<li><a href="/tags/python">python</a></li>
-					
-					<li><a href="/tags/thread">thread</a></li>
-					
-					<li><a href="/tags/asyncio">asyncio</a></li>
-					
-				</ul>
-			</nav>
-			
-			
+	</div>
+	
+	
+	
+	
+	
+		
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Tags</p>
 		</div>
-	</article>
-</main>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			<a href="https://lafolle.ca/tags/asyncio/"> asyncio </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="https://lafolle.ca/tags/python/"> python </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="https://lafolle.ca/tags/thread/"> thread </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+		
+	</div></div>
+
+  </main>
 <footer>
-  <div style="display:flex"><a class="soc" href="https://github.com/lafolle" title="Github"><i data-feather="fab fa-github"></i></a><a class="soc" href="https://twitter.com/ckarany" title="Twitter"><i data-feather="fab fa-twitter"></i></a><a class="soc" href="https://www.linkedin.com/in/karan-chaudhary-603b6aa0/" title="Linkedin"><i data-feather="fab fa-linkedin"></i></a></div>
-  <div class="footer-info">
-    2022  © Karan Chaudhary |  <a
-      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
-  </div>
-</footer>
-
-
+	 © Karan Chaudhary 
+	
+	
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -265,8 +350,9 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-<script>
-  feather.replace()
-</script></div>
-    </body>
+	
+</footer>
+
+
+</body>
 </html>

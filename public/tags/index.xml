@@ -1,120 +1,160 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Tags on The Knife of Phaedrus</title>
-    <link>https://lafolle.ca/tags/</link>
-    <description>Recent content in Tags on The Knife of Phaedrus</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>© Karan Chaudhary</copyright>
-    <lastBuildDate>Wed, 16 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lafolle.ca/tags/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>asyncio</title>
-      <link>https://lafolle.ca/tags/asyncio/</link>
-      <pubDate>Wed, 16 Mar 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://lafolle.ca/tags/asyncio/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>python</title>
-      <link>https://lafolle.ca/tags/python/</link>
-      <pubDate>Wed, 16 Mar 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://lafolle.ca/tags/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>signals</title>
-      <link>https://lafolle.ca/tags/signals/</link>
-      <pubDate>Wed, 16 Mar 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://lafolle.ca/tags/signals/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>thread</title>
-      <link>https://lafolle.ca/tags/thread/</link>
-      <pubDate>Thu, 10 Mar 2022 22:08:29 -0800</pubDate>
-      
-      <guid>https://lafolle.ca/tags/thread/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>dh</title>
-      <link>https://lafolle.ca/tags/dh/</link>
-      <pubDate>Sun, 23 Aug 2020 16:58:39 -0400</pubDate>
-      
-      <guid>https://lafolle.ca/tags/dh/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>diffie-hellman</title>
-      <link>https://lafolle.ca/tags/diffie-hellman/</link>
-      <pubDate>Sun, 23 Aug 2020 16:58:39 -0400</pubDate>
-      
-      <guid>https://lafolle.ca/tags/diffie-hellman/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>esni</title>
-      <link>https://lafolle.ca/tags/esni/</link>
-      <pubDate>Sun, 23 Aug 2020 16:58:39 -0400</pubDate>
-      
-      <guid>https://lafolle.ca/tags/esni/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>https</title>
-      <link>https://lafolle.ca/tags/https/</link>
-      <pubDate>Sun, 23 Aug 2020 16:58:39 -0400</pubDate>
-      
-      <guid>https://lafolle.ca/tags/https/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>san</title>
-      <link>https://lafolle.ca/tags/san/</link>
-      <pubDate>Sun, 23 Aug 2020 16:58:39 -0400</pubDate>
-      
-      <guid>https://lafolle.ca/tags/san/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>sni</title>
-      <link>https://lafolle.ca/tags/sni/</link>
-      <pubDate>Sun, 23 Aug 2020 16:58:39 -0400</pubDate>
-      
-      <guid>https://lafolle.ca/tags/sni/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tls</title>
-      <link>https://lafolle.ca/tags/tls/</link>
-      <pubDate>Sun, 23 Aug 2020 16:58:39 -0400</pubDate>
-      
-      <guid>https://lafolle.ca/tags/tls/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>x.509</title>
-      <link>https://lafolle.ca/tags/x.509/</link>
-      <pubDate>Sun, 23 Aug 2020 16:58:39 -0400</pubDate>
-      
-      <guid>https://lafolle.ca/tags/x.509/</guid>
-      <description></description>
-    </item>
-    
-  </channel>
+	<channel>
+		<title>Tags on The Knife of Phaedrus</title>
+		<link>https://lafolle.ca/tags/</link>
+		<description>Recent content in Tags on lafolle.ca</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>en-us</language>
+		<copyright>© Karan Chaudhary</copyright>
+		<lastBuildDate>Wed, 16 Mar 2022 00:00:00 +0000</lastBuildDate>
+		
+		<atom:link href="https://lafolle.ca/tags/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>asyncio</title>
+			<link>https://lafolle.ca/tags/asyncio/</link>
+			<pubDate>Wed, 16 Mar 2022 00:00:00 +0000</pubDate>
+			
+			<guid>https://lafolle.ca/tags/asyncio/</guid>
+			<description>
+				
+				
+				
+			</description>
+		</item>
+		<item>
+			<title>python</title>
+			<link>https://lafolle.ca/tags/python/</link>
+			<pubDate>Wed, 16 Mar 2022 00:00:00 +0000</pubDate>
+			
+			<guid>https://lafolle.ca/tags/python/</guid>
+			<description>
+				
+				
+				
+			</description>
+		</item>
+		<item>
+			<title>signals</title>
+			<link>https://lafolle.ca/tags/signals/</link>
+			<pubDate>Wed, 16 Mar 2022 00:00:00 +0000</pubDate>
+			
+			<guid>https://lafolle.ca/tags/signals/</guid>
+			<description>
+				
+				
+				
+			</description>
+		</item>
+		<item>
+			<title>thread</title>
+			<link>https://lafolle.ca/tags/thread/</link>
+			<pubDate>Thu, 10 Mar 2022 22:08:29 -0800</pubDate>
+			
+			<guid>https://lafolle.ca/tags/thread/</guid>
+			<description>
+				
+				
+				
+			</description>
+		</item>
+		<item>
+			<title>dh</title>
+			<link>https://lafolle.ca/tags/dh/</link>
+			<pubDate>Sun, 23 Aug 2020 16:58:39 -0400</pubDate>
+			
+			<guid>https://lafolle.ca/tags/dh/</guid>
+			<description>
+				
+				
+				
+			</description>
+		</item>
+		<item>
+			<title>diffie-hellman</title>
+			<link>https://lafolle.ca/tags/diffie-hellman/</link>
+			<pubDate>Sun, 23 Aug 2020 16:58:39 -0400</pubDate>
+			
+			<guid>https://lafolle.ca/tags/diffie-hellman/</guid>
+			<description>
+				
+				
+				
+			</description>
+		</item>
+		<item>
+			<title>esni</title>
+			<link>https://lafolle.ca/tags/esni/</link>
+			<pubDate>Sun, 23 Aug 2020 16:58:39 -0400</pubDate>
+			
+			<guid>https://lafolle.ca/tags/esni/</guid>
+			<description>
+				
+				
+				
+			</description>
+		</item>
+		<item>
+			<title>https</title>
+			<link>https://lafolle.ca/tags/https/</link>
+			<pubDate>Sun, 23 Aug 2020 16:58:39 -0400</pubDate>
+			
+			<guid>https://lafolle.ca/tags/https/</guid>
+			<description>
+				
+				
+				
+			</description>
+		</item>
+		<item>
+			<title>san</title>
+			<link>https://lafolle.ca/tags/san/</link>
+			<pubDate>Sun, 23 Aug 2020 16:58:39 -0400</pubDate>
+			
+			<guid>https://lafolle.ca/tags/san/</guid>
+			<description>
+				
+				
+				
+			</description>
+		</item>
+		<item>
+			<title>sni</title>
+			<link>https://lafolle.ca/tags/sni/</link>
+			<pubDate>Sun, 23 Aug 2020 16:58:39 -0400</pubDate>
+			
+			<guid>https://lafolle.ca/tags/sni/</guid>
+			<description>
+				
+				
+				
+			</description>
+		</item>
+		<item>
+			<title>tls</title>
+			<link>https://lafolle.ca/tags/tls/</link>
+			<pubDate>Sun, 23 Aug 2020 16:58:39 -0400</pubDate>
+			
+			<guid>https://lafolle.ca/tags/tls/</guid>
+			<description>
+				
+				
+				
+			</description>
+		</item>
+		<item>
+			<title>x.509</title>
+			<link>https://lafolle.ca/tags/x.509/</link>
+			<pubDate>Sun, 23 Aug 2020 16:58:39 -0400</pubDate>
+			
+			<guid>https://lafolle.ca/tags/x.509/</guid>
+			<description>
+				
+				
+				
+			</description>
+		</item>
+		
+	</channel>
 </rss>

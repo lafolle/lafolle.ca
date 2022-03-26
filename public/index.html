@@ -1,148 +1,6 @@
 <!DOCTYPE html>
-<html>
-	<head>
-	<meta name="generator" content="Hugo 0.94.0" />
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>The Knife of Phaedrus | Home </title><meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="" />
-	<meta property="og:image" content=""/>
-	<link rel="alternate" type="application/rss+xml" href="https://lafolle.ca/index.xml" title="The Knife of Phaedrus" />
-	<meta property="og:title" content="" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://lafolle.ca/" />
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content=""/>
-<meta name="twitter:description" content=""/>
-<script src="https://lafolle.ca/js/feather.min.js"></script>
+<html lang="en"><head>
 	
-	
-        <link href="https://lafolle.ca/css/fonts.b685ac6f654695232de7b82a9143a46f9e049c8e3af3a21d9737b01f4be211d1.css" rel="stylesheet">
-	
-
-	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://lafolle.ca/css/main.40ca3a860425083862b7ebd55447caec5c4384573f0cb098b8d06a91e8dace2e.css" />
-	
-	
-</head>
-
-	<body>
-		<div class="content">
-			<header>
-	<div class="main">
-		<a href="https://lafolle.ca/">The Knife of Phaedrus</a>
-	</div>
-	<nav>
-		
-		<a href="/">Home</a>
-		
-		<a href="/tags">Tags</a>
-		
-		<a href="/about">About</a>
-		
-		
-	</nav>
-</header>
-
-			
-			<main class="list">
-				<div class="site-description"><p>Musings with systems</p></div>
-				
-				
-				
-				<section class="list-item">
-					<h1 class="title"><a href="/blog/on-asyncio-class-hierarchy/">On asyncio class hierarchy</a></h1>
-					<time>Mar 16, 2022</time>
-					<br><div class="description">
-						
-						_UnixSelectorEventLoop is used as a _loop_factory. That is, it is used to create new event loops in unix based system.
-What does it look like?
-class _UnixSelectorEventLoop(selector_events.BaseSelectorEventLoop) It is a subclass of BaseSelectorEventLoop. Rather than going into the details of the unix selector, i&rsquo;ll first dive into the base class.
-class BaseSelectorEventLoop(base_events.BaseEventLoop) And it inherits from BaseEventLoop.
-class BaseEventLoop(events.AbstractEventLoop) And it inherits from AbstractEventLoop. I&rsquo;m glad that this is the end to the inheritance hierarchy.&hellip;
-						
-					</div>
-					<a class="readmore" href="/blog/on-asyncio-class-hierarchy/">Read more ⟶</a>
-				</section>
-				
-				<section class="list-item">
-					<h1 class="title"><a href="/blog/on-asyncio-run/">On asyncio run</a></h1>
-					<time>Mar 10, 2022</time>
-					<br><div class="description">
-						
-						Python formally introduced concurrency using asncio in 3.7+. A simple program that can demonstrate the hello world of async stuff goes like this-
-import asyncio async def main(): print(&#39;hello&#39;) await asyncio.sleep(1) print(&#39;world&#39;) asyncio.run(main()) In this case asyncio.run is the blocking call. It takes coroutine as a param, that is created by main() due to the async qualifer.
-Does it also create an event loop inside? From the doc, yes it does-&hellip;
-						
-					</div>
-					<a class="readmore" href="/blog/on-asyncio-run/">Read more ⟶</a>
-				</section>
-				
-				<section class="list-item">
-					<h1 class="title"><a href="/blog/wifi/">Wifi</a></h1>
-					<time>Sep 5, 2020 <span class="draft-label">DRAFT</span> </time>
-					<br><div class="description">
-						
-						Was unable to capture traffic for my wifi using airport sniff . It turns out my wifi is on channel 44 and not 1.
-airport sniff 44 # works
-Beacon frame -
-wlan.fc.type_subtype != 0x08 &amp;&amp; wlan.ssid == &quot;Waves in Space-5G&quot; &amp;&amp; wlan.ta == e4:76:84:ce:61:0d&hellip;
-						
-					</div>
-					<a class="readmore" href="/blog/wifi/">Read more ⟶</a>
-				</section>
-				
-				<section class="list-item">
-					<h1 class="title"><a href="/blog/impl-sha256/">Impl Sha256</a></h1>
-					<time>Aug 28, 2020 <span class="draft-label">DRAFT</span> </time>
-					<br><div class="description">
-						
-						How does SHA256 work?
-What is a hash? Given a messages M of m bits generate a data N of n bits where n &lt; m. Must be collision resistant
-What is cryptographic hash? h = H(x)
- Large input domain -&gt; small fixed output =&gt; compression Well distributed P(H(x)-i) = 1/N  Three additional properties:
- Pre-image resistant - given H(x), hard to find x. Weak collision resistance - hard to find any x such that H(x) = h Strong collision resistance - hard to find any pair such that H(x) = H(y)  How is hashing different from encryption?&hellip;
-						
-					</div>
-					<a class="readmore" href="/blog/impl-sha256/">Read more ⟶</a>
-				</section>
-				
-				<section class="list-item">
-					<h1 class="title"><a href="/blog/broken-resolution/">Breaking the Resolution</a></h1>
-					<time>Aug 23, 2020</time>
-					<br><div class="description">
-						
-						Two machines on the internet can talk to each other iff both of them know each other&rsquo;s IP addresses. When we type in &ldquo;google.com&rdquo; in the browser, the first task of the browser is to get the IP address of &ldquo;google.com&rdquo; which it does by communicating with the DNS system. Once an IP address is received, the browser establishes a TCP connection to the server, does a TLS handshake, exchanges data with the server before terminating the connection.&hellip;
-						
-					</div>
-					<a class="readmore" href="/blog/broken-resolution/">Read more ⟶</a>
-				</section>
-				
-				<section class="list-item">
-					<h1 class="title"><a href="/blog/dnssec/">Dnssec</a></h1>
-					<time>Aug 19, 2020 <span class="draft-label">DRAFT</span> </time>
-					<br><div class="description">
-						
-						
-						
-					</div>
-					<a class="readmore" href="/blog/dnssec/">Read more ⟶</a>
-				</section>
-				
-				
-
-
-			</main>
-			<footer>
-  <div style="display:flex"><a class="soc" href="https://github.com/lafolle" title="Github"><i data-feather="fab fa-github"></i></a><a class="soc" href="https://twitter.com/ckarany" title="Twitter"><i data-feather="fab fa-twitter"></i></a><a class="soc" href="https://www.linkedin.com/in/karan-chaudhary-603b6aa0/" title="Linkedin"><i data-feather="fab fa-linkedin"></i></a></div>
-  <div class="footer-info">
-    2022  © Karan Chaudhary |  <a
-      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
-  </div>
-</footer>
-
-
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -154,10 +12,139 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-<script>
-  feather.replace()
-</script>
+	
+	<meta name="generator" content="Hugo 0.94.0" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta property="og:title" content="" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://lafolle.ca/" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content=""/>
+<link rel="alternate" type="application/rss+xml" href="https://lafolle.ca/index.xml" title="The Knife of Phaedrus">
+	<link rel="stylesheet" type="text/css" media="screen" href="https://lafolle.ca/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://lafolle.ca/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://lafolle.ca/css/all.css" />
+	<title>The Knife of Phaedrus </title></head>
+<body><header>
+	
+	<div id="titletext"><h1 id="title"><a href="https://lafolle.ca/">The Knife of Phaedrus</a></h1></div>
+	<div id="title-description"><p id="subtitle">Musings with systems</p><div id=social>
+			<nav>
+				<ul><li><a href="https://github.com/lafolle"><i title="Github" class="icons fab fa-github"></i></a></li><li><a href="https://twitter.com/ckarany"><i title="Twitter" class="icons fab fa-twitter"></i></a></li><li><a href="https://www.linkedin.com/in/karan-chaudhary-603b6aa0/"><i title="Linkedin" class="icons fab fa-linkedin"></i></a></li></ul>
+			</nav>
 		</div>
-		
-	</body>
+	</div>
+	
+	<div id="mainmenu">
+		<nav>
+			<ul>
+				
+				<li><a href="/">Home</a></li>
+				
+				<li><a href="/tags">Tags</a></li>
+				
+				<li><a href="/about">About</a></li>
+				
+			</ul>
+		</nav>
+	</div>
+	
+</header>
+<main>
+<div class="recent-posts">
+	<div class="posts">
+	
+	
+	
+		<div class="post">
+			<div class="post-header">
+				<div class="meta">
+					<div class="date">
+						<span class="day">16</span>
+						<span class="rest">Mar 2022</span>
+					</div>
+				</div>
+				<div class="matter">
+					<h3 class="title small"><a href="/blog/on-asyncio-class-hierarchy/">On asyncio class hierarchy</a></h3>
+					<span class="description">
+					
+					_UnixSelectorEventLoop is used as a _loop_factory. That is, it is used to create new event loops in unix based system.
+W...
+					
+					</span>
+				</div>
+			</div>
+		</div>
+	
+		<div class="post">
+			<div class="post-header">
+				<div class="meta">
+					<div class="date">
+						<span class="day">10</span>
+						<span class="rest">Mar 2022</span>
+					</div>
+				</div>
+				<div class="matter">
+					<h3 class="title small"><a href="/blog/on-asyncio-run/">On asyncio run</a></h3>
+					<span class="description">
+					
+					Python formally introduced concurrency using asncio in 3.7&#43;. A simple program that can demonstrate the hello world of as...
+					
+					</span>
+				</div>
+			</div>
+		</div>
+	
+		<div class="post">
+			<div class="post-header">
+				<div class="meta">
+					<div class="date">
+						<span class="day">23</span>
+						<span class="rest">Aug 2020</span>
+					</div>
+				</div>
+				<div class="matter">
+					<h3 class="title small"><a href="/blog/broken-resolution/">Breaking the Resolution</a></h3>
+					<span class="description">
+					
+					Two machines on the internet can talk to each other iff both of them know each other’s IP addresses. When we type ...
+					
+					</span>
+				</div>
+			</div>
+		</div>
+	
+	
+
+
+	</div>
+</div>
+
+
+  </main>
+<footer>
+	 © Karan Chaudhary 
+	
+	
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-176408027-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+	
+</footer>
+
+
+</body>
 </html>
