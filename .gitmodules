@@ -7,6 +7,3 @@
 [submodule "themes/archie"]
 	path = themes/archie
 	url = https://github.com/lafolle/archie.git
-[submodule "archie"]
-	path = archie
-	url = git@github.com:lafolle/archie.git
