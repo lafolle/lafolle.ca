@@ -1,7 +1,7 @@
 baseURL = "https://lafolle.ca/"
 languageCode = "en-us"
 title = "The Knife of Phaedrus"
-theme = "archie"
+theme = "hugo-vitae"
 
 pygmentsCodefences = true
 pygmentsStyle = "github"

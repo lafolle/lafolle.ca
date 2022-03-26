@@ -7,3 +7,9 @@
 [submodule "themes/archie"]
 	path = themes/archie
 	url = https://github.com/lafolle/archie.git
+[submodule "themes/listed"]
+	path = themes/listed
+	url = git@github.com:ronv/listed.git
+[submodule "archie"]
+	path = archie
+	url = git@github.com:lafolle/archie.git
