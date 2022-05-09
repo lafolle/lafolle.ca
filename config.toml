@@ -12,6 +12,7 @@ googleAnalytics = "UA-176408027-1"
 
 copyright = "© Karan Chaudhary"
 
+
 [params]
 	subtitle = "Musings with systems"
 
@@ -22,6 +23,10 @@ copyright = "© Karan Chaudhary"
 	github = "https://github.com/lafolle"
 	iconOrder = ["Github", "Twitter"]
 	showPageTitleInTOC = true
+
+	# Customzie the hugo-vitae theme. The custom css is referenced by the theme 
+	# in themes/hugo-vitae/layouts/partials/head.html file.
+	customcss = "custom.css"
 
 # Navigation
 [[menu.main]]
@@ -54,3 +59,6 @@ url = "https://twitter.com/ckarany"
 name = "Linkedin"
 icon = "fab fa-linkedin"
 url = "https://www.linkedin.com/in/karan-chaudhary-603b6aa0/"
+
+[markup.goldmark.parser.attribute]
+block = true  # default false
