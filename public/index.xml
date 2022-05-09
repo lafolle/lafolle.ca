@@ -7,10 +7,62 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
 		<copyright>© Karan Chaudhary</copyright>
-		<lastBuildDate>Wed, 16 Mar 2022 00:00:00 +0000</lastBuildDate>
+		<lastBuildDate>Sat, 16 Apr 2022 21:45:42 -0700</lastBuildDate>
 		
 		<atom:link href="https://lafolle.ca/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>Python Func Call</title>
+			<link>https://lafolle.ca/blog/python-func-call/</link>
+			<pubDate>Sat, 16 Apr 2022 21:45:42 -0700</pubDate>
+			
+			<guid>https://lafolle.ca/blog/python-func-call/</guid>
+			<description>
+				
+				Consider following simple code-
+1 2 3 4 5 6 7  def b(x): 	print(x)  def a(y) 	b(y)  a(10)   What happens when a calls b?...
+				
+			</description>
+		</item>
+		<item>
+			<title>Disassembling simple patterns in python</title>
+			<link>https://lafolle.ca/blog/disassembling/</link>
+			<pubDate>Fri, 25 Mar 2022 22:20:36 -0700</pubDate>
+			
+			<guid>https://lafolle.ca/blog/disassembling/</guid>
+			<description>
+				
+				func call What happens when a func is called by another func in python? For example, consider these two funcs:
+1 2 3 4 5...
+				
+			</description>
+		</item>
+		<item>
+			<title>Disassembling simple patterns in python</title>
+			<link>https://lafolle.ca/blog/call-stack/</link>
+			<pubDate>Wed, 23 Mar 2022 22:20:36 -0700</pubDate>
+			
+			<guid>https://lafolle.ca/blog/call-stack/</guid>
+			<description>
+				
+				func call What happens when a func is called by another func in python? For example, consider these two funcs:
+def b(x, ...
+				
+			</description>
+		</item>
+		<item>
+			<title>Stacks in python</title>
+			<link>https://lafolle.ca/blog/asyncio-stuff/</link>
+			<pubDate>Wed, 23 Mar 2022 22:20:36 -0700</pubDate>
+			
+			<guid>https://lafolle.ca/blog/asyncio-stuff/</guid>
+			<description>
+				
+				What happens when a func is called by another func in python? For example, consider these two funcs:
+1 2 3 4 5  def b(x,...
+				
+			</description>
+		</item>
 		<item>
 			<title>On asyncio class hierarchy</title>
 			<link>https://lafolle.ca/blog/on-asyncio-class-hierarchy/</link>
@@ -37,6 +89,32 @@ W...
 			</description>
 		</item>
 		<item>
+			<title>Wifi</title>
+			<link>https://lafolle.ca/blog/wifi/</link>
+			<pubDate>Sat, 05 Sep 2020 15:26:36 -0400</pubDate>
+			
+			<guid>https://lafolle.ca/blog/wifi/</guid>
+			<description>
+				
+				Was unable to capture traffic for my wifi using airport sniff . It turns out my wifi is on channel 44 and not 1.
+airport...
+				
+			</description>
+		</item>
+		<item>
+			<title>Impl Sha256</title>
+			<link>https://lafolle.ca/blog/impl-sha256/</link>
+			<pubDate>Fri, 28 Aug 2020 08:09:13 -0400</pubDate>
+			
+			<guid>https://lafolle.ca/blog/impl-sha256/</guid>
+			<description>
+				
+				How does SHA256 work?
+What is a hash? Given a messages M of m bits generate a data N of n bits where n &lt; m. Must be c...
+				
+			</description>
+		</item>
+		<item>
 			<title>Breaking the Resolution</title>
 			<link>https://lafolle.ca/blog/broken-resolution/</link>
 			<pubDate>Sun, 23 Aug 2020 16:58:39 -0400</pubDate>
@@ -45,6 +123,18 @@ W...
 			<description>
 				
 				Two machines on the internet can talk to each other iff both of them know each other’s IP addresses. When we type ...
+				
+			</description>
+		</item>
+		<item>
+			<title>Dnssec</title>
+			<link>https://lafolle.ca/blog/dnssec/</link>
+			<pubDate>Wed, 19 Aug 2020 17:04:55 -0400</pubDate>
+			
+			<guid>https://lafolle.ca/blog/dnssec/</guid>
+			<description>
+				
+				
 				
 			</description>
 		</item>
