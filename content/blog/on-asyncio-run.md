@@ -29,6 +29,7 @@ in that existing event loop?  From the docs-
 > This function cannot be called when another asyncio event loop is running in the same thread.
 
 If that is the case then calling `run` from `run` should throw an error-
+
 ```
 async def boom():
     await asyncio.sleep(3)
@@ -41,6 +42,7 @@ async def main():
 asyncio.run(main(), debug=True)
 ```
 Indeed it does-
+
 ```
 Traceback (most recent call last):
     <NOT RELEVANT>

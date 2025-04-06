@@ -6,9 +6,9 @@ theme = "hugo-bearblog"
 
 ignoreLogs = ['warning-goldmark-raw-html']
 
-pygmentsCodefences = true
-pygmentsStyle = "github"
-pygmentsOptions = "linenos=table"
+# pygmentsCodefences = true
+# pygmentsStyle = "github"
+# pygmentsOptions = "linenos=table"
 
 # Google analytics
 googleAnalytics = "UA-176408027-1"

@@ -1,15 +1,3 @@
-[submodule "themes/ananke"]
-	path = themes/ananke
-	url = https://github.com/budparr/gohugo-theme-ananke.git
-[submodule "themes/hugo-theme-codex"]
-	path = themes/hugo-theme-codex
-	url = https://github.com/jakewies/hugo-theme-codex.git
-[submodule "themes/archie"]
-	path = themes/archie
-	url = https://github.com/lafolle/archie.git
-[submodule "themes/hugo-vitae"]
-	path = themes/hugo-vitae
-	url = https://github.com/dataCobra/hugo-vitae.git
 [submodule "themes/hugo-bearblog"]
 	path = themes/hugo-bearblog
 	url = https://github.com/janraasch/hugo-bearblog.git
