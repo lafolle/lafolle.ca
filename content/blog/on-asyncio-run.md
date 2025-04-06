@@ -2,7 +2,7 @@
 title: "On asyncio run"
 date: 2022-03-10T22:08:29-08:00
 draft: false
-tags: [python, thread, asyncio]
+tags: []
 ---
 Python formally introduced concurrency using asncio in 3.7+. A simple program that can
 demonstrate the hello world of async stuff goes like this-

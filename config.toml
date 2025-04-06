@@ -4,6 +4,8 @@ title = "The Knife of Phaedrus"
 # https://themes.gohugo.io/themes/hugo-bearblog/
 theme = "hugo-bearblog"
 
+ignoreLogs = ['warning-goldmark-raw-html']
+
 pygmentsCodefences = true
 pygmentsStyle = "github"
 pygmentsOptions = "linenos=table"
@@ -44,22 +46,3 @@ math = false
 # name = "About"
 # url = "/about"
 # weight = 3
-
-# Social menu
-# [[params.social]]
-# name = "Github"
-# icon = "fab fa-github"
-# url = "https://github.com/lafolle"
-
-# [[params.social]]
-# name = "Twitter"
-# icon = "fab fa-twitter"
-# url = "https://twitter.com/ckarany"
-
-# [[params.social]]
-# name = "Linkedin"
-# icon = "fab fa-linkedin"
-# url = "https://www.linkedin.com/in/karan-chaudhary-603b6aa0/"
-
-# [markup.goldmark.parser.attribute]
-# block = true # default false

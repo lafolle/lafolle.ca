@@ -1,10 +1,10 @@
 ---
 title: "Did you send it?"
-date: 2020-08-19T17:04:55-04:00
+date: 2025-04-05T01:20:00-08:00
 slug: "dnssec"
 description: ""
 keywords: []
-draft: true
+draft: false
 tags: []
 math: false
 toc: false

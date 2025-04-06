@@ -1,0 +1,39 @@
+baseURL: "https://lafolle.ca/"
+languageCode: "en-us"
+title: "The Knife of Phaedrus"
+theme: "hugo-bearblog"
+
+ignoreLogs:
+  - "warning-goldmark-raw-html"
+
+pygmentsCodefences: true
+pygmentsStyle: "github"
+pygmentsOptions: "linenos=table"
+
+# Google analytics
+googleAnalytics: "UA-176408027-1"
+
+copyright: "© Karan Chaudhary"
+
+params:
+  subtitle: "Musings with systems"
+  math: false
+
+# twitter: "https://twitter.com/ckarany"
+# github: "https://github.com/lafolle"
+# iconOrder:
+#   - "Github"
+#   - "Twitter"
+# showPageTitleInTOC: true
+
+# Custom CSS for hugo-vitae theme
+# customcss:
+#   - "custom.css"
+
+# Navigation
+# menu:
+#   main:
+#     - name: "Home"
+#       url: "/"
+#       weight: 1
+#     - name: "Tags"

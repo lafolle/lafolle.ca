@@ -2,7 +2,7 @@
 title: "On asyncio class hierarchy"
 date: 2022-03-16
 draft: False
-tags: [python, asyncio, signals]
+tags: []
 ---
 
 `_UnixSelectorEventLoop` is used as a `_loop_factory`. That is, it is used to create new event loops in unix based system.
