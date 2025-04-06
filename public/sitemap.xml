@@ -3,22 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://lafolle.ca/</loc>
-    <lastmod>2022-04-16T21:45:42-07:00</lastmod>
+    <lastmod>2025-03-28T12:55:42-07:00</lastmod>
   </url><url>
     <loc>https://lafolle.ca/blog/</loc>
-    <lastmod>2022-04-16T21:45:42-07:00</lastmod>
+    <lastmod>2025-03-28T12:55:42-07:00</lastmod>
   </url><url>
-    <loc>https://lafolle.ca/blog/python-func-call/</loc>
-    <lastmod>2022-04-16T21:45:42-07:00</lastmod>
-  </url><url>
-    <loc>https://lafolle.ca/blog/disassembling/</loc>
-    <lastmod>2022-03-25T22:20:36-07:00</lastmod>
-  </url><url>
-    <loc>https://lafolle.ca/blog/call-stack/</loc>
-    <lastmod>2022-03-23T22:20:36-07:00</lastmod>
-  </url><url>
-    <loc>https://lafolle.ca/blog/asyncio-stuff/</loc>
-    <lastmod>2022-03-23T22:20:36-07:00</lastmod>
+    <loc>https://lafolle.ca/blog/mail/</loc>
+    <lastmod>2025-03-28T12:55:42-07:00</lastmod>
   </url><url>
     <loc>https://lafolle.ca/tags/asyncio/</loc>
     <lastmod>2022-03-16T00:00:00+00:00</lastmod>
@@ -40,9 +31,6 @@
   </url><url>
     <loc>https://lafolle.ca/tags/thread/</loc>
     <lastmod>2022-03-10T22:08:29-08:00</lastmod>
-  </url><url>
-    <loc>https://lafolle.ca/blog/wifi/</loc>
-    <lastmod>2020-09-05T15:26:36-04:00</lastmod>
   </url><url>
     <loc>https://lafolle.ca/blog/impl-sha256/</loc>
     <lastmod>2020-08-28T08:09:13-04:00</lastmod>
@@ -78,7 +66,6 @@
     <lastmod>2020-08-19T17:04:55-04:00</lastmod>
   </url><url>
     <loc>https://lafolle.ca/about/</loc>
-    <priority>0</priority>
   </url><url>
     <loc>https://lafolle.ca/categories/</loc>
   </url>

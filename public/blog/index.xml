@@ -1,143 +1,55 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-	<channel>
-		<title>Blogs on The Knife of Phaedrus</title>
-		<link>https://lafolle.ca/blog/</link>
-		<description>Recent content in Blogs on lafolle.ca</description>
-		<generator>Hugo -- gohugo.io</generator>
-		<language>en-us</language>
-		<copyright>© Karan Chaudhary</copyright>
-		<lastBuildDate>Sat, 16 Apr 2022 21:45:42 -0700</lastBuildDate>
-		
-		<atom:link href="https://lafolle.ca/blog/index.xml" rel="self" type="application/rss+xml" />
-		
-		<item>
-			<title>Python Func Call</title>
-			<link>https://lafolle.ca/blog/python-func-call/</link>
-			<pubDate>Sat, 16 Apr 2022 21:45:42 -0700</pubDate>
-			
-			<guid>https://lafolle.ca/blog/python-func-call/</guid>
-			<description>
-				
-				Consider following simple code-
-1 2 3 4 5 6 7  def b(x): 	print(x)  def a(y) 	b(y)  a(10)   What happens when a calls b?...
-				
-			</description>
-		</item>
-		<item>
-			<title>Disassembling simple patterns in python</title>
-			<link>https://lafolle.ca/blog/disassembling/</link>
-			<pubDate>Fri, 25 Mar 2022 22:20:36 -0700</pubDate>
-			
-			<guid>https://lafolle.ca/blog/disassembling/</guid>
-			<description>
-				
-				func call What happens when a func is called by another func in python? For example, consider these two funcs:
-1 2 3 4 5...
-				
-			</description>
-		</item>
-		<item>
-			<title>Disassembling simple patterns in python</title>
-			<link>https://lafolle.ca/blog/call-stack/</link>
-			<pubDate>Wed, 23 Mar 2022 22:20:36 -0700</pubDate>
-			
-			<guid>https://lafolle.ca/blog/call-stack/</guid>
-			<description>
-				
-				func call What happens when a func is called by another func in python? For example, consider these two funcs:
-def b(x, ...
-				
-			</description>
-		</item>
-		<item>
-			<title>Stacks in python</title>
-			<link>https://lafolle.ca/blog/asyncio-stuff/</link>
-			<pubDate>Wed, 23 Mar 2022 22:20:36 -0700</pubDate>
-			
-			<guid>https://lafolle.ca/blog/asyncio-stuff/</guid>
-			<description>
-				
-				What happens when a func is called by another func in python? For example, consider these two funcs:
-1 2 3 4 5  def b(x,...
-				
-			</description>
-		</item>
-		<item>
-			<title>On asyncio class hierarchy</title>
-			<link>https://lafolle.ca/blog/on-asyncio-class-hierarchy/</link>
-			<pubDate>Wed, 16 Mar 2022 00:00:00 +0000</pubDate>
-			
-			<guid>https://lafolle.ca/blog/on-asyncio-class-hierarchy/</guid>
-			<description>
-				
-				_UnixSelectorEventLoop is used as a _loop_factory. That is, it is used to create new event loops in unix based system.
-W...
-				
-			</description>
-		</item>
-		<item>
-			<title>On asyncio run</title>
-			<link>https://lafolle.ca/blog/on-asyncio-run/</link>
-			<pubDate>Thu, 10 Mar 2022 22:08:29 -0800</pubDate>
-			
-			<guid>https://lafolle.ca/blog/on-asyncio-run/</guid>
-			<description>
-				
-				Python formally introduced concurrency using asncio in 3.7&#43;. A simple program that can demonstrate the hello world of as...
-				
-			</description>
-		</item>
-		<item>
-			<title>Wifi</title>
-			<link>https://lafolle.ca/blog/wifi/</link>
-			<pubDate>Sat, 05 Sep 2020 15:26:36 -0400</pubDate>
-			
-			<guid>https://lafolle.ca/blog/wifi/</guid>
-			<description>
-				
-				Was unable to capture traffic for my wifi using airport sniff . It turns out my wifi is on channel 44 and not 1.
-airport...
-				
-			</description>
-		</item>
-		<item>
-			<title>Impl Sha256</title>
-			<link>https://lafolle.ca/blog/impl-sha256/</link>
-			<pubDate>Fri, 28 Aug 2020 08:09:13 -0400</pubDate>
-			
-			<guid>https://lafolle.ca/blog/impl-sha256/</guid>
-			<description>
-				
-				How does SHA256 work?
-What is a hash? Given a messages M of m bits generate a data N of n bits where n &lt; m. Must be c...
-				
-			</description>
-		</item>
-		<item>
-			<title>Breaking the Resolution</title>
-			<link>https://lafolle.ca/blog/broken-resolution/</link>
-			<pubDate>Sun, 23 Aug 2020 16:58:39 -0400</pubDate>
-			
-			<guid>https://lafolle.ca/blog/broken-resolution/</guid>
-			<description>
-				
-				Two machines on the internet can talk to each other iff both of them know each other’s IP addresses. When we type ...
-				
-			</description>
-		</item>
-		<item>
-			<title>Dnssec</title>
-			<link>https://lafolle.ca/blog/dnssec/</link>
-			<pubDate>Wed, 19 Aug 2020 17:04:55 -0400</pubDate>
-			
-			<guid>https://lafolle.ca/blog/dnssec/</guid>
-			<description>
-				
-				
-				
-			</description>
-		</item>
-		
-	</channel>
+  <channel>
+    <title>Blogs on The Knife of Phaedrus</title>
+    <link>https://lafolle.ca/blog/</link>
+    <description>Recent content in Blogs on The Knife of Phaedrus</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <copyright>© Karan Chaudhary</copyright>
+    <lastBuildDate>Fri, 28 Mar 2025 12:55:42 -0700</lastBuildDate>
+    <atom:link href="https://lafolle.ca/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>You&#39;ve got mail</title>
+      <link>https://lafolle.ca/blog/mail/</link>
+      <pubDate>Fri, 28 Mar 2025 12:55:42 -0700</pubDate>
+      <guid>https://lafolle.ca/blog/mail/</guid>
+      <description>&lt;h2 id=&#34;how-to-fetch-emails&#34;&gt;How to fetch emails?&lt;/h2&gt;&#xA;&lt;p&gt;Two protocols are used to download emails:&lt;/p&gt;&#xA;&lt;p&gt;IMAP (Internet Message Access Protocol) is for fetching emails from mail server. Mail stays in mail server once the emails are fetched. This is good for cases where multiple mail clients intend to fetch emails. For example, Gmail app and web interface can be considered two different mail clients, conceptually, and both can use IMAP to download emails.&lt;/p&gt;&#xA;&lt;p&gt;POP3 (Post Office Protocol 3) is also for fetching emails from mail server. Unlike IMAP, mails are deleted from mail server once fetched. Only a single mail client can access mails using this protocol.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>On asyncio class hierarchy</title>
+      <link>https://lafolle.ca/blog/on-asyncio-class-hierarchy/</link>
+      <pubDate>Wed, 16 Mar 2022 00:00:00 +0000</pubDate>
+      <guid>https://lafolle.ca/blog/on-asyncio-class-hierarchy/</guid>
+      <description>&lt;p&gt;&lt;code&gt;_UnixSelectorEventLoop&lt;/code&gt; is used as a &lt;code&gt;_loop_factory&lt;/code&gt;. That is, it is used to create new event loops in unix based system.&lt;/p&gt;&#xA;&lt;p&gt;What does it look like?&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;class _UnixSelectorEventLoop(selector_events.BaseSelectorEventLoop)&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;It is a subclass of &lt;code&gt;BaseSelectorEventLoop&lt;/code&gt;.  Rather than going into the details of the unix selector, i&amp;rsquo;ll first dive&#xA;into the base class.&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;class BaseSelectorEventLoop(base_events.BaseEventLoop)&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And it inherits from &lt;code&gt;BaseEventLoop&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;class BaseEventLoop(events.AbstractEventLoop)&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And it inherits from &lt;code&gt;AbstractEventLoop&lt;/code&gt;.  I&amp;rsquo;m glad that this is the end to the inheritance hierarchy.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>On asyncio run</title>
+      <link>https://lafolle.ca/blog/on-asyncio-run/</link>
+      <pubDate>Thu, 10 Mar 2022 22:08:29 -0800</pubDate>
+      <guid>https://lafolle.ca/blog/on-asyncio-run/</guid>
+      <description>&lt;p&gt;Python formally introduced concurrency using asncio in 3.7+. A simple program that can&#xA;demonstrate the hello world of async stuff goes like this-&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import asyncio&#xA;&#xA;async def main():&#xA;&#x9;print(&amp;#39;hello&amp;#39;)&#xA;&#x9;await asyncio.sleep(1)&#xA;&#x9;print(&amp;#39;world&amp;#39;)&#xA;&#xA;asyncio.run(main())&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In this case &lt;code&gt;asyncio.run&lt;/code&gt; is the blocking call. It takes coroutine as a param, that is&#xA;created by &lt;code&gt;main()&lt;/code&gt; due to the &lt;code&gt;async&lt;/code&gt; qualifer.&lt;/p&gt;&#xA;&lt;p&gt;Does it also create an event loop inside? From the doc, yes it does-&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Impl Sha256</title>
+      <link>https://lafolle.ca/blog/impl-sha256/</link>
+      <pubDate>Fri, 28 Aug 2020 08:09:13 -0400</pubDate>
+      <guid>https://lafolle.ca/blog/impl-sha256/</guid>
+      <description>&lt;p&gt;How does SHA256 work?&lt;/p&gt;&#xA;&lt;p&gt;What is a hash?&#xA;Given a messages M of m bits generate a data N of n bits where n &amp;lt; m.&#xA;Must be collision resistant&lt;/p&gt;&#xA;&lt;p&gt;What is cryptographic hash?&#xA;h = H(x)&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Large input domain -&amp;gt; small fixed output =&amp;gt; compression&lt;/li&gt;&#xA;&lt;li&gt;Well distributed P(H(x)-i) = 1/N&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;Three additional properties:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Pre-image resistant - given H(x), hard to find x.&lt;/li&gt;&#xA;&lt;li&gt;Weak collision resistance - hard to find any x such that H(x) = h&lt;/li&gt;&#xA;&lt;li&gt;Strong collision resistance - hard to find any pair such that H(x) = H(y)&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;How is hashing different from encryption?&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Breaking the Resolution</title>
+      <link>https://lafolle.ca/blog/broken-resolution/</link>
+      <pubDate>Sun, 23 Aug 2020 16:58:39 -0400</pubDate>
+      <guid>https://lafolle.ca/blog/broken-resolution/</guid>
+      <description>&lt;p&gt;Two machines on the internet can talk to each other iff both of them know each other&amp;rsquo;s IP addresses.  When we&#xA;type in &amp;ldquo;google.com&amp;rdquo; in the browser,  the first task of the browser is to get the IP address of &amp;ldquo;google.com&amp;rdquo;&#xA;which it does by communicating with the DNS system. Once an IP address is received, the browser establishes a&#xA;TCP connection to the server, does a TLS handshake, exchanges data with the server before terminating the&#xA;connection.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Did you send it?</title>
+      <link>https://lafolle.ca/blog/dnssec/</link>
+      <pubDate>Wed, 19 Aug 2020 17:04:55 -0400</pubDate>
+      <guid>https://lafolle.ca/blog/dnssec/</guid>
+      <description>&lt;p&gt;Is DNS secure without DNSSEC??? No.  All queries made by clients to recursive resolver, authoritative name servers, TLD name servers or root&#xA;name servers are un-encrypted.&#xA;Apart from that DNS is based on UDP protocol which is connectionless in nature such that if i have a DNS server running on my&#xA;(public) machine anyone who knows the IP and port on which the server is listening for traffic, can easily send request to it.&lt;/p&gt;</description>
+    </item>
+  </channel>
 </rss>

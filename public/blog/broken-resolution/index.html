@@ -1,84 +1,235 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-	
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-176408027-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+<html lang="en-us">
 
-	
-	<meta name="generator" content="Hugo 0.94.0" />
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="keywords" content="tls,x.509,https,sni,esni,san,diffie-hellman,dh"><meta property="og:title" content="Breaking the Resolution" />
-<meta property="og:description" content="Two machines on the internet can talk to each other iff both of them know each other&rsquo;s IP addresses. When we type in &ldquo;google.com&rdquo; in the browser, the first task of the browser is to get the IP address of &ldquo;google.com&rdquo; which it does by communicating with the DNS system. Once an IP address is received, the browser establishes a TCP connection to the server, does a TLS handshake, exchanges data with the server before terminating the connection." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://lafolle.ca/blog/broken-resolution/" /><meta property="article:section" content="blog" />
-<meta property="article:published_time" content="2020-08-23T16:58:39-04:00" />
-<meta property="article:modified_time" content="2020-08-23T16:58:39-04:00" />
+<head>
+  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Breaking the Resolution | The Knife of Phaedrus</title>
+<meta name="title" content="Breaking the Resolution" />
+<meta name="description" content="Two machines on the internet can talk to each other iff both of them know each other&rsquo;s IP addresses.  When we
+type in &ldquo;google.com&rdquo; in the browser,  the first task of the browser is to get the IP address of &ldquo;google.com&rdquo;
+which it does by communicating with the DNS system. Once an IP address is received, the browser establishes a
+TCP connection to the server, does a TLS handshake, exchanges data with the server before terminating the
+connection." />
+<meta name="keywords" content="tls,x.509,https,sni,esni,san,diffie-hellman,dh," />
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Breaking the Resolution"/>
-<meta name="twitter:description" content="Two machines on the internet can talk to each other iff both of them know each other&rsquo;s IP addresses. When we type in &ldquo;google.com&rdquo; in the browser, the first task of the browser is to get the IP address of &ldquo;google.com&rdquo; which it does by communicating with the DNS system. Once an IP address is received, the browser establishes a TCP connection to the server, does a TLS handshake, exchanges data with the server before terminating the connection."/>
 
-	<link rel="stylesheet" type="text/css" media="screen" href="https://lafolle.ca/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://lafolle.ca/css/main.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://lafolle.ca/css/all.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://lafolle.ca/css/custom.css" /><title>Breaking the Resolution | The Knife of Phaedrus</title></head>
-<body><header>
-	
-	<div id="titletext"><h2 id="title"><a href="https://lafolle.ca/">The Knife of Phaedrus</a></h2></div>
-	<div id="title-description"><p id="subtitle">Musings with systems</p><div id=social>
-			<nav>
-				<ul><li><a href="https://github.com/lafolle"><i title="Github" class="icons fab fa-github"></i></a></li><li><a href="https://twitter.com/ckarany"><i title="Twitter" class="icons fab fa-twitter"></i></a></li><li><a href="https://www.linkedin.com/in/karan-chaudhary-603b6aa0/"><i title="Linkedin" class="icons fab fa-linkedin"></i></a></li></ul>
-			</nav>
-		</div>
-	</div>
-	
-	<div id="mainmenu">
-		<nav>
-			<ul>
-				
-				<li><a href="/">Home</a></li>
-				
-				<li><a href="/tags">Tags</a></li>
-				
-				<li><a href="/about">About</a></li>
-				
-			</ul>
-		</nav>
-	</div>
-	
+<meta property="og:url" content="https://lafolle.ca/blog/broken-resolution/">
+  <meta property="og:site_name" content="The Knife of Phaedrus">
+  <meta property="og:title" content="Breaking the Resolution">
+  <meta property="og:description" content="Two machines on the internet can talk to each other iff both of them know each other’s IP addresses. When we type in “google.com” in the browser, the first task of the browser is to get the IP address of “google.com” which it does by communicating with the DNS system. Once an IP address is received, the browser establishes a TCP connection to the server, does a TLS handshake, exchanges data with the server before terminating the connection.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
+    <meta property="article:published_time" content="2020-08-23T16:58:39-04:00">
+    <meta property="article:modified_time" content="2020-08-23T16:58:39-04:00">
+    <meta property="article:tag" content="Tls">
+    <meta property="article:tag" content="X.509">
+    <meta property="article:tag" content="Https">
+    <meta property="article:tag" content="Sni">
+    <meta property="article:tag" content="Esni">
+    <meta property="article:tag" content="San">
+
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Breaking the Resolution">
+  <meta name="twitter:description" content="Two machines on the internet can talk to each other iff both of them know each other’s IP addresses. When we type in “google.com” in the browser, the first task of the browser is to get the IP address of “google.com” which it does by communicating with the DNS system. Once an IP address is received, the browser establishes a TCP connection to the server, does a TLS handshake, exchanges data with the server before terminating the connection.">
+
+
+
+
+  <meta itemprop="name" content="Breaking the Resolution">
+  <meta itemprop="description" content="Two machines on the internet can talk to each other iff both of them know each other’s IP addresses. When we type in “google.com” in the browser, the first task of the browser is to get the IP address of “google.com” which it does by communicating with the DNS system. Once an IP address is received, the browser establishes a TCP connection to the server, does a TLS handshake, exchanges data with the server before terminating the connection.">
+  <meta itemprop="datePublished" content="2020-08-23T16:58:39-04:00">
+  <meta itemprop="dateModified" content="2020-08-23T16:58:39-04:00">
+  <meta itemprop="wordCount" content="2930">
+  <meta itemprop="keywords" content="Tls,X.509,Https,Sni,Esni,San,Diffie-Hellman,Dh">
+<meta name="referrer" content="no-referrer-when-downgrade" />
+
+  <style>
+  :root {
+      --width: 720px;
+      --font-main: Verdana, sans-serif;
+      --font-secondary: Verdana, sans-serif;
+      --font-scale: 1em;
+      --background-color: #fff;
+      --heading-color: #222;
+      --text-color: #444;
+      --link-color: #3273dc;
+      --visited-color:  #8b6fcb;
+      --code-background-color: #f2f2f2;
+      --code-color: #222;
+      --blockquote-color: #222;
+  }
+
+  @media (prefers-color-scheme: dark) {
+      :root {
+          --background-color: #01242e;
+          --heading-color: #eee;
+          --text-color: #ddd;
+          --link-color: #8cc2dd;
+          --visited-color:  #8b6fcb;
+          --code-background-color: #000;
+          --code-color: #ddd;
+          --blockquote-color: #ccc;
+      }
+  }
+
+  body {
+      font-family: var(--font-secondary);
+      font-size: var(--font-scale);
+      margin: auto;
+      padding: 20px;
+      max-width: var(--width);
+      text-align: left;
+      background-color: var(--background-color);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      line-height: 1.5;
+      color: var(--text-color);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-main);
+      color: var(--heading-color);
+  }
+
+  a {
+      color: var(--link-color);
+      cursor: pointer;
+      text-decoration: none;
+  }
+
+  a:hover {
+      text-decoration: underline;
+  }
+
+  nav a {
+      margin-right: 8px;
+  }
+
+  strong, b {
+      color: var(--heading-color);
+  }
+
+  button {
+      margin: 0;
+      cursor: pointer;
+  }
+
+  time {
+   	font-family: monospace;
+    	font-style: normal;
+    	font-size: 15px;
+  }
+
+  main {
+      line-height: 1.6;
+  }
+
+  table {
+      width: 100%;
+  }
+
+  hr {
+      border: 0;
+      border-top: 1px dashed;
+  }
+
+  img {
+      max-width: 100%;
+  }
+
+  code {
+      font-family: monospace;
+      padding: 2px;
+      background-color: var(--code-background-color);
+      color: var(--code-color);
+      border-radius: 3px;
+  }
+
+  blockquote {
+      border-left: 1px solid #999;
+      color: var(--code-color);
+      padding-left: 20px;
+      font-style: italic;
+  }
+
+  footer {
+      padding: 25px 0;
+      text-align: center;
+  }
+
+  .title:hover {
+      text-decoration: none;
+  }
+
+  .title h1 {
+      font-size: 1.5em;
+  }
+
+  .inline {
+      width: auto !important;
+  }
+
+  .highlight, .code {
+      padding: 1px 15px;
+      background-color: var(--code-background-color);
+      color: var(--code-color);
+      border-radius: 3px;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      overflow-x: auto;
+  }
+
+   
+  ul.blog-posts {
+      list-style-type: none;
+      padding: unset;
+  }
+
+  ul.blog-posts li {
+      display: flex;
+  }
+
+  ul.blog-posts li span {
+      flex: 0 0 130px;
+  }
+
+  ul.blog-posts li a:visited {
+      color: var(--visited-color);
+  }
+</style>
+
+</head>
+
+<body>
+  <header><a href="/" class="title">
+  <h2>The Knife of Phaedrus</h2>
+</a>
+<nav><a href="/">Home</a>
+
+
+<a href="/blog">Blog</a>
+
+</nav>
 </header>
-<main><div class="post">
-	
-	<div class="author">
-	
-	</div>
-	<div class="post-header">
-	
-		<div class="meta">
-			
-			<div class="date">
-				<span class="day">23</span>
-				<span class="rest">Aug 2020</span>
-			</div>
-			
-		</div>
-		
-		<div class="matter">
-			<h1 class="title">Breaking the Resolution</h1>
-		</div>
-	</div>
-	<div class="markdown">
-		<p>Two machines on the internet can talk to each other iff both of them know each other&rsquo;s IP addresses.  When we
+  <main>
+
+<h1>Breaking the Resolution</h1>
+<p>
+  <i>
+    <time datetime='2020-08-23'>
+      23 Aug, 2020
+    </time>
+  </i>
+</p>
+
+<content>
+  <p>Two machines on the internet can talk to each other iff both of them know each other&rsquo;s IP addresses.  When we
 type in &ldquo;google.com&rdquo; in the browser,  the first task of the browser is to get the IP address of &ldquo;google.com&rdquo;
 which it does by communicating with the DNS system. Once an IP address is received, the browser establishes a
 TCP connection to the server, does a TLS handshake, exchanges data with the server before terminating the
@@ -105,88 +256,88 @@ The certificate is at &#34;./example.com.pem&#34; and the key at &#34;./example.
 run TLS server given SSL certificate and private key:</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Go" data-lang="Go"><span style="display:flex;"><span>http.<span style="color:#900;font-weight:bold">ListenAndServeTLS</span>(<span style="color:#d14">&#34;:443&#34;</span>,
-</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;example.com.pem&#34;</span>, <span style="color:#998;font-style:italic">// Certificate.
-</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>	<span style="color:#d14">&#34;example.com-key.pem&#34;</span>, <span style="color:#000;font-weight:bold">nil</span>) <span style="color:#998;font-style:italic">// Private key.
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Go" data-lang="Go"><span style="display:flex;"><span><span style="color:#1f2328">http</span><span style="color:#1f2328">.</span><span style="color:#6639ba">ListenAndServeTLS</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;:443&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#0a3069">&#34;example.com.pem&#34;</span><span style="color:#1f2328">,</span> <span style="color:#57606a">// Certificate.</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#0a3069">&#34;example.com-key.pem&#34;</span><span style="color:#1f2328">,</span> <span style="color:#cf222e">nil</span><span style="color:#1f2328">)</span> <span style="color:#57606a">// Private key.</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Check if the server is running correctly:</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl <span style="color:#d14">\
-</span></span></span><span style="display:flex;"><span><span style="color:#d14"></span>	--cacert rootCA.pem <span style="color:#d14">\ </span><span style="color:#998;font-style:italic"># Load the root cert from this path</span>
-</span></span><span style="display:flex;"><span>	--resolve example.com:443:127.0.0.1  <span style="color:#d14">\ </span><span style="color:#998;font-style:italic"># Use this mapping instead of asking DNS resolver</span>
-</span></span><span style="display:flex;"><span>	-vvv <span style="color:#d14">\
-</span></span></span><span style="display:flex;"><span><span style="color:#d14"></span>	https://example.com
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>	--cacert rootCA.pem <span style="color:#0a3069">\ </span><span style="color:#57606a"># Load the root cert from this path</span>
+</span></span><span style="display:flex;"><span>	--resolve example.com:443:127.0.0.1  <span style="color:#0a3069">\ </span><span style="color:#57606a"># Use this mapping instead of asking DNS resolver</span>
+</span></span><span style="display:flex;"><span>	-vvv <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>	https://example.com
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Now lets resolve <code>google.com</code> to 127.0.0.1 and hit our test server:</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl <span style="color:#d14">\
-</span></span></span><span style="display:flex;"><span><span style="color:#d14"></span>	--cacert rootCA.pem <span style="color:#d14">\
-</span></span></span><span style="display:flex;"><span><span style="color:#d14"></span>	--resolve <span style="color:#d14">\
-</span></span></span><span style="display:flex;"><span><span style="color:#d14"></span>	google.com:443:127.0.0.1  <span style="color:#d14">\
-</span></span></span><span style="display:flex;"><span><span style="color:#d14"></span>	-vvv <span style="color:#d14">\
-</span></span></span><span style="display:flex;"><span><span style="color:#d14"></span>	https://google.com
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>	--cacert rootCA.pem <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>	--resolve <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>	google.com:443:127.0.0.1  <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>	-vvv <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>	https://google.com
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>which spits out</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="background-color:#e5e5e5"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span></span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="background-color:#e5e5e5"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span></span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>* Added google.com:443:127.0.0.1 to DNS cache
 </span></span><span style="display:flex;"><span>* Hostname google.com was found in DNS cache
-</span></span><span style="display:flex;"><span>*   Trying 127.0.0.1:443...  <span style="color:#000;font-weight:bold">[</span>redacted - ALPN stuff<span style="color:#000;font-weight:bold">]</span>
-</span></span><span style="display:flex;"><span>* successfully <span style="color:#0086b3">set</span> certificate verify locations:
+</span></span><span style="display:flex;"><span>*   Trying 127.0.0.1:443...  <span style="color:#0550ae">[</span>redacted - ALPN stuff<span style="color:#0550ae">]</span>
+</span></span><span style="display:flex;"><span>* successfully <span style="color:#6639ba">set</span> certificate verify locations:
 </span></span><span style="display:flex;"><span>*   CAfile: ~/mkcert/rootCA.pem CApath: /usr/local/etc/openssl@1.1/certs
-</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">[</span>redacted - TLS 1.3 handshake stuff<span style="color:#000;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">[</span>redacted - TLS 1.3 handshake stuff<span style="color:#0550ae">]</span>
 </span></span><span style="display:flex;"><span>* Server certificate:
-</span></span><span style="display:flex;"><span>*  subject: <span style="color:#008080">O</span><span style="color:#000;font-weight:bold">=</span>mkcert development certificate; <span style="color:#008080">OU</span><span style="color:#000;font-weight:bold">=</span>Lafolle Inc.
-</span></span><span style="display:flex;"><span>*  start date: Jun  <span style="color:#099">1</span> 00:00:00 <span style="color:#099">2019</span> GMT
-</span></span><span style="display:flex;"><span>*  expire date: Aug <span style="color:#099">24</span> 02:23:32 <span style="color:#099">2030</span> GMT
+</span></span><span style="display:flex;"><span>*  subject: <span style="color:#953800">O</span><span style="color:#0550ae">=</span>mkcert development certificate<span style="color:#1f2328">;</span> <span style="color:#953800">OU</span><span style="color:#0550ae">=</span>Lafolle Inc.
+</span></span><span style="display:flex;"><span>*  start date: Jun  <span style="color:#0550ae">1</span> 00:00:00 <span style="color:#0550ae">2019</span> GMT
+</span></span><span style="display:flex;"><span>*  expire date: Aug <span style="color:#0550ae">24</span> 02:23:32 <span style="color:#0550ae">2030</span> GMT
 </span></span><span style="display:flex;"><span>*  subjectAltName does not match google.com
-</span></span><span style="display:flex; background-color:#e5e5e5"><span>* SSL: no alternative certificate subject name matches target host name <span style="color:#d14">&#39;google.com&#39;</span> <span style="color:#000;font-weight:bold">}</span> <span style="color:#000;font-weight:bold">[</span><span style="color:#099">5</span> bytes data<span style="color:#000;font-weight:bold">]</span>
-</span></span><span style="display:flex;"><span>* TLSv1.3 <span style="color:#000;font-weight:bold">(</span>OUT<span style="color:#000;font-weight:bold">)</span>, TLS alert, close notify <span style="color:#000;font-weight:bold">(</span>256<span style="color:#000;font-weight:bold">)</span>: <span style="color:#000;font-weight:bold">}</span> <span style="color:#000;font-weight:bold">[</span><span style="color:#099">2</span> bytes data<span style="color:#000;font-weight:bold">]</span> curl: <span style="color:#000;font-weight:bold">(</span>60<span style="color:#000;font-weight:bold">)</span> SSL: no alternative certificate
-</span></span><span style="display:flex;"><span>  subject name matches target host name <span style="color:#d14">&#39;google.com&#39;</span> More details here: https://curl.haxx.se/docs/sslcerts.html
+</span></span><span style="display:flex; background-color:#e5e5e5"><span>* SSL: no alternative certificate subject name matches target host name <span style="color:#0a3069">&#39;google.com&#39;</span> <span style="color:#0550ae">}</span> <span style="color:#0550ae">[</span><span style="color:#0550ae">5</span> bytes data<span style="color:#0550ae">]</span>
+</span></span><span style="display:flex;"><span>* TLSv1.3 <span style="color:#0550ae">(</span>OUT<span style="color:#0550ae">)</span>, TLS alert, close notify <span style="color:#0550ae">(</span>256<span style="color:#0550ae">)</span>: <span style="color:#0550ae">}</span> <span style="color:#0550ae">[</span><span style="color:#0550ae">2</span> bytes data<span style="color:#0550ae">]</span> curl: <span style="color:#0550ae">(</span>60<span style="color:#0550ae">)</span> SSL: no alternative certificate
+</span></span><span style="display:flex;"><span>  subject name matches target host name <span style="color:#0a3069">&#39;google.com&#39;</span> More details here: https://curl.haxx.se/docs/sslcerts.html
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>curl failed to verify the legitimacy of the server and therefore could not establish a secure connection to it. To
 </span></span><span style="display:flex;"><span>learn more about this situation and how to fix it, please visit the web page mentioned above. 
@@ -226,56 +377,56 @@ certificate matches <code>google.com</code>.  What are they in the certificate? 
 like this:</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Go" data-lang="Go"><span style="display:flex;"><span>http.<span style="color:#900;font-weight:bold">ListenAndServeTLS</span>(<span style="color:#d14">&#34;:443&#34;</span>,
-</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;google.com.pem&#34;</span>, <span style="color:#998;font-style:italic">// Certificate.
-</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>	<span style="color:#d14">&#34;google.com-key.pem&#34;</span>, <span style="color:#000;font-weight:bold">nil</span>) <span style="color:#998;font-style:italic">// Private key.
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Go" data-lang="Go"><span style="display:flex;"><span><span style="color:#1f2328">http</span><span style="color:#1f2328">.</span><span style="color:#6639ba">ListenAndServeTLS</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;:443&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#0a3069">&#34;google.com.pem&#34;</span><span style="color:#1f2328">,</span> <span style="color:#57606a">// Certificate.</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#0a3069">&#34;google.com-key.pem&#34;</span><span style="color:#1f2328">,</span> <span style="color:#cf222e">nil</span><span style="color:#1f2328">)</span> <span style="color:#57606a">// Private key.</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>and hitting the server with following curl request:</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl <span style="color:#d14">\
-</span></span></span><span style="display:flex;"><span><span style="color:#d14"></span>   --cacert rootCA.pem <span style="color:#d14">\
-</span></span></span><span style="display:flex;"><span><span style="color:#d14"></span>   --resolve google.com:443:127.0.0.1  <span style="color:#d14">\
-</span></span></span><span style="display:flex;"><span><span style="color:#d14"></span>   -vvv <span style="color:#d14">\
-</span></span></span><span style="display:flex;"><span><span style="color:#d14"></span>   https://google.com
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>   --cacert rootCA.pem <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>   --resolve google.com:443:127.0.0.1  <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>   -vvv <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>   https://google.com
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>outputs</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="background-color:#e5e5e5"><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span></span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="background-color:#e5e5e5"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">[</span>redacted<span style="color:#000;font-weight:bold">]</span>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#0550ae">[</span>redacted<span style="color:#0550ae">]</span>
 </span></span><span style="display:flex;"><span>* Server certificate:
-</span></span><span style="display:flex;"><span>*  subject: <span style="color:#008080">O</span><span style="color:#000;font-weight:bold">=</span>mkcert development certificate; <span style="color:#008080">OU</span><span style="color:#000;font-weight:bold">=</span>Lafolle Inc.
-</span></span><span style="display:flex;"><span>*  start date: Jun  <span style="color:#099">1</span> 00:00:00 <span style="color:#099">2019</span> GMT
-</span></span><span style="display:flex;"><span>*  expire date: Aug <span style="color:#099">24</span> 20:38:06 <span style="color:#099">2030</span> GMT
-</span></span><span style="display:flex; background-color:#e5e5e5"><span>*  subjectAltName: host <span style="color:#d14">&#34;google.com&#34;</span> matched cert<span style="color:#a61717;background-color:#e3d2d2">&#39;</span>s <span style="color:#d14">&#34;google.com&#34;</span>
-</span></span><span style="display:flex;"><span>*  issuer: <span style="color:#008080">O</span><span style="color:#000;font-weight:bold">=</span>mkcert development CA; <span style="color:#008080">OU</span><span style="color:#000;font-weight:bold">=</span>Lafolle Inc.; <span style="color:#008080">CN</span><span style="color:#000;font-weight:bold">=</span>mkcert Karan@Karans-MacBook-Air.local <span style="color:#000;font-weight:bold">(</span>Karan Chaudhary<span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>*  subject: <span style="color:#953800">O</span><span style="color:#0550ae">=</span>mkcert development certificate<span style="color:#1f2328">;</span> <span style="color:#953800">OU</span><span style="color:#0550ae">=</span>Lafolle Inc.
+</span></span><span style="display:flex;"><span>*  start date: Jun  <span style="color:#0550ae">1</span> 00:00:00 <span style="color:#0550ae">2019</span> GMT
+</span></span><span style="display:flex;"><span>*  expire date: Aug <span style="color:#0550ae">24</span> 20:38:06 <span style="color:#0550ae">2030</span> GMT
+</span></span><span style="display:flex; background-color:#e5e5e5"><span>*  subjectAltName: host <span style="color:#0a3069">&#34;google.com&#34;</span> matched cert<span style="color:#f6f8fa;background-color:#82071e">&#39;</span>s <span style="color:#0a3069">&#34;google.com&#34;</span>
+</span></span><span style="display:flex;"><span>*  issuer: <span style="color:#953800">O</span><span style="color:#0550ae">=</span>mkcert development CA<span style="color:#1f2328">;</span> <span style="color:#953800">OU</span><span style="color:#0550ae">=</span>Lafolle Inc.<span style="color:#1f2328">;</span> <span style="color:#953800">CN</span><span style="color:#0550ae">=</span>mkcert Karan@Karans-MacBook-Air.local <span style="color:#0550ae">(</span>Karan Chaudhary<span style="color:#0550ae">)</span>
 </span></span><span style="display:flex;"><span>*  SSL certificate verify ok.
-</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">[</span>redacted<span style="color:#000;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">[</span>redacted<span style="color:#0550ae">]</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>This is expected.  The certificate does have <code>google.com</code> in it under SAN (<code>subjectAltName</code>) section which
@@ -288,12 +439,12 @@ certs and can also be provisioned to use CA certs installed in the system.</p>
 <p>How can we get the SSL cert for <code>google.com</code> in PEM format??? Easy:</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#0086b3">echo</span> | openssl s_connect -showcerts -connect google.com.443 <span style="color:#d14">\
-</span></span></span><span style="display:flex;"><span><span style="color:#d14"></span>	openssl x509 -out google.com-original.pem
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6639ba">echo</span> <span style="color:#1f2328">|</span> openssl s_connect -showcerts -connect google.com.443 <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069"></span>	openssl x509 -out google.com-original.pem
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>This will create a file <code>google.com-original.pem</code> that will contain the digital certificate for <code>google.com</code>.
@@ -303,25 +454,25 @@ request.  In fact, if we can have the corresponding private key,  Google&rsquo;s
 <p>This is a blocker but lets go forward and try to feed-in wrong private key to the Go server:</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Go" data-lang="Go"><span style="display:flex;"><span>http.<span style="color:#900;font-weight:bold">ListenAndServeTLS</span>(<span style="color:#d14">&#34;:443&#34;</span>,
-</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;google.com-original.pem&#34;</span>, <span style="color:#998;font-style:italic">// Certificate.
-</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>	<span style="color:#d14">&#34;bad-key.pem&#34;</span>, <span style="color:#000;font-weight:bold">nil</span>) <span style="color:#998;font-style:italic">// Private key.
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Go" data-lang="Go"><span style="display:flex;"><span><span style="color:#1f2328">http</span><span style="color:#1f2328">.</span><span style="color:#6639ba">ListenAndServeTLS</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;:443&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#0a3069">&#34;google.com-original.pem&#34;</span><span style="color:#1f2328">,</span> <span style="color:#57606a">// Certificate.</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#0a3069">&#34;bad-key.pem&#34;</span><span style="color:#1f2328">,</span> <span style="color:#cf222e">nil</span><span style="color:#1f2328">)</span> <span style="color:#57606a">// Private key.</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>On running, the server fails with following error:</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>2020/08/24 17:42:44 ListenAndServe: tls: private key does not match public key
-</span></span><span style="display:flex;"><span><span style="color:#0086b3">exit</span> status <span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">exit</span> status <span style="color:#0550ae">1</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Of course!  When the server loads the cert and private key,  it generates corresponding public key from private
@@ -423,120 +574,32 @@ don&rsquo;t think there is yet a way to fix this.</p>
 <p>Always use HTTPS (with TLS1.3) and at the server side,  keep good care of your private keys to protect yourself
 as well your customers from malicious entities.</p>
 
-	</div>
-	
-	
-	
-	
-	
-		
-	
-	
-	
-	<div class="tags">
-		<div class="taxosfloating_left">
-			<p>Tags</p>
-		</div>
-		<div class="termsfloating_right">
-			<p>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<a href="https://lafolle.ca/tags/dh/"> dh </a>
-			
-			
-			
-			
-			
-			<a href="https://lafolle.ca/tags/diffie-hellman/"> diffie-hellman </a>
-			
-			
-			
-			
-			
-			<a href="https://lafolle.ca/tags/esni/"> esni </a>
-			
-			
-			
-			
-			
-			<a href="https://lafolle.ca/tags/https/"> https </a>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<a href="https://lafolle.ca/tags/san/"> san </a>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<a href="https://lafolle.ca/tags/sni/"> sni </a>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<a href="https://lafolle.ca/tags/tls/"> tls </a>
-			
-			
-			
-			
-			
-			<a href="https://lafolle.ca/tags/x.509/"> x.509 </a>
-			
-			
-			
-			</p>
-		</div>
-		<div class="clearit"></div>
-		
-		
-		
-		
-		
-	</div></div>
+</content>
+<p>
+  
+  <a href="https://lafolle.ca/tags/tls/">#Tls</a>
+  
+  <a href="https://lafolle.ca/tags/x.509/">#X.509</a>
+  
+  <a href="https://lafolle.ca/tags/https/">#Https</a>
+  
+  <a href="https://lafolle.ca/tags/sni/">#Sni</a>
+  
+  <a href="https://lafolle.ca/tags/esni/">#Esni</a>
+  
+  <a href="https://lafolle.ca/tags/san/">#San</a>
+  
+  <a href="https://lafolle.ca/tags/diffie-hellman/">#Diffie-Hellman</a>
+  
+  <a href="https://lafolle.ca/tags/dh/">#Dh</a>
+  
+</p>
 
   </main>
-<footer>
-	 © Karan Chaudhary 
-	
-	
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-176408027-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-	
+  <footer>Made with <a href="https://github.com/janraasch/hugo-bearblog/">Hugo ʕ•ᴥ•ʔ Bear</a>
 </footer>
 
-
+    
 </body>
+
 </html>

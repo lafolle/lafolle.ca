@@ -1,28 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-	<channel>
-		<title>thread on The Knife of Phaedrus</title>
-		<link>https://lafolle.ca/tags/thread/</link>
-		<description>Recent content in thread on lafolle.ca</description>
-		<generator>Hugo -- gohugo.io</generator>
-		<language>en-us</language>
-		<copyright>© Karan Chaudhary</copyright>
-		<lastBuildDate>Thu, 10 Mar 2022 22:08:29 -0800</lastBuildDate>
-		
-		<atom:link href="https://lafolle.ca/tags/thread/index.xml" rel="self" type="application/rss+xml" />
-		
-		<item>
-			<title>On asyncio run</title>
-			<link>https://lafolle.ca/blog/on-asyncio-run/</link>
-			<pubDate>Thu, 10 Mar 2022 22:08:29 -0800</pubDate>
-			
-			<guid>https://lafolle.ca/blog/on-asyncio-run/</guid>
-			<description>
-				
-				Python formally introduced concurrency using asncio in 3.7&#43;. A simple program that can demonstrate the hello world of as...
-				
-			</description>
-		</item>
-		
-	</channel>
+  <channel>
+    <title>Thread on The Knife of Phaedrus</title>
+    <link>https://lafolle.ca/tags/thread/</link>
+    <description>Recent content in Thread on The Knife of Phaedrus</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <copyright>© Karan Chaudhary</copyright>
+    <lastBuildDate>Thu, 10 Mar 2022 22:08:29 -0800</lastBuildDate>
+    <atom:link href="https://lafolle.ca/tags/thread/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>On asyncio run</title>
+      <link>https://lafolle.ca/blog/on-asyncio-run/</link>
+      <pubDate>Thu, 10 Mar 2022 22:08:29 -0800</pubDate>
+      <guid>https://lafolle.ca/blog/on-asyncio-run/</guid>
+      <description>&lt;p&gt;Python formally introduced concurrency using asncio in 3.7+. A simple program that can&#xA;demonstrate the hello world of async stuff goes like this-&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import asyncio&#xA;&#xA;async def main():&#xA;&#x9;print(&amp;#39;hello&amp;#39;)&#xA;&#x9;await asyncio.sleep(1)&#xA;&#x9;print(&amp;#39;world&amp;#39;)&#xA;&#xA;asyncio.run(main())&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In this case &lt;code&gt;asyncio.run&lt;/code&gt; is the blocking call. It takes coroutine as a param, that is&#xA;created by &lt;code&gt;main()&lt;/code&gt; due to the &lt;code&gt;async&lt;/code&gt; qualifer.&lt;/p&gt;&#xA;&lt;p&gt;Does it also create an event loop inside? From the doc, yes it does-&lt;/p&gt;</description>
+    </item>
+  </channel>
 </rss>

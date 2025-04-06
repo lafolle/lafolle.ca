@@ -7,3 +7,9 @@
 [submodule "themes/archie"]
 	path = themes/archie
 	url = https://github.com/lafolle/archie.git
+[submodule "themes/hugo-vitae"]
+	path = themes/hugo-vitae
+	url = https://github.com/dataCobra/hugo-vitae.git
+[submodule "themes/hugo-bearblog"]
+	path = themes/hugo-bearblog
+	url = https://github.com/janraasch/hugo-bearblog.git
